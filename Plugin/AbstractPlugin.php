@@ -2,7 +2,6 @@
 /**
  *
 **/
-
 namespace FishPig\WordPress_Yoast\Plugin;
 
 use \FishPig\WordPress\Model\Config;
@@ -11,12 +10,7 @@ use \FishPig\WordPress\Helper\View as ViewHelper;
 use \FishPig\WordPress\Model\AbstractModel;
 use \Magento\Framework\Registry;
 
-use \FishPig\WordPress\Model\Post;
-use \FishPig\WordPress\Model\Term;
-use \FishPig\WordPress\Model\User;
-use \FishPig\WordPress\Model\Archive;
-
-abstract class AbstractPlugin extends \Magento\Framework\DataObject implements SeoInterface
+abstract class AbstractPlugin extends \Magento\Framework\DataObject implements \FishPig\WordPress\Plugin\SeoInterface
 {
 	/**
 	 * Free plugin filename in WordPress
@@ -351,7 +345,7 @@ abstract class AbstractPlugin extends \Magento\Framework\DataObject implements S
 				$data['searchphrase'] = $value;
 			}
 
-			if ($object  instanceof Post) {
+			if ($object  instanceof \FishPig\WordPress\Model\Post) {
 				$data['date'] = $object->getPostDate();
 				$data['title'] = $object->getPostTitle();
 				$data['excerpt'] = trim($object->getExcerpt(30));
@@ -369,14 +363,14 @@ abstract class AbstractPlugin extends \Magento\Framework\DataObject implements S
 				$data['name'] = $object->getUser()->getUserNicename();
 				$data['userid'] = $object->getUser()->getId();
 			}
-			else if ($object instanceof Term) {
+			else if ($object instanceof \FishPig\WordPress\Model\Term) {
 				$data['term_description'] = trim(strip_tags($object->getDescription()));
 				$data['term_title'] = $object->getName();
 			}
-			else if ($object instanceof Archive) {
+			else if ($object instanceof \FishPig\WordPress\Model\Archive) {
 				$data['date'] = $object->getName();
 			}
-			else if ($object instanceof User) {
+			else if ($object instanceof \FishPig\WordPress\Model\User) {
 				$data['name'] = $object->getDisplayName();
 			}	
 			
