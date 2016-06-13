@@ -16,11 +16,27 @@ use \FishPig\WordPress\Model\Term;
 use \FishPig\WordPress\Model\User;
 use \FishPig\WordPress\Model\Archive;
 
-abstract class AbstractPlugin extends \Magento\Framework\DataObject
+abstract class AbstractPlugin extends \Magento\Framework\DataObject implements SeoInterface
 {
+	/**
+	 * Free plugin filename in WordPress
+	 *
+	 * @var string
+	**/
 	const PLUGIN_FILE_FREE = 'wordpress-seo/wp-seo.php';
+	
+	/**
+	 * Premium plugin filename in WordPress
+	 *
+	 * @var string
+	**/
 	const PLUGIN_FILE_PREMIUM = 'wordpress-seo-premium/wp-seo-premium.php';
 	
+	/**
+	 * Separator map
+	 *
+	 * @var array
+	**/
 	protected $_separators = array(
 		'sc-dash'   => '-',
 		'sc-ndash'  => '&ndash;',
@@ -37,10 +53,30 @@ abstract class AbstractPlugin extends \Magento\Framework\DataObject
 		'sc-gt'     => '&gt;',
 	);
 	
+	/**
+	 * @ \FishPig\WordPress\Model\Config
+	**/
 	protected $_config = null;
+	
+	/**
+	 * @ \FishPig\WordPress\Helper\Plugin
+	**/
 	protected $_pluginHelper = null;
+
+	/**
+	 * @ \FishPig\WordPress\Helper\View
+	**/	
 	protected $_viewHelper = null;
 	
+	/**
+	 * Constructor
+	 *
+	 * @param \FishPig\WordPress\Model\Config $config,
+	 * @param \FishPig\WordPress\Helper\Plugin $pluginHelper,
+	 * @param \FishPig\WordPress\Helper\View $viewHelper,
+	 * @param \Magento\Framework\Registry $registry,
+	 * @param $data = []
+	**/
 	public function __construct(Config $config, PluginHelper $pluginHelper, ViewHelper $viewHelper, Registry $registry, $data = [])
 	{
 		$this->_config = $config;
@@ -51,6 +87,11 @@ abstract class AbstractPlugin extends \Magento\Framework\DataObject
 		$this->_init();
 	}
 	
+	/**
+	 * Initialise the plugin with plugin data
+	 *
+	 * @return $this
+	**/
 	protected function _init()
 	{
 		if (!$this->isEnabled()) {
@@ -71,12 +112,24 @@ abstract class AbstractPlugin extends \Magento\Framework\DataObject
 		return $this->setData($data);
 	}
 
+	/**
+	 * Determine whether the plugin is enabled in WordPress
+	 *
+	 * @return bool
+	**/
 	public function isEnabled()
 	{
 		return $this->_pluginHelper->isEnabled(self::PLUGIN_FILE_FREE)
 			|| $this->_pluginHelper->isEnabled(self::PLUGIN_FILE_PREMIUM);
 	}
 	
+	/**
+	 * Get the page title
+	 *
+	 * @param $object
+	 * @param $callback
+	 * @return string
+	**/
 	public function aroundGetPageTitle($object, $callback)
 	{
 		if ($this->isEnabled()) {
@@ -90,16 +143,24 @@ abstract class AbstractPlugin extends \Magento\Framework\DataObject
 		return $callback();
 	}
 	
+	/**
+	 * Get the page title
+	 *
+	 * @param AbstractModel $object
+	 * @return string|null
+	**/
 	protected function _aroundGetPageTitle(AbstractModel $object)
 	{
 		return null;
 	}
 	
 	/**
+	 * Get the meta description
 	 *
-	 *
-	 * @return  string
-	**/	
+	 * @param $object
+	 * @param $callback
+	 * @return string
+	**/
 	public function aroundGetMetaDescription($object, $callback)
 	{
 		if ($this->isEnabled()) {
@@ -113,15 +174,23 @@ abstract class AbstractPlugin extends \Magento\Framework\DataObject
 		return $callback();
 	}
 
+	/**
+	 * Get the meta description
+	 *
+	 * @param AbstractModel $object
+	 * @return string|null
+	**/
 	protected function _aroundGetMetaDescription(AbstractModel $object)
 	{
 		return null;
 	}
 	
 	/**
+	 * Get the meta keywords
 	 *
-	 *
-	 * @return  string
+	 * @param $object
+	 * @param $callback
+	 * @return string
 	**/
 	public function aroundGetMetaKeywords($object, $callback)
 	{
@@ -136,15 +205,23 @@ abstract class AbstractPlugin extends \Magento\Framework\DataObject
 		return $callback();
 	}
 	
+	/**
+	 * Get the meta keywords
+	 *
+	 * @param AbstractModel $object
+	 * @return string|null
+	**/
 	protected function _aroundGetMetaKeywords(AbstractModel $object)
 	{
 		return null;
 	}
 	
 	/**
+	 * Get the meta robots value
 	 *
-	 *
-	 * @return  string
+	 * @param $object
+	 * @param $callback
+	 * @return string
 	**/
 	public function aroundGetRobots($object, $callback)
 	{		
@@ -165,15 +242,23 @@ abstract class AbstractPlugin extends \Magento\Framework\DataObject
 		return $callback();
 	}
 	
+	/**
+	 * Get the meta robots value
+	 *
+	 * @param AbstractModel $object
+	 * @return string|null
+	**/
 	protected function _aroundGetRobots(AbstractModel $object)
 	{
 		return null;
 	}
 	
 	/**
+	 * Get the canonical URL
 	 *
-	 *
-	 * @return  string
+	 * @param $object
+	 * @param $callback
+	 * @return string
 	**/
 	public function aroundGetCanonicalUrl($object, $callback)
 	{
@@ -188,17 +273,17 @@ abstract class AbstractPlugin extends \Magento\Framework\DataObject
 		return $callback();
 	}
 	
+	/**
+	 * Get the canonical URL
+	 *
+	 * @param AbstractModel $object
+	 * @return string|null
+	**/
 	protected function _aroundGetCanonicalUrl(AbstractModel $object)
 	{
 		return null;
 	}
-	
-	protected function _debugData()
-	{
-		echo sprintf('<pre>%s</pre>', print_r($this->getData(), true));
-		exit;
-	}
-	
+
 	/**
 	 * Given a key that determines which format to load
 	 * and a data array, merge the 2 to create a valid title
@@ -237,9 +322,15 @@ abstract class AbstractPlugin extends \Magento\Framework\DataObject
 		return false;
 	}
 	
-	protected function _setupRewriteData(AbstractModel $object, $force = false)
+	/**
+	 * Setup the rewrite data for $object
+	 *
+	 * @param AbstractModel $object
+	 * @return $this
+	**/
+	protected function _setupRewriteData(AbstractModel $object)
 	{
-		if (!$this->hasRewriteData() || $force) {
+		if (!$this->hasRewriteData()) {
 			$data = array(
 				'sitename' => $this->_config->getOption('blogname'),
 				'sitedesc' => $this->_config->getOption('blogdescription'),
@@ -302,20 +393,9 @@ abstract class AbstractPlugin extends \Magento\Framework\DataObject
 	 */
 	public function getRewriteData(array $updates = [])
 	{
-		$rewriteData = $this->_getData('rewrite_data');		
-		
-		if ($updates) {
-			$rewriteData = array_merge($rewriteData, $updates);
-		}
-		
-		return $rewriteData;
-	}
-	
-	public function updateRewriteData($key, $value)
-	{
-		return $this->setRewriteData(
-			array_merge($this->getRewriteData(), array($key => $value))
-		);
+		return $updates
+			 ? array_merge($this->_getData('rewrite_data'), $updates)
+			 : $this->_getData('rewrite_data');
 	}
 	
 	/**
