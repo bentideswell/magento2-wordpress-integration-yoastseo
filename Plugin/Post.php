@@ -121,4 +121,11 @@ class Post extends AbstractPlugin
 
 		return null;
 	}
+	
+	public function aroundAddPrimaryCategoryToSelect($select, $postId)
+	{
+		echo __FILE__;exit;
+		#			Mage::helper('wp_addon_yoastseo')->addPrimaryCategoryToSelect($select, $postId);
+#		return $this;
+	}
 }

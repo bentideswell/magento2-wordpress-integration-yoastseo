@@ -5,6 +5,7 @@
 namespace FishPig\WordPress_Yoast\Plugin;
 
 use \FishPig\WordPress\Model\Config;
+use \FishPig\WordPress\Model\App\Factory;
 use \FishPig\WordPress\Helper\Plugin as PluginHelper;
 use \FishPig\WordPress\Helper\View as ViewHelper;
 use \FishPig\WordPress\Model\AbstractModel;
@@ -61,6 +62,11 @@ abstract class AbstractPlugin extends \Magento\Framework\DataObject implements \
 	 * @ \FishPig\WordPress\Helper\View
 	**/	
 	protected $_viewHelper = null;
+
+	/**
+	 * @ \FishPig\WordPress\Model\App\Factory
+	**/	
+	protected $_factory = null;
 	
 	/**
 	 * Constructor
@@ -71,12 +77,20 @@ abstract class AbstractPlugin extends \Magento\Framework\DataObject implements \
 	 * @param \Magento\Framework\Registry $registry,
 	 * @param $data = []
 	**/
-	public function __construct(Config $config, PluginHelper $pluginHelper, ViewHelper $viewHelper, Registry $registry, $data = [])
+	public function __construct(
+		Config $config,
+		PluginHelper $pluginHelper,
+		ViewHelper $viewHelper,
+		Registry $registry,
+		Factory $factory,
+		$data = []
+	)
 	{
 		$this->_config = $config;
 		$this->_pluginHelper = $pluginHelper;
 		$this->_viewHelper = $viewHelper;
 		$this->_registry = $registry;
+		$this->_factory = $factory;
 
 		$this->_init();
 	}

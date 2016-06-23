@@ -9,6 +9,9 @@
     <type name="FishPig\WordPress\Model\Post">
         <plugin name="fishpig_wordpress_yoast_post" type="FishPig\WordPress_Yoast\Plugin\Post" sortOrder="10" disabled="false"/>
     </type>
+    <type name="FishPig\WordPress\Model\ResourceModel\Post">
+        <plugin name="fishpig_wordpress_yoast_resource_post" type="FishPig\WordPress_Yoast\Plugin\ResourcePlugin\Post" sortOrder="10" disabled="false"/>
+    </type>
     <type name="FishPig\WordPress\Model\Term">    
         <plugin name="fishpig_wordpress_yoast_term" type="FishPig\WordPress_Yoast\Plugin\Term" sortOrder="10" disabled="false"/>
     </type>
