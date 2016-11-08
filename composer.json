@@ -1,0 +1,13 @@
+{
+    "name": "FishPig_WordPress_Yoast",
+    "description": "Yoast Integration for Magento WordPress Integration",
+    "type": "magento2-module",
+    "extra": {
+        "map": [
+            [
+                "*",
+                "FishPig_WordPress_Yoast"
+            ]
+        ]
+    }
+}
