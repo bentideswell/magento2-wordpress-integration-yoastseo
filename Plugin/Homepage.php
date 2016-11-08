@@ -4,17 +4,17 @@
 **/
 namespace FishPig\WordPress_Yoast\Plugin;
 
-use \FishPig\WordPress\Model\AbstractModel;
+use \FishPig\WordPress\Api\Data\Entity\ViewableInterface;
 
 class Homepage extends AbstractPlugin
 {
 	/**
 	 * Get the Yoast Page title
 	 *
-	 * @param AbstractModel $object
+	 * @param ViewableInterface $object
 	 * @return string|null
 	**/
-	protected function _aroundGetPageTitle(AbstractModel $object)
+	protected function _aroundGetPageTitle(ViewableInterface $object)
 	{
 		return $this->_rewriteString(
 			$this->_getPageTitleFormat('home_wpseo')
@@ -24,10 +24,10 @@ class Homepage extends AbstractPlugin
 	/**
 	 * Get the Yoast meta description
 	 *
-	 * @param AbstractModel $object
+	 * @param ViewableInterface $object
 	 * @return string|null
 	**/
-	protected function _aroundGetMetaDescription(AbstractModel $object)
+	protected function _aroundGetMetaDescription(ViewableInterface $object)
 	{
 		return $this->_rewriteString(
 			$this->_getMetaDescriptionFormat('home_wpseo')
@@ -37,10 +37,10 @@ class Homepage extends AbstractPlugin
 	/**
 	 * Get the Yoast meta keywords
 	 *
-	 * @param AbstractModel $object
+	 * @param ViewableInterface $object
 	 * @return string|null
 	**/
-	protected function _aroundGetMetaKeywords(AbstractModel $object)
+	protected function _aroundGetMetaKeywords(ViewableInterface $object)
 	{
 		return $this->_rewriteString(
 			$this->_getMetaKeywordsFormat('home_wpseo')

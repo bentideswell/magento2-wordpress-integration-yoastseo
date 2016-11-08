@@ -27,4 +27,8 @@
     <type name="FishPig\WordPress\Model\Search">    
         <plugin name="fishpig_wordpress_yoast_search" type="FishPig\WordPress_Yoast\Plugin\Search" sortOrder="10" disabled="false"/>
     </type>
+    <!-- Required FishPig_WodPress_PostTypeTaxonomy -->
+    <type name="FishPig\WordPress\Model\Post\Type">
+        <plugin name="fishpig_wordpress_yoast_post_type" type="FishPig\WordPress_Yoast\Plugin\Post\Type" sortOrder="10" disabled="false"/>
+    </type>
 </config>

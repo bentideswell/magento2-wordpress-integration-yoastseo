@@ -4,7 +4,7 @@
 **/
 namespace FishPig\WordPress_Yoast\Plugin;
 
-use \FishPig\WordPress\Model\AbstractModel;
+use \FishPig\WordPress\Api\Data\Entity\ViewableInterface;
 
 class Term extends AbstractPlugin
 {
@@ -30,10 +30,10 @@ class Term extends AbstractPlugin
 	/**
 	 * Get the Yoast Page title
 	 *
-	 * @param AbstractModel $object
+	 * @param ViewableInterface $object
 	 * @return string|null
 	**/
-	protected function _aroundGetPageTitle(AbstractModel $object)
+	protected function _aroundGetPageTitle(ViewableInterface $object)
 	{
 		$rewriteData = [];
 		
@@ -50,10 +50,10 @@ class Term extends AbstractPlugin
 	/**
 	 * Get the Yoast meta description
 	 *
-	 * @param AbstractModel $object
+	 * @param ViewableInterface $object
 	 * @return string|null
 	**/
-	protected function _aroundGetMetaDescription(AbstractModel $object)
+	protected function _aroundGetMetaDescription(ViewableInterface $object)
 	{
 		if (($value = trim($this->_getTaxonomyMeta($object, self::FIELD_META_DESCRIPTION))) !== '') {
 			return $value;
@@ -67,10 +67,10 @@ class Term extends AbstractPlugin
 	/**
 	 * Get the Yoast meta keywords
 	 *
-	 * @param AbstractModel $object
+	 * @param ViewableInterface $object
 	 * @return string|null
 	**/
-	protected function _aroundGetMetaKeywords(AbstractModel $object)
+	protected function _aroundGetMetaKeywords(ViewableInterface $object)
 	{
 		if (($value = trim($this->_getTaxonomyMeta($object, self::FIELD_META_KEYWORDS))) !== '') {
 			return $value;
@@ -84,10 +84,10 @@ class Term extends AbstractPlugin
 	/**
 	 * Get the Yoast robots tag value
 	 *
-	 * @param AbstractModel $object
+	 * @param ViewableInterface $object
 	 * @return string|null
 	**/
-	protected function _aroundGetRobots(AbstractModel $object)
+	protected function _aroundGetRobots(ViewableInterface $object)
 	{
 		$this->_isSubPageNoindex();
 		$robots = ['index' => 'index', 'follow' => 'follow'];
@@ -102,10 +102,10 @@ class Term extends AbstractPlugin
 	/**
 	 * Get the Yoast canonical URL
 	 *
-	 * @param AbstractModel $object
+	 * @param ViewableInterface $object
 	 * @return string|null
 	**/
-	protected function _aroundGetCanonicalUrl(AbstractModel $object)
+	protected function _aroundGetCanonicalUrl(ViewableInterface $object)
 	{
 		if (($value = trim($this->_getTaxonomyMeta($object, self::FIELD_CANONICAL))) !== '') {
 			return $value;
@@ -117,11 +117,11 @@ class Term extends AbstractPlugin
 	/**
 	 * Get a meta field for a taxonomy object
 	 *
-	 * @param AbstractModel $object
+	 * @param ViewableInterface $object
 	 * @param string $key
 	 * @return string
 	**/
-	protected function _getTaxonomyMeta(AbstractModel $object, $key)
+	protected function _getTaxonomyMeta(ViewableInterface $object, $key)
 	{
 		$taxonomy = $object->getTaxonomyType();
 		$id = $object->getId();

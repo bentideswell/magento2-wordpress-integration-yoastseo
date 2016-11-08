@@ -8,7 +8,7 @@ use \FishPig\WordPress\Model\Config;
 use \FishPig\WordPress\Model\App\Factory;
 use \FishPig\WordPress\Helper\Plugin as PluginHelper;
 use \FishPig\WordPress\Helper\View as ViewHelper;
-use \FishPig\WordPress\Model\AbstractModel;
+use \FishPig\WordPress\Api\Data\Entity\ViewableInterface;
 use \Magento\Framework\Registry;
 
 abstract class AbstractPlugin extends \Magento\Framework\DataObject implements \FishPig\WordPress\Plugin\SeoInterface
@@ -154,10 +154,10 @@ abstract class AbstractPlugin extends \Magento\Framework\DataObject implements \
 	/**
 	 * Get the page title
 	 *
-	 * @param AbstractModel $object
+	 * @param ViewableInterface $object
 	 * @return string|null
 	**/
-	protected function _aroundGetPageTitle(AbstractModel $object)
+	protected function _aroundGetPageTitle(ViewableInterface $object)
 	{
 		return null;
 	}
@@ -185,10 +185,10 @@ abstract class AbstractPlugin extends \Magento\Framework\DataObject implements \
 	/**
 	 * Get the meta description
 	 *
-	 * @param AbstractModel $object
+	 * @param ViewableInterface $object
 	 * @return string|null
 	**/
-	protected function _aroundGetMetaDescription(AbstractModel $object)
+	protected function _aroundGetMetaDescription(ViewableInterface $object)
 	{
 		return null;
 	}
@@ -216,10 +216,10 @@ abstract class AbstractPlugin extends \Magento\Framework\DataObject implements \
 	/**
 	 * Get the meta keywords
 	 *
-	 * @param AbstractModel $object
+	 * @param ViewableInterface $object
 	 * @return string|null
 	**/
-	protected function _aroundGetMetaKeywords(AbstractModel $object)
+	protected function _aroundGetMetaKeywords(ViewableInterface $object)
 	{
 		return null;
 	}
@@ -253,10 +253,10 @@ abstract class AbstractPlugin extends \Magento\Framework\DataObject implements \
 	/**
 	 * Get the meta robots value
 	 *
-	 * @param AbstractModel $object
+	 * @param ViewableInterface $object
 	 * @return string|null
 	**/
-	protected function _aroundGetRobots(AbstractModel $object)
+	protected function _aroundGetRobots(ViewableInterface $object)
 	{
 		return null;
 	}
@@ -284,10 +284,10 @@ abstract class AbstractPlugin extends \Magento\Framework\DataObject implements \
 	/**
 	 * Get the canonical URL
 	 *
-	 * @param AbstractModel $object
+	 * @param ViewableInterface $object
 	 * @return string|null
 	**/
-	protected function _aroundGetCanonicalUrl(AbstractModel $object)
+	protected function _aroundGetCanonicalUrl(ViewableInterface $object)
 	{
 		return null;
 	}
@@ -333,10 +333,10 @@ abstract class AbstractPlugin extends \Magento\Framework\DataObject implements \
 	/**
 	 * Setup the rewrite data for $object
 	 *
-	 * @param AbstractModel $object
+	 * @param ViewableInterface $object
 	 * @return $this
 	**/
-	protected function _setupRewriteData(AbstractModel $object)
+	protected function _setupRewriteData(ViewableInterface $object)
 	{
 		if (!$this->hasRewriteData()) {
 			$data = array(
@@ -387,6 +387,11 @@ abstract class AbstractPlugin extends \Magento\Framework\DataObject implements \
 			else if ($object instanceof \FishPig\WordPress\Model\User) {
 				$data['name'] = $object->getDisplayName();
 			}	
+			
+			
+			if ($object instanceof \FishPig\WordPress\Model\Post\Type) {
+				$data['pt_plural'] = $object->getPluralName();
+			}
 			
 			$this->setRewriteData($data);		
 		}

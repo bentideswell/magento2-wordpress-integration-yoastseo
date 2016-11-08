@@ -4,7 +4,7 @@
 **/
 namespace FishPig\WordPress_Yoast\Plugin;
 
-use \FishPig\WordPress\Model\AbstractModel;
+use \FishPig\WordPress\Api\Data\Entity\ViewableInterface;
 
 class Post extends AbstractPlugin
 {
@@ -24,10 +24,10 @@ class Post extends AbstractPlugin
 	/**
 	 * Get the Yoast Page title
 	 *
-	 * @param AbstractModel $object
+	 * @param ViewableInterface $object
 	 * @return string|null
 	**/
-	protected function _aroundGetPageTitle(AbstractModel $object)
+	protected function _aroundGetPageTitle(ViewableInterface $object)
 	{
 		$rewriteData = [];
 		
@@ -44,10 +44,10 @@ class Post extends AbstractPlugin
 	/**
 	 * Get the Yoast meta description
 	 *
-	 * @param AbstractModel $object
+	 * @param ViewableInterface $object
 	 * @return string|null
 	**/
-	protected function _aroundGetMetaDescription(AbstractModel $object)
+	protected function _aroundGetMetaDescription(ViewableInterface $object)
 	{
 		if (($value = trim($object->getMetaValue(self::FIELD_META_DESCRIPTION))) !== '') {
 			return $value;
@@ -61,10 +61,10 @@ class Post extends AbstractPlugin
 	/**
 	 * Get the Yoast meta keywords
 	 *
-	 * @param AbstractModel $object
+	 * @param ViewableInterface $object
 	 * @return string|null
 	**/
-	protected function _aroundGetMetaKeywords(AbstractModel $object)
+	protected function _aroundGetMetaKeywords(ViewableInterface $object)
 	{
 		if (($value = trim($object->getMetaValue(self::FIELD_META_KEYWORDS))) !== '') {
 			return $value;
@@ -78,10 +78,10 @@ class Post extends AbstractPlugin
 	/**
 	 * Get the Yoast robots tag value
 	 *
-	 * @param AbstractModel $object
+	 * @param ViewableInterface $object
 	 * @return string|null
 	**/
-	protected function _aroundGetRobots(AbstractModel $object)
+	protected function _aroundGetRobots(ViewableInterface $object)
 	{
 		$robots = ['index' => 'index', 'follow' => 'follow'];
 
@@ -110,10 +110,10 @@ class Post extends AbstractPlugin
 	/**
 	 * Get the Yoast canonical URL
 	 *
-	 * @param AbstractModel $object
+	 * @param ViewableInterface $object
 	 * @return string|null
 	**/
-	protected function _aroundGetCanonicalUrl(AbstractModel $object)
+	protected function _aroundGetCanonicalUrl(ViewableInterface $object)
 	{
 		if ($value = $object->getMetaValue(self::FIELD_CANONICAL)) {
 			return $value;

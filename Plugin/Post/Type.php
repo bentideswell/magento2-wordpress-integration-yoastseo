@@ -2,25 +2,22 @@
 /**
  *
 **/
-namespace FishPig\WordPress_Yoast\Plugin;
+namespace FishPig\WordPress_Yoast\Plugin\Post;
 
 use \FishPig\WordPress\Api\Data\Entity\ViewableInterface;
 
-class Archive extends AbstractPlugin
+class Type extends \FishPig\WordPress_Yoast\Plugin\AbstractPlugin
 {
 	/**
 	 * Yoast field mappings for Posts
 	 *
 	 * @const string
 	**/
-	const FIELD_PAGE_TITLE = '_yoast_wpseo_title';
-	const FIELD_META_DESCRIPTION = '_yoast_wpseo_metadesc';
-	const FIELD_META_KEYWORDS = '_yoast_wpseo_metakeywords';
-	const FIELD_NOINDEX = '_yoast_wpseo_meta-robots-noindex';
-	const FIELD_NOFOLLOW = '_yoast_wpseo_meta-robots-nofollow';
-	const FIELD_ROBOTS_ADVANCED = '_yoast_wpseo_meta-robots-adv';
-	const FIELD_CANONICAL = '_yoast_wpseo_canonical';
-
+	const FIELD_PAGE_TITLE = 'title_ptarchive_';
+	const FIELD_META_DESCRIPTION = 'metadesc_ptarchive_';
+	const FIELD_META_KEYWORDS = 'metakey_ptarchive_';
+	const FIELD_NOINDEX = 'noindex_ptarchive_';
+	
 	/**
 	 * Get the Yoast Page title
 	 *
@@ -30,10 +27,10 @@ class Archive extends AbstractPlugin
 	protected function _aroundGetPageTitle(ViewableInterface $object)
 	{
 		return $this->_rewriteString(
-			$this->_getPageTitleFormat('archive_wpseo')
+			$this->getData(self::FIELD_PAGE_TITLE . $object->getPostType())
 		);
 	}
-
+	
 	/**
 	 * Get the Yoast meta description
 	 *
@@ -43,7 +40,7 @@ class Archive extends AbstractPlugin
 	protected function _aroundGetMetaDescription(ViewableInterface $object)
 	{
 		return $this->_rewriteString(
-			$this->_getMetaDescriptionFormat('archive_wpseo')
+			$this->getData(self::FIELD_META_DESCRIPTION . $object->getPostType())
 		);
 	}
 	
@@ -55,8 +52,12 @@ class Archive extends AbstractPlugin
 	**/
 	protected function _aroundGetMetaKeywords(ViewableInterface $object)
 	{
+		if (($value = trim($object->getMetaValue(self::FIELD_META_KEYWORDS))) !== '') {
+			return $value;
+		}
+
 		return $this->_rewriteString(
-			$this->_getMetaKeywordsFormat('archive_wpseo')
+			$this->getData(self::FIELD_META_KEYWORDS . $object->getPostType())
 		);
 	}
 	
@@ -70,10 +71,12 @@ class Archive extends AbstractPlugin
 	{
 		$robots = ['index' => 'index', 'follow' => 'follow'];
 
-		if ($this->_isNoindex('archive_wpseo')) {
-			$robots['index'] = 'noindex';
+
+		switch((int)$this->getData(self::FIELD_NOINDEX . $object->getPostType())) {
+			case 1:  $robots['index'] = 'noindex';   break;
+			case 2:  $robots['index'] = 'index';       break;
 		}
-	
+
 		return $robots;
 	}
 }
