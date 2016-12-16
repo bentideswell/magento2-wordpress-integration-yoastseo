@@ -1,5 +1,5 @@
 {
-    "name": "FishPig_WordPress_Yoast",
+    "name": "fishpig/module-wordpress-yoast",
     "description": "Yoast Integration for Magento WordPress Integration",
     "type": "magento2-module",
     "extra": {
