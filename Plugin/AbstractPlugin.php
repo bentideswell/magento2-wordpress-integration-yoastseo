@@ -143,7 +143,7 @@ abstract class AbstractPlugin extends \Magento\Framework\DataObject implements \
 		if ($this->isEnabled()) {
 			$this->_setupRewriteData($object);
 			
-			if (($value = $this->_aroundGetPageTitle($object)) !== null) {
+			if ($value = $this->_aroundGetPageTitle($object)) {
 				return $value;
 			}
 		}
@@ -174,11 +174,11 @@ abstract class AbstractPlugin extends \Magento\Framework\DataObject implements \
 		if ($this->isEnabled()) {
 			$this->_setupRewriteData($object);
 			
-			if (($value = $this->_aroundGetMetaDescription($object)) !== null) {
+			if ($value = $this->_aroundGetMetaDescription($object)) {
 				return $value;
 			}
 		}
-		
+
 		return $callback();
 	}
 
@@ -205,7 +205,7 @@ abstract class AbstractPlugin extends \Magento\Framework\DataObject implements \
 		if ($this->isEnabled()) {
 			$this->_setupRewriteData($object);
 			
-			if (($value = $this->_aroundGetMetaKeywords($object)) !== null) {
+			if ($value = $this->_aroundGetMetaKeywords($object)) {
 				return $value;
 			}
 		}
@@ -237,7 +237,7 @@ abstract class AbstractPlugin extends \Magento\Framework\DataObject implements \
 			if (!$this->_viewHelper->canDiscourageSearchEngines()) {
 				$this->_setupRewriteData($object);
 				
-				if (($value = $this->_aroundGetRobots($object)) !== null) {
+				if ($value = $this->_aroundGetRobots($object)) {
 					if ($this->_isNoindex('subpages_wpseo') && (int)$this->_viewHelper->getRequest()->getParam('page') > 1) {
 						$value['index'] = 'noindex';
 					}
@@ -273,7 +273,7 @@ abstract class AbstractPlugin extends \Magento\Framework\DataObject implements \
 		if ($this->isEnabled()) {
 			$this->_setupRewriteData($object);
 			
-			if (($value = $this->_aroundGetCanonicalUrl($object)) !== null) {
+			if ($value = $this->_aroundGetCanonicalUrl($object)) {
 				return $value;
 			}
 		}
