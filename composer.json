@@ -1,13 +1,13 @@
 {
     "name": "fishpig/module-wordpress-yoast",
-    "description": "Yoast Integration for Magento WordPress Integration",
+    "description": "add support for the WordPress SEO plugin.",
     "type": "magento2-module",
-    "extra": {
-        "map": [
-            [
-                "*",
-                "FishPig_WordPress_Yoast"
-            ]
-        ]
-    }
+    "version": "1.0.0.3",
+	"require": {
+		"magento\/product-community-edition": "^2.0.0"
+	},
+	"autoload": {
+		"files": ["registration.php"],
+		"psr-4": {"FishPig\\WordPress_Yoast\\": ""}
+	}
 }
