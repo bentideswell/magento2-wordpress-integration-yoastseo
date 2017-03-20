@@ -15,6 +15,9 @@
     <type name="FishPig\WordPress\Model\Term">    
         <plugin name="fishpig_wordpress_yoast_term" type="FishPig\WordPress_Yoast\Plugin\Term" sortOrder="10" disabled="false"/>
     </type>
+    <type name="FishPig\WordPress\Model\Term\Taxonomy">    
+        <plugin name="fishpig_wordpress_yoast_term_taxonomy" type="FishPig\WordPress_Yoast\Plugin\Term\Taxonomy" sortOrder="10" disabled="false"/>
+    </type>
     <type name="FishPig\WordPress\Model\User">    
         <plugin name="fishpig_wordpress_yoast_user" type="FishPig\WordPress_Yoast\Plugin\User" sortOrder="10" disabled="false"/>
     </type>
