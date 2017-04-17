@@ -1,0 +1,10 @@
+<?php
+/**
+ *
+**/
+?>
+<?php if ($tags = $this->getTags()): ?>
+	<?php foreach($tags as $property => $content): ?>
+		<meta property="og:<?php echo $property ?>" content="<?php echo $block->escapeHtml($content) ?>" />
+	<?php endforeach; ?>
+<?php endif; ?>

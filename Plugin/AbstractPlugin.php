@@ -6,27 +6,13 @@ namespace FishPig\WordPress_Yoast\Plugin;
 
 use \FishPig\WordPress\Model\Config;
 use \FishPig\WordPress\Model\App\Factory;
-use \FishPig\WordPress\Helper\Plugin as PluginHelper;
+use \FishPig\WordPress_Yoast\Helper\Data as DataHelper;
 use \FishPig\WordPress\Helper\View as ViewHelper;
 use \FishPig\WordPress\Api\Data\Entity\ViewableInterface;
 use \Magento\Framework\Registry;
 
 abstract class AbstractPlugin extends \Magento\Framework\DataObject implements \FishPig\WordPress\Plugin\SeoInterface
-{
-	/**
-	 * Free plugin filename in WordPress
-	 *
-	 * @var string
-	**/
-	const PLUGIN_FILE_FREE = 'wordpress-seo/wp-seo.php';
-	
-	/**
-	 * Premium plugin filename in WordPress
-	 *
-	 * @var string
-	**/
-	const PLUGIN_FILE_PREMIUM = 'wordpress-seo-premium/wp-seo-premium.php';
-	
+{	
 	/**
 	 * Separator map
 	 *
@@ -54,9 +40,9 @@ abstract class AbstractPlugin extends \Magento\Framework\DataObject implements \
 	protected $_config = null;
 	
 	/**
-	 * @ \FishPig\WordPress\Helper\Plugin
+	 * @ \FishPig\WordPress_Yoast\Helper\Data
 	**/
-	protected $_pluginHelper = null;
+	protected $_dataHelper = null;
 
 	/**
 	 * @ \FishPig\WordPress\Helper\View
@@ -77,47 +63,13 @@ abstract class AbstractPlugin extends \Magento\Framework\DataObject implements \
 	 * @param \Magento\Framework\Registry $registry,
 	 * @param $data = []
 	**/
-	public function __construct(
-		Config $config,
-		PluginHelper $pluginHelper,
-		ViewHelper $viewHelper,
-		Registry $registry,
-		Factory $factory,
-		$data = []
-	)
+	public function __construct(Config $config, DataHelper $dataHelper, ViewHelper $viewHelper, Registry $registry, Factory $factory, $data = [])
 	{
 		$this->_config = $config;
-		$this->_pluginHelper = $pluginHelper;
+		$this->_dataHelper = $dataHelper;
 		$this->_viewHelper = $viewHelper;
 		$this->_registry = $registry;
 		$this->_factory = $factory;
-
-		$this->_init();
-	}
-	
-	/**
-	 * Initialise the plugin with plugin data
-	 *
-	 * @return $this
-	**/
-	protected function _init()
-	{
-		if (!$this->isEnabled()) {
-			return $this;
-		}
-		
-		$types = ['wpseo', 'wpseo_titles', 'wpseo_xml', 'wpseo_social', 'wpseo_rss', 'wpseo_internallinks', 'wpseo_permalinks'];
-		$data = array();
-		
-		foreach($types as $type) {
-			if ($options = $this->_pluginHelper->getOption($type)) {
-				foreach($options as $key => $value) {
-					$data[str_replace('-', '_', $key)] = $value;
-				}
-			}
-		}
-		
-		return $this->setData($data);
 	}
 
 	/**
@@ -127,8 +79,7 @@ abstract class AbstractPlugin extends \Magento\Framework\DataObject implements \
 	**/
 	public function isEnabled()
 	{
-		return $this->_pluginHelper->isEnabled(self::PLUGIN_FILE_FREE)
-			|| $this->_pluginHelper->isEnabled(self::PLUGIN_FILE_PREMIUM);
+		return $this->_dataHelper->isEnabled();
 	}
 	
 	/**
@@ -349,7 +300,7 @@ abstract class AbstractPlugin extends \Magento\Framework\DataObject implements \
 				'sep' => '|',
 			);
 
-			if ($sep = $this->getData('separator')) {
+			if ($sep = $this->getConfigOption('separator')) {
 				if (isset($this->_separators[$sep])) {
 					$data['sep'] = $this->_separators[$sep];
 				}
@@ -407,8 +358,8 @@ abstract class AbstractPlugin extends \Magento\Framework\DataObject implements \
 	public function getRewriteData(array $updates = [])
 	{
 		return $updates
-			 ? array_merge($this->_getData('rewrite_data'), $updates)
-			 : $this->_getData('rewrite_data');
+			 ? array_merge($this->getConfigOption('rewrite_data'), $updates)
+			 : $this->getConfigOption('rewrite_data');
 	}
 	
 	/**
@@ -419,7 +370,7 @@ abstract class AbstractPlugin extends \Magento\Framework\DataObject implements \
 	 */
 	protected function _getPageTitleFormat($key)
 	{
-		return trim($this->getData('title_' . $key));
+		return trim($this->getConfigOption('title_' . $key));
 	}
 	
 	/**
@@ -430,7 +381,7 @@ abstract class AbstractPlugin extends \Magento\Framework\DataObject implements \
 	 */
 	protected function _getMetaDescriptionFormat($key)
 	{
-		return trim($this->getData('metadesc_' . $key));
+		return trim($this->getConfigOption('metadesc_' . $key));
 	}
 	
 	/**
@@ -441,9 +392,8 @@ abstract class AbstractPlugin extends \Magento\Framework\DataObject implements \
 	 */
 	protected function _getMetaKeywordsFormat($key)
 	{
-		return trim($this->getData('metakey_' . $key));
+		return trim($this->getConfigOption('metakey_' . $key));
 	}
-	
 	
 	/**
 	 * Retrieve the title format for the given key
@@ -453,7 +403,7 @@ abstract class AbstractPlugin extends \Magento\Framework\DataObject implements \
 	 */
 	protected function _isNoindex($key)
 	{
-		return (int)$this->getData('noindex_' . $key) === 1;
+		return (int)$this->getConfigOption('noindex_' . $key) === 1;
 	}
 	
 	/**
@@ -464,5 +414,14 @@ abstract class AbstractPlugin extends \Magento\Framework\DataObject implements \
 	public function _isSubPageNoindex()
 	{
 		return $this->_isNoindex('subpages_wpseo');
+	}
+	
+	/**
+	 * @param string $key
+	 * @return mixed
+	**/
+	public function getConfigOption($key)
+	{
+		return $this->_dataHelper->getConfigOption($key);
 	}
 }
