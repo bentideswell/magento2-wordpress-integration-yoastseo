@@ -357,9 +357,17 @@ abstract class AbstractPlugin extends \Magento\Framework\DataObject implements \
 	 */
 	public function getRewriteData(array $updates = [])
 	{
-		return $updates
-			 ? array_merge($this->getConfigOption('rewrite_data'), $updates)
-			 : $this->getConfigOption('rewrite_data');
+		$rewriteData = $this->getConfigOption('rewrite_data');
+		
+		if (!is_array($rewriteData)) {
+			$rewriteData = array();
+		}
+		
+		if (!is_array($updates)) {
+			$updates = array();
+		}
+		
+		return $updates ? array_merge($rewriteData, $updates) : $rewriteData;
 	}
 	
 	/**
