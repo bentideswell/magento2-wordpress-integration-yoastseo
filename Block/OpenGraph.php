@@ -70,7 +70,7 @@ class OpenGraph extends AbstractBlock
 				'title' => $object->getName(),
 				'description' => $object->getMetaDescription(),
 				'url' => $object->getUrl(),
-				'image' => $object->getFeaturedImage() ? $object->getFeaturedImage()->getFullSizeImage() : '',
+				'image' => $object->getFeaturedImage() ? $object->getFeaturedImage()->getAvailableImage() : '',
 				'updated_time' => $object->getPostModifiedDate('c'),
 				'article:author' => $object->getUser()->getMetaValue('facebook'),
 				'article:published_time' => $object->getPostDate('c'),
