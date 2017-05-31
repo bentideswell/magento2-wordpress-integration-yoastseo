@@ -74,6 +74,12 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
 		$this->_configData = $data;
 	}
 	
+	/**
+	 * Get a config option for the plugin
+	 *
+	 * @param string $key = null
+	 * @return string
+	**/
 	public function getConfigOption($key = null)
 	{
 		if (!$key) {

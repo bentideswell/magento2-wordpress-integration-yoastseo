@@ -256,7 +256,7 @@ abstract class AbstractPlugin extends \Magento\Framework\DataObject implements \
 		if (!$data) {
 			$data = $this->getRewriteData();
 		}
-		
+
 		$rwt = '%%';
 		$value = array();
 		$parts = preg_split("/(" . $rwt . "[a-z_-]{1,}" . $rwt . ")/iU", $format, -1, PREG_SPLIT_DELIM_CAPTURE|PREG_SPLIT_NO_EMPTY);
@@ -343,10 +343,10 @@ abstract class AbstractPlugin extends \Magento\Framework\DataObject implements \
 			if ($object instanceof \FishPig\WordPress\Model\Post\Type) {
 				$data['pt_plural'] = $object->getPluralName();
 			}
-			
+
 			$this->setRewriteData($data);		
 		}
-		
+
 		return $this;
 	}
 	
@@ -357,7 +357,7 @@ abstract class AbstractPlugin extends \Magento\Framework\DataObject implements \
 	 */
 	public function getRewriteData(array $updates = [])
 	{
-		$rewriteData = $this->getConfigOption('rewrite_data');
+		$rewriteData = $this->getData('rewrite_data');//$this->getConfigOption('rewrite_data');
 		
 		if (!is_array($rewriteData)) {
 			$rewriteData = array();
@@ -428,7 +428,7 @@ abstract class AbstractPlugin extends \Magento\Framework\DataObject implements \
 	 * @param string $key
 	 * @return mixed
 	**/
-	public function getConfigOption($key)
+	public function getConfigOption($key = null)
 	{
 		return $this->_dataHelper->getConfigOption($key);
 	}
