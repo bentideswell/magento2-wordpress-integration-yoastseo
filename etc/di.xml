@@ -34,4 +34,8 @@
     <type name="FishPig\WordPress\Model\Post\Type">
         <plugin name="fishpig_wordpress_yoast_post_type" type="FishPig\WordPress_Yoast\Plugin\Post\Type" sortOrder="10" disabled="false"/>
     </type>
+    
+    <type name="FishPig\WordPress\Model\Config">
+        <plugin name="fishpig_wordpress_yoast_config" type="FishPig\WordPress_Yoast\Plugin\Config" sortOrder="10" disabled="false"/>
+    </type>
 </config>
