@@ -4,7 +4,7 @@
 **/
 namespace FishPig\WordPress_Yoast\Plugin;
 
-use \FishPig\WordPress\Model\Config;
+use \FishPig\WordPress\Model\Config as WPConfig;
 use \FishPig\WordPress\Model\App\Factory;
 use \FishPig\WordPress_Yoast\Helper\Data as DataHelper;
 use \FishPig\WordPress\Helper\View as ViewHelper;
@@ -63,7 +63,7 @@ abstract class AbstractPlugin extends \Magento\Framework\DataObject implements \
 	 * @param \Magento\Framework\Registry $registry,
 	 * @param $data = []
 	**/
-	public function __construct(Config $config, DataHelper $dataHelper, ViewHelper $viewHelper, Registry $registry, Factory $factory, $data = [])
+	public function __construct(WPConfig $config, DataHelper $dataHelper, ViewHelper $viewHelper, Registry $registry, Factory $factory, $data = [])
 	{
 		$this->_config = $config;
 		$this->_dataHelper = $dataHelper;

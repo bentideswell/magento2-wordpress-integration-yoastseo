@@ -2,7 +2,7 @@
     "name": "fishpig/module-wordpress-yoast",
     "description": "add support for the WordPress SEO plugin.",
     "type": "magento2-module",
-    "version": "1.0.0.10",
+    "version": "1.0.0.11",
 	"require": {
 		"magento\/product-community-edition": "^2.0.0"
 	},
