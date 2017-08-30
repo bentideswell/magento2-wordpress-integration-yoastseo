@@ -30,7 +30,7 @@ class Post extends AbstractPlugin
 	protected function _aroundGetPageTitle(ViewableInterface $object)
 	{
 		$rewriteData = [];
-		
+
 		if (($value = trim($object->getMetaValue(self::FIELD_PAGE_TITLE))) !== '') {
 			$rewriteData = $this->getRewriteData(array('title' => $value));
 		}
@@ -120,12 +120,5 @@ class Post extends AbstractPlugin
 		}
 
 		return null;
-	}
-	
-	public function aroundAddPrimaryCategoryToSelect($select, $postId)
-	{
-		echo __FILE__;exit;
-		#			Mage::helper('wp_addon_yoastseo')->addPrimaryCategoryToSelect($select, $postId);
-#		return $this;
 	}
 }

@@ -70,21 +70,17 @@ class OpenGraph extends AbstractBlock
 				'title' => $object->getName(),
 				'description' => $object->getMetaDescription(),
 				'url' => $object->getUrl(),
-				'image' => $object->getFeaturedImage() ? $object->getFeaturedImage()->getAvailableImage() : '',
+				'image' => $object->getImage() ? $object->getImage()->getAvailableImage() : '',
 				'updated_time' => $object->getPostModifiedDate('c'),
 				'article:author' => $object->getUser()->getMetaValue('facebook'),
 				'article:published_time' => $object->getPostDate('c'),
 				'article:modified_time' => $object->getPostModifiedDate('c'),
 			);
-	
-			if (!$tags['description']) {
-				if ($fbDesc = $object->getMetaValue('_yoast_wpseo_opengraph-description')) {
-					$tags['description'] = $fbDesc;
+
+			foreach(['title', 'description', 'image'] as $key) {
+				if ($value = $object->getMetaValue('_yoast_wpseo_opengraph-' . $key)) {
+					$tags[$key] = $value;
 				}
-			}
-			
-			if (!$tags['image'] && ($fbImage = $object->getMetaValue('_yoast_wpseo_opengraph-image'))) {
-				$tags['image'] = $fbImage;
 			}
 		}
 		else if ($object instanceof \FishPig\WordPress\Model\Term) {
