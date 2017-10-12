@@ -253,6 +253,24 @@ abstract class AbstractPlugin extends \Magento\Framework\DataObject implements \
 	 */
 	protected function _rewriteString($format, $data = [])
 	{
+		if (strpos($format, '%%page%%') !== false || strpos($format, '%%pagetotal%%') !== false) {
+			if ($pagerBlock = $this->_viewHelper->getLayout()->getBlock('wp.post_list.pager')) {
+				if ($listBlock = $pagerBlock->getParentBlock()->getParentBlock()) {
+					$listBlock->getPostListHtml();
+
+					if ($pagerBlock->getCollection()) {
+						$data = $this->getRewriteData();
+						
+						$lastPageNumber = $pagerBlock->getLastPageNum();
+						$data['pagetotal'] = $lastPageNumber;
+						$data['page'] = sprintf('Page %d of %d', $data['pagenumber'], $data['pagetotal']);
+						
+						$this->setRewriteData($data);
+					}
+				}
+			}
+		}
+		
 		if (!$data) {
 			$data = $this->getRewriteData();
 		}
@@ -280,7 +298,7 @@ abstract class AbstractPlugin extends \Magento\Framework\DataObject implements \
 		
 		return false;
 	}
-	
+
 	/**
 	 * Setup the rewrite data for $object
 	 *
@@ -298,6 +316,7 @@ abstract class AbstractPlugin extends \Magento\Framework\DataObject implements \
 				'currentmonth' => date('F'),
 				'currentyear' => date('Y'),
 				'sep' => '|',
+				'pagenumber' => (int)$this->_viewHelper->getRequest()->getParam('page'),
 			);
 
 			if ($sep = $this->getConfigOption('separator')) {
