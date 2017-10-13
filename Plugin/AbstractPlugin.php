@@ -316,7 +316,7 @@ abstract class AbstractPlugin extends \Magento\Framework\DataObject implements \
 				'currentmonth' => date('F'),
 				'currentyear' => date('Y'),
 				'sep' => '|',
-				'pagenumber' => (int)$this->_viewHelper->getRequest()->getParam('page'),
+				'pagenumber' => max(1, (int)$this->_viewHelper->getRequest()->getParam('page')),
 			);
 
 			if ($sep = $this->getConfigOption('separator')) {
