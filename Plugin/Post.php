@@ -32,9 +32,10 @@ class Post extends AbstractPlugin
 		$rewriteData = [];
 
 		if (($value = trim($object->getMetaValue(self::FIELD_PAGE_TITLE))) !== '') {
+			return $value;
 			$rewriteData = $this->getRewriteData(array('title' => $value));
 		}
-		
+
 		return $this->_rewriteString(
 			$this->_getPageTitleFormat($object->getPostType()),
 			$rewriteData
