@@ -1,8 +1,8 @@
 {
-  "name": "fishpig/magento2-wordpress-integration-yoast",
+  "name": "fishpig/magento2-wordpress-integration-yoastseo",
   "description": "add support for the WordPress SEO plugin.",
   "type": "magento2-module",
-  "version": "1.0.0.17",
+  "version": "1.0.0.18",
 	"require": {
 		"magento\/product-community-edition": "^2.0.0"
 	},
