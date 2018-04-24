@@ -95,6 +95,10 @@ class Term extends AbstractPlugin
 		if (($value = trim($this->_getTaxonomyMeta($object, self::FIELD_NOINDEX))) !== '') {
 			$robots['index'] = $value;
 		}
+		else if ($this->_isNoindex('tax_' . $object->getTaxonomy())) {
+			$robots['index'] = 'NOINDEX';
+		}
+
 
 		return $robots;
 	}
@@ -127,12 +131,14 @@ class Term extends AbstractPlugin
 		$id = $object->getId();
 		
 		if ($this->_taxonomyMetaData === null) {
-			
 			if ($meta = @unserialize($this->_config->getOption(self::FIELD_CONFIG_OPTION))) {
 				$this->_taxonomyMetaData = $meta;
 			}
+			else {
+				return $this->_taxonomyMetaData = false;
+			}
 		}
-		
+
 		if (!isset($this->_taxonomyMetaData[$taxonomy])) {
 			return '';
 		}
