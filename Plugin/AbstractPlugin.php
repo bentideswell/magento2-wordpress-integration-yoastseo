@@ -54,6 +54,11 @@ abstract class AbstractPlugin extends \Magento\Framework\DataObject implements \
 	**/	
 	protected $_factory = null;
 	
+	/*
+	 *
+	 */
+	protected $currentObject;
+	
 	/**
 	 * Constructor
 	 *
@@ -275,6 +280,17 @@ abstract class AbstractPlugin extends \Magento\Framework\DataObject implements \
 			$data = $this->getRewriteData();
 		}
 
+		// Add custom field data
+		if (strpos($format, '%%cf_') !== false) {
+			if (method_exists($this->currentObject, 'getMetaValue')) {
+				if (preg_match_all('/\%\%cf_([^\%]{1,})\%\%/', $format, $matches)) {
+					foreach($matches[1] as $customField) {
+						$data['cf_' . $customField] = $this->currentObject->getMetaValue($customField);
+					}
+				}
+			}
+		}
+		
 		$rwt = '%%';
 		$value = array();
 		$parts = preg_split("/(" . $rwt . "[a-z_-]{1,}" . $rwt . ")/iU", $format, -1, PREG_SPLIT_DELIM_CAPTURE|PREG_SPLIT_NO_EMPTY);
@@ -307,6 +323,8 @@ abstract class AbstractPlugin extends \Magento\Framework\DataObject implements \
 	**/
 	protected function _setupRewriteData(ViewableInterface $object)
 	{
+		$this->currentObject = $object;
+		
 		if (!$this->hasRewriteData()) {
 			$data = array(
 				'sitename' => $this->_config->getOption('blogname'),
