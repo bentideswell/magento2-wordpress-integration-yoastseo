@@ -4,13 +4,23 @@
 **/
 namespace FishPig\WordPress_Yoast\Plugin;
 
-use \FishPig\WordPress\Model\Config as WPConfig;
-use \FishPig\WordPress_Yoast\Helper\Data as DataHelper;
-use \FishPig\WordPress\Helper\View as ViewHelper;
-use \FishPig\WordPress\Api\Data\Entity\ViewableInterface;
-use \Magento\Framework\Registry;
+/* Parent Class */
+use Magento\Framework\DataObject;
 
-abstract class AbstractPlugin extends \Magento\Framework\DataObject implements \FishPig\WordPress\Api\Data\Plugin\SeoInterface
+/* Interface */
+use FishPig\WordPress\Api\Data\Plugin\SeoInterface;
+
+/* Constructor Args */
+use FishPig\WordPress\Model\OptionManager;
+use FishPig\WordPress_Yoast\Helper\Data as YoastHelper;
+use FishPig\WordPress\Helper\Date as DateHelper;
+use Magento\Framework\Registry;
+use Magento\Framework\View\Layout;
+
+/* Misc */
+use FishPig\WordPress\Api\Data\Entity\ViewableInterface;
+
+abstract class AbstractPlugin extends DataObject implements SeoInterface
 {	
 	/**
 	 * Separator map
@@ -33,22 +43,24 @@ abstract class AbstractPlugin extends \Magento\Framework\DataObject implements \
 		'sc-gt'     => '&gt;',
 	);
 	
-	/**
-	 * @ \FishPig\WordPress\Model\Config
-	**/
-	protected $_config = null;
-	
-	/**
-	 * @ \FishPig\WordPress_Yoast\Helper\Data
-	**/
-	protected $_dataHelper = null;
+	/*
+	 *
+	 * @var
+	 *
+	 */
+	protected $optionManager = null;
 
-	/**
-	 * @ \FishPig\WordPress\Helper\View
-	**/	
-	protected $_viewHelper = null;
+
+	/*
+	 *
+	 * @var
+	 *
+	 */
+	protected $dateHelper;
 	
 	/*
+	 *
+	 * @var
 	 *
 	 */
 	protected $currentObject;
@@ -62,12 +74,23 @@ abstract class AbstractPlugin extends \Magento\Framework\DataObject implements \
 	 * @param \Magento\Framework\Registry $registry,
 	 * @param $data = []
 	**/
-	public function __construct(WPConfig $config, DataHelper $dataHelper, ViewHelper $viewHelper, Registry $registry, $data = [])
+	public function __construct(
+		OptionManager $optionManager,
+  		YoastHelper $yoastHelper,
+		   DateHelper $dateHelper,
+		     Registry $registry,
+		       Layout $layout,
+		              $data = []
+  )
 	{
-		$this->_config = $config;
-		$this->_dataHelper = $dataHelper;
-		$this->_viewHelper = $viewHelper;
-		$this->_registry = $registry;
+		$this->optionManager = $optionManager;
+		$this->yoastHelper   = $yoastHelper;
+		$this->dateHelper    = $dateHelper;
+		$this->_registry     = $registry;
+		$this->registry      = $registry;
+		$this->layout        = $layout;
+		
+		parent::__construct($data);
 	}
 
 	/**
@@ -77,7 +100,7 @@ abstract class AbstractPlugin extends \Magento\Framework\DataObject implements \
 	**/
 	public function isEnabled()
 	{
-		return $this->_dataHelper->isEnabled();
+		return $this->yoastHelper->isEnabled();
 	}
 	
 	/**
@@ -183,11 +206,11 @@ abstract class AbstractPlugin extends \Magento\Framework\DataObject implements \
 	public function aroundGetRobots($object, $callback)
 	{		
 		if ($this->isEnabled()) {
-			if (!$this->_viewHelper->canDiscourageSearchEngines()) {
+			if (!$this->yoastHelper->canDiscourageSearchEngines()) {
 				$this->_setupRewriteData($object);
 				
 				if ($value = $this->_aroundGetRobots($object)) {
-					if ($this->_isNoindex('subpages_wpseo') && (int)$this->_viewHelper->getRequest()->getParam('page') > 1) {
+					if ($this->_isNoindex('subpages_wpseo') && (int)$this->yoastHelper->getRequest()->getParam('page') > 1) {
 						$value['index'] = 'noindex';
 					}
 
@@ -252,7 +275,7 @@ abstract class AbstractPlugin extends \Magento\Framework\DataObject implements \
 	protected function _rewriteString($format, $data = [])
 	{
 		if (strpos($format, '%%page%%') !== false || strpos($format, '%%pagetotal%%') !== false) {
-			if ($pagerBlock = $this->_viewHelper->getLayout()->getBlock('wp.post_list.pager')) {
+			if ($pagerBlock = $this->layout->getBlock('wp.post_list.pager')) {
 				if ($listBlock = $pagerBlock->getParentBlock()->getParentBlock()) {
 					$listBlock->getPostListHtml();
 
@@ -320,14 +343,14 @@ abstract class AbstractPlugin extends \Magento\Framework\DataObject implements \
 		
 		if (!$this->hasRewriteData()) {
 			$data = array(
-				'sitename' => $this->_config->getOption('blogname'),
-				'sitedesc' => $this->_config->getOption('blogdescription'),
-				'currenttime' => $this->_viewHelper->formatTime(date('Y-m-d H:i:s')),
-				'currentdate' => $this->_viewHelper->formatDate(date('Y-m-d H:i:s')),
+				'sitename' => $this->optionManager->getOption('blogname'),
+				'sitedesc' => $this->optionManager->getOption('blogdescription'),
+				'currenttime' => $this->dateHelper->formatTime(date('Y-m-d H:i:s')),
+				'currentdate' => $this->dateHelper->formatDate(date('Y-m-d H:i:s')),
 				'currentmonth' => date('F'),
 				'currentyear' => date('Y'),
 				'sep' => '|',
-				'pagenumber' => max(1, (int)$this->_viewHelper->getRequest()->getParam('page')),
+				'pagenumber' => max(1, (int)$this->dateHelper->getRequest()->getParam('page')),
 			);
 
 			if ($sep = $this->getConfigOption('separator')) {
@@ -368,8 +391,7 @@ abstract class AbstractPlugin extends \Magento\Framework\DataObject implements \
 			else if ($object instanceof \FishPig\WordPress\Model\User) {
 				$data['name'] = $object->getDisplayName();
 			}	
-			
-			
+
 			if ($object instanceof \FishPig\WordPress\Model\Post\Type) {
 				$data['pt_plural'] = $object->getPluralName();
 			}
@@ -387,7 +409,7 @@ abstract class AbstractPlugin extends \Magento\Framework\DataObject implements \
 	 */
 	public function getRewriteData(array $updates = [])
 	{
-		$rewriteData = $this->getData('rewrite_data');//$this->getConfigOption('rewrite_data');
+		$rewriteData = $this->getData('rewrite_data');
 		
 		if (!is_array($rewriteData)) {
 			$rewriteData = array();
@@ -460,6 +482,6 @@ abstract class AbstractPlugin extends \Magento\Framework\DataObject implements \
 	**/
 	public function getConfigOption($key = null)
 	{
-		return $this->_dataHelper->getConfigOption($key);
+		return $this->yoastHelper->getConfigOption($key);
 	}
 }

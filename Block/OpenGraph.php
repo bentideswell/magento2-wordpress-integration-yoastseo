@@ -1,58 +1,61 @@
 <?php
-/**
- * @category Fishpig
- * @package Fishpig_Wordpress_Yoast
- * @author Ben Tideswell <help@fishpig.co.uk>
+/*
+ *
  */
-
 namespace FishPig\WordPress_Yoast\Block;
 
-use \FishPig\WordPress\Block\AbstractBlock;
+/* Parent Class */
+use FishPig\WordPress\Block\AbstractBlock;
+
+/* Constructor Args */
+use Magento\Framework\View\Element\Template\Context;
+use FishPig\WordPress\Model\Context as WPContext;
+use FishPig\WordPress_Yoast\Helper\Data as YoastHelper;
 
 class OpenGraph extends AbstractBlock
 {
-	/**
+	/*
 	 * @var FishPig\WordPress_Yoast\Helper\Data
-	**/
-	protected $_helper = null;
+	 */
+	protected $yoastHelper;
 
-	/**
+	/*
 	 * @var FishPig\WordPress\Model\AbstractModel
-	**/	
-	protected $_entity = null;
+	 */
+	protected $entity;
 	
-	/**
-	 * @return FishPig\WordPress_Yoast\Helper\Data
-	**/
-	protected function _getHelper()
+	/*
+	 *
+	 *
+	 *
+	 */
+  public function __construct(Context $context, WPContext $wpContext, YoastHelper $yoastHelper, array $data = [])
 	{
-		if ($this->_helper === null) {
-			$this->_helper = \Magento\Framework\App\ObjectManager::getInstance()->get('FishPig\WordPress_Yoast\Helper\Data');
-		}	
+		$this->yoastHelper = $yoastHelper;
 		
-		return $this->_helper;
+		parent::__construct($context, $wpContext, $data);
 	}
 	
-	/**
+	/*
 	 * @return array
-	**/
+	 */
 	protected function _getTagDefaults()
 	{
 		return [
-			'locale' => $this->_config->getLocaleCode(),
+			'locale' => $this->yoastHelper->getLocaleCode(),
 			'type' => 'blog',
-			'title' => $this->_config->getOption('blogname'),
-			'description' => $this->_config->getOption('blogdescription'),
-			'url' => $this->_app->getWpUrlBuilder()->getUrl(),
-			'site_name' => $this->_config->getOption('blogname'),
-			'article:publisher' => $this->_getHelper()->getConfigOption('facebook_site'),
-			'image' => $this->_getHelper()->getConfigOption('og_default_image'),
+			'title' => $this->optionManager->getOption('blogname'),
+			'description' => $this->optionManager->getOption('blogdescription'),
+			'url' => $this->url->getUrl(),
+			'site_name' => $this->optionManager->getOption('blogname'),
+			'article:publisher' => $this->yoastHelper->getConfigOption('facebook_site'),
+			'image' => $this->yoastHelper->getConfigOption('og_default_image'),
 		];
 	}
 
-	/**
+	/*
 	 * @return array
-	**/
+	 */
 	public function getTags()
 	{
 		$object = $this->_getEntity();
@@ -60,8 +63,8 @@ class OpenGraph extends AbstractBlock
 		
 		if ($object instanceof \FishPig\WordPress\Model\Homepage) {
 			$tags = array(
-				'description' => $this->_getHelper()->getConfigOption('og_frontpage_desc'),
-				'image' => $this->_getHelper()->getConfigOption('og_frontpage_image'),
+				'description' => $this->yoastHelper->getConfigOption('og_frontpage_desc'),
+				'image' => $this->yoastHelper->getConfigOption('og_frontpage_image'),
 			);
 		}
 		else if ($object instanceof \FishPig\WordPress\Model\Post) {
@@ -100,9 +103,9 @@ class OpenGraph extends AbstractBlock
 		return $tags;
 	}
 	
-	/**
+	/*
 	 * @return array
-	**/
+	 */
 	protected function _mergeTags($a, $b)
 	{
 		foreach($b as $key => $value) {
@@ -120,27 +123,27 @@ class OpenGraph extends AbstractBlock
 		return $a;
 	}
 	
-	/**
+	/*
 	 * @return FishPig\WordPress\Model\AbstractModel
-	**/
+	 */
 	protected function _getEntity()
 	{
-		if ($this->_entity !== null) {
-			return $this->_entity;
+		if ($this->entity !== null) {
+			return $this->entity;
 		}
 		
-		$this->_entity = false;
+		$this->entity = false;
 		
-		if ($object = $this->_registry->registry('wordpress_homepage')) {
-			$this->_entity = $object;
+		if ($object = $this->registry->registry('wordpress_homepage')) {
+			$this->entity = $object;
 		}
-		else if ($object = $this->_registry->registry('wordpress_post')) {
-			$this->_entity = $object;
+		else if ($object = $this->registry->registry('wordpress_post')) {
+			$this->entity = $object;
 		}
-		else if ($object = $this->_registry->registry('wordpress_term')) {
-			$this->_entity = $object;
+		else if ($object = $this->registry->registry('wordpress_term')) {
+			$this->entity = $object;
 		}
 
-		return $this->_entity;
+		return $this->entity;
 	}
 }

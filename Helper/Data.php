@@ -1,15 +1,13 @@
 <?php
-/**
- * @category    Fishpig
- * @package     Fishpig_Wordpress
- * @license     http://fishpig.co.uk/license.txt
- * @author      Ben Tideswell <help@fishpig.co.uk>
+/*
+ *
  */
-
 namespace FishPig\WordPress_Yoast\Helper;
 
-use \Magento\Framework\App\Helper\Context;
-use \FishPig\WordPress\Helper\Plugin as PluginHelper;
+/* Constructor Args */
+use Magento\Framework\App\Helper\Context;
+use FishPig\WordPress\Model\Plugin;
+use Magento\Store\Model\StoreManagerInterface;
 
 class Data extends \Magento\Framework\App\Helper\AbstractHelper
 {
@@ -27,24 +25,24 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
 	**/
 	const PLUGIN_FILE_PREMIUM = 'wordpress-seo-premium/wp-seo-premium.php';
 	
-	/**
-	 * @ \FishPig\WordPress\Helper\Plugin
-	**/
-	protected $_pluginHelper = null;
+	/*
+	 *
+	 * @var
+	 *
+	 */
+	protected $plugin;
 	
 	/**
 	 *
 	 *
 	 * @return 
 	**/
-	public function __construct(
-		Context $context, 
-		PluginHelper $pluginHelper
-	)
+	public function __construct(Context $context, Plugin $plugin, StoreManagerInterface $storeManager)
 	{
-		parent::__construct($context);
+		$this->plugin       = $plugin;
+		$this->storeManager = $storeManager;
 		
-		$this->_pluginHelper = $pluginHelper;
+		parent::__construct($context);
 		
 		$this->_init();
 	}
@@ -64,7 +62,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
 		$data = array();
 		
 		foreach($types as $type) {
-			if ($options = $this->_pluginHelper->getOption($type)) {
+			if ($options = $this->plugin->getOption($type)) {
 				foreach($options as $key => $value) {
 					$data[str_replace('-', '_', $key)] = $value;
 				}
@@ -96,7 +94,20 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
 	**/
 	public function isEnabled()
 	{
-		return $this->_pluginHelper->isEnabled(self::PLUGIN_FILE_FREE)
-			|| $this->_pluginHelper->isEnabled(self::PLUGIN_FILE_PREMIUM);
+		return $this->plugin->isEnabled(self::PLUGIN_FILE_FREE) || $this->plugin->isEnabled(self::PLUGIN_FILE_PREMIUM);
+	}
+	
+	public function getRequest()
+	{
+		return $this->_getRequest();
+	}
+	
+	/*
+	 *
+	 * @return string
+	 */
+	public function getLocaleCode()
+	{
+		return $this->storeManager->getStore()->getLocaleCode();
 	}
 }
