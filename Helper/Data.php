@@ -8,6 +8,7 @@ namespace FishPig\WordPress_Yoast\Helper;
 use Magento\Framework\App\Helper\Context;
 use FishPig\WordPress\Model\Plugin;
 use Magento\Store\Model\StoreManagerInterface;
+use FishPig\WordPress\Model\OptionManager;
 
 class Data extends \Magento\Framework\App\Helper\AbstractHelper
 {
@@ -37,10 +38,11 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
 	 *
 	 * @return 
 	**/
-	public function __construct(Context $context, Plugin $plugin, StoreManagerInterface $storeManager)
+	public function __construct(Context $context, Plugin $plugin, StoreManagerInterface $storeManager, OptionManager $optionManager)
 	{
-		$this->plugin       = $plugin;
-		$this->storeManager = $storeManager;
+		$this->plugin        = $plugin;
+		$this->storeManager  = $storeManager;
+		$this->optionManager = $optionManager;
 		
 		parent::__construct($context);
 		
@@ -109,5 +111,10 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
 	public function getLocaleCode()
 	{
 		return $this->storeManager->getStore()->getLocaleCode();
+	}
+	
+	public function canDiscourageSearchEngines()
+	{
+		return (int)$this->optionManager->getOption('blog_public') === 0;
 	}
 }

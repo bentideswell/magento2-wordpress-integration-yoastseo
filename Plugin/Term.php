@@ -131,7 +131,7 @@ class Term extends AbstractPlugin
 		$id = $object->getId();
 		
 		if ($this->_taxonomyMetaData === null) {
-			if ($meta = @unserialize($this->_config->getOption(self::FIELD_CONFIG_OPTION))) {
+			if ($meta = @unserialize($this->optionManager->getOption(self::FIELD_CONFIG_OPTION))) {
 				$this->_taxonomyMetaData = $meta;
 			}
 			else {

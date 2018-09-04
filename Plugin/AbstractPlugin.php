@@ -14,6 +14,7 @@ use FishPig\WordPress\Api\Data\Plugin\SeoInterface;
 use FishPig\WordPress\Model\OptionManager;
 use FishPig\WordPress_Yoast\Helper\Data as YoastHelper;
 use FishPig\WordPress\Helper\Date as DateHelper;
+use FishPig\WordPress\Model\Factory;
 use Magento\Framework\Registry;
 use Magento\Framework\View\Layout;
 
@@ -65,30 +66,27 @@ abstract class AbstractPlugin extends DataObject implements SeoInterface
 	 */
 	protected $currentObject;
 	
-	/**
-	 * Constructor
+	/*
 	 *
-	 * @param \FishPig\WordPress\Model\Config $config,
-	 * @param \FishPig\WordPress\Helper\Plugin $pluginHelper,
-	 * @param \FishPig\WordPress\Helper\View $viewHelper,
-	 * @param \Magento\Framework\Registry $registry,
-	 * @param $data = []
-	**/
+	 *
+	 */
 	public function __construct(
 		OptionManager $optionManager,
   		YoastHelper $yoastHelper,
 		   DateHelper $dateHelper,
 		     Registry $registry,
 		       Layout $layout,
+		      Factory $factory,
 		              $data = []
   )
 	{
 		$this->optionManager = $optionManager;
 		$this->yoastHelper   = $yoastHelper;
 		$this->dateHelper    = $dateHelper;
-		$this->_registry     = $registry;
+		$this->_registry     = $registry;     // Remove
 		$this->registry      = $registry;
 		$this->layout        = $layout;
+		$this->factory       = $factory;
 		
 		parent::__construct($data);
 	}
@@ -350,7 +348,7 @@ abstract class AbstractPlugin extends DataObject implements SeoInterface
 				'currentmonth' => date('F'),
 				'currentyear' => date('Y'),
 				'sep' => '|',
-				'pagenumber' => max(1, (int)$this->dateHelper->getRequest()->getParam('page')),
+				'pagenumber' => max(1, (int)$this->yoastHelper->getRequest()->getParam('page')),
 			);
 
 			if ($sep = $this->getConfigOption('separator')) {
@@ -359,7 +357,7 @@ abstract class AbstractPlugin extends DataObject implements SeoInterface
 				}
 			}
 
-			if (($value = trim($this->_viewHelper->getSearchTerm(true))) !== '') {
+			if (($value = trim($this->factory->create('Search')->getSearchTerm(true))) !== '') {
 				$data['searchphrase'] = $value;
 			}
 
