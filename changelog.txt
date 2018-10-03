@@ -1,2 +1,5 @@
+03/10/2018 - 2.0.0.1
+- Fixed issue with fatal error when calling getFactory() method.
+
 11/05/2018 - 1.0.0.20
 - Added support for custom fields. You can use custom fields like so: %%cf_custom_field%% where custom_field is the custom field name. If the custom field was 'meta_description' the token would be %%cf_meta_description%%.

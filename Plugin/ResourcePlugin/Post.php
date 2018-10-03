@@ -32,7 +32,7 @@ class Post extends AbstractPlugin
 			$postId = array_shift($postId);
 		}
 
-		$tempPostModel = $this->_factory->getFactory('Post')->create()->setId($postId);
+		$tempPostModel = $this->factory->create('Post')->setId($postId);
 
 		if ($categoryId = $tempPostModel->getMetaValue('_yoast_wpseo_primary_category')) {
 			$select->reset(\Zend_Db_Select::ORDER)->where('_term.term_id=?', $categoryId);
