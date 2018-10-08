@@ -1,8 +1,9 @@
 <?php
-/**
- *
-**/
-namespace FishPig\WordPress_Yoast\Plugin;
+/*
+ * @package FishPig_WordPress_Yoast
+ * @author  Ben Tideswell (ben@fishpig.co.uk)
+ */
+namespace FishPig\WordPress_Yoast\Plugin\FishPig_WordPress\Model;
 
 /* Parent Class */
 use Magento\Framework\DataObject;
@@ -23,11 +24,11 @@ use FishPig\WordPress\Api\Data\Entity\ViewableInterface;
 
 abstract class AbstractPlugin extends DataObject implements SeoInterface
 {	
-	/**
+	/*
 	 * Separator map
 	 *
 	 * @var array
-	**/
+	 */
 	protected $_separators = array(
 		'sc-dash'   => '-',
 		'sc-ndash'  => '&ndash;',
@@ -91,23 +92,23 @@ abstract class AbstractPlugin extends DataObject implements SeoInterface
 		parent::__construct($data);
 	}
 
-	/**
+	/*
 	 * Determine whether the plugin is enabled in WordPress
 	 *
 	 * @return bool
-	**/
+	 */
 	public function isEnabled()
 	{
 		return $this->yoastHelper->isEnabled();
 	}
 	
-	/**
+	/*
 	 * Get the page title
 	 *
 	 * @param $object
 	 * @param $callback
 	 * @return string
-	**/
+	 */
 	public function aroundGetPageTitle($object, $callback)
 	{
 		if ($this->isEnabled()) {
@@ -121,24 +122,24 @@ abstract class AbstractPlugin extends DataObject implements SeoInterface
 		return $callback();
 	}
 	
-	/**
+	/*
 	 * Get the page title
 	 *
 	 * @param ViewableInterface $object
 	 * @return string|null
-	**/
+	 */
 	protected function _aroundGetPageTitle(ViewableInterface $object)
 	{
 		return null;
 	}
 	
-	/**
+	/*
 	 * Get the meta description
 	 *
 	 * @param $object
 	 * @param $callback
 	 * @return string
-	**/
+	 */
 	public function aroundGetMetaDescription($object, $callback)
 	{
 		if ($this->isEnabled()) {
@@ -152,24 +153,24 @@ abstract class AbstractPlugin extends DataObject implements SeoInterface
 		return $callback();
 	}
 
-	/**
+	/*
 	 * Get the meta description
 	 *
 	 * @param ViewableInterface $object
 	 * @return string|null
-	**/
+	 */
 	protected function _aroundGetMetaDescription(ViewableInterface $object)
 	{
 		return null;
 	}
 	
-	/**
+	/*
 	 * Get the meta keywords
 	 *
 	 * @param $object
 	 * @param $callback
 	 * @return string
-	**/
+	 */
 	public function aroundGetMetaKeywords($object, $callback)
 	{
 		if ($this->isEnabled()) {
@@ -183,24 +184,24 @@ abstract class AbstractPlugin extends DataObject implements SeoInterface
 		return $callback();
 	}
 	
-	/**
+	/*
 	 * Get the meta keywords
 	 *
 	 * @param ViewableInterface $object
 	 * @return string|null
-	**/
+	 */
 	protected function _aroundGetMetaKeywords(ViewableInterface $object)
 	{
 		return null;
 	}
 	
-	/**
+	/*
 	 * Get the meta robots value
 	 *
 	 * @param $object
 	 * @param $callback
 	 * @return string
-	**/
+	 */
 	public function aroundGetRobots($object, $callback)
 	{		
 		if ($this->isEnabled()) {
@@ -220,24 +221,24 @@ abstract class AbstractPlugin extends DataObject implements SeoInterface
 		return $callback();
 	}
 	
-	/**
+	/*
 	 * Get the meta robots value
 	 *
 	 * @param ViewableInterface $object
 	 * @return string|null
-	**/
+	 */
 	protected function _aroundGetRobots(ViewableInterface $object)
 	{
 		return null;
 	}
 	
-	/**
+	/*
 	 * Get the canonical URL
 	 *
 	 * @param $object
 	 * @param $callback
 	 * @return string
-	**/
+	 */
 	public function aroundGetCanonicalUrl($object, $callback)
 	{
 		if ($this->isEnabled()) {
@@ -251,18 +252,18 @@ abstract class AbstractPlugin extends DataObject implements SeoInterface
 		return $callback();
 	}
 	
-	/**
+	/*
 	 * Get the canonical URL
 	 *
 	 * @param ViewableInterface $object
 	 * @return string|null
-	**/
+	 */
 	protected function _aroundGetCanonicalUrl(ViewableInterface $object)
 	{
 		return null;
 	}
 
-	/**
+	/*
 	 * Given a key that determines which format to load
 	 * and a data array, merge the 2 to create a valid title
 	 *
@@ -329,12 +330,12 @@ abstract class AbstractPlugin extends DataObject implements SeoInterface
 		return false;
 	}
 
-	/**
+	/*
 	 * Setup the rewrite data for $object
 	 *
 	 * @param ViewableInterface $object
 	 * @return $this
-	**/
+	 */
 	protected function _setupRewriteData(ViewableInterface $object)
 	{
 		$this->currentObject = $object;
@@ -400,7 +401,7 @@ abstract class AbstractPlugin extends DataObject implements SeoInterface
 		return $this;
 	}
 	
-	/**
+	/*
 	 * Retrieve the rewrite data
 	 *
 	 * @return array
@@ -420,7 +421,7 @@ abstract class AbstractPlugin extends DataObject implements SeoInterface
 		return $updates ? array_merge($rewriteData, $updates) : $rewriteData;
 	}
 	
-	/**
+	/*
 	 * Retrieve the title format for the given key
 	 *
 	 * @param string $key
@@ -431,7 +432,7 @@ abstract class AbstractPlugin extends DataObject implements SeoInterface
 		return trim($this->getConfigOption('title_' . $key));
 	}
 	
-	/**
+	/*
 	 * Retrieve the title format for the given key
 	 *
 	 * @param string $key
@@ -442,7 +443,7 @@ abstract class AbstractPlugin extends DataObject implements SeoInterface
 		return trim($this->getConfigOption('metadesc_' . $key));
 	}
 	
-	/**
+	/*
 	 * Retrieve the title format for the given key
 	 *
 	 * @param string $key
@@ -453,7 +454,7 @@ abstract class AbstractPlugin extends DataObject implements SeoInterface
 		return trim($this->getConfigOption('metakey_' . $key));
 	}
 	
-	/**
+	/*
 	 * Retrieve the title format for the given key
 	 *
 	 * @param string $key
@@ -464,20 +465,20 @@ abstract class AbstractPlugin extends DataObject implements SeoInterface
 		return (int)$this->getConfigOption('noindex_' . $key) === 1;
 	}
 	
-	/**
+	/*
 	 * Determine whether subpages (eg. page/2/) should always be noindex
 	 *
 	 * @return bool
-	**/
+	 */
 	public function _isSubPageNoindex()
 	{
 		return $this->_isNoindex('subpages_wpseo');
 	}
 	
-	/**
+	/*
 	 * @param string $key
 	 * @return mixed
-	**/
+	 */
 	public function getConfigOption($key = null)
 	{
 		return $this->yoastHelper->getConfigOption($key);

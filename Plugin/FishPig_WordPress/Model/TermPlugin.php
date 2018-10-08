@@ -1,24 +1,27 @@
 <?php
-/**
- *
-**/
-namespace FishPig\WordPress_Yoast\Plugin;
+/*
+ * @package FishPig_WordPress_Yoast
+ * @author  Ben Tideswell (ben@fishpig.co.uk)
+ */
+namespace FishPig\WordPress_Yoast\Plugin\FishPig_WordPress\Model;
 
-use \FishPig\WordPress\Api\Data\Entity\ViewableInterface;
+/* Misc */
+use FishPig\WordPress\Api\Data\Entity\ViewableInterface;
 
-class Term extends AbstractPlugin
+
+class TermPlugin extends AbstractPlugin
 {
 	/**
 	 * Yoast field mappings for Posts
 	 *
 	 * @const string
 	**/
-	const FIELD_PAGE_TITLE = 'wpseo_title';
+	const FIELD_PAGE_TITLE       = 'wpseo_title';
 	const FIELD_META_DESCRIPTION = 'wpseo_desc';
-	const FIELD_META_KEYWORDS = 'wpseo_metakey';
-	const FIELD_NOINDEX = 'wpseo_noindex';
-	const FIELD_CANONICAL = 'wpseo_canonical';
-	const FIELD_CONFIG_OPTION = 'wpseo_taxonomy_meta';
+	const FIELD_META_KEYWORDS    = 'wpseo_metakey';
+	const FIELD_NOINDEX          = 'wpseo_noindex';
+	const FIELD_CANONICAL        = 'wpseo_canonical';
+	const FIELD_CONFIG_OPTION    = 'wpseo_taxonomy_meta';
 	
 	/**
 	 * Taxonomy meta data cache

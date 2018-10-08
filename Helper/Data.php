@@ -99,6 +99,10 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
 		return $this->plugin->isEnabled(self::PLUGIN_FILE_FREE) || $this->plugin->isEnabled(self::PLUGIN_FILE_PREMIUM);
 	}
 	
+	/*
+	 *
+	 *
+	 */
 	public function getRequest()
 	{
 		return $this->_getRequest();
@@ -112,7 +116,11 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
 	{
 		return $this->storeManager->getStore()->getLocaleCode();
 	}
-	
+
+	/*
+	 *
+	 *
+	 */
 	public function canDiscourageSearchEngines()
 	{
 		return (int)$this->optionManager->getOption('blog_public') === 0;

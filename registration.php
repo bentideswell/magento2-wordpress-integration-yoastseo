@@ -1,7 +1,7 @@
 <?php
 /*
  *
- * WordPress_Yoast
+ * FishPig_WordPress_Yoast
  * https://fishpig.co.uk/
  *
  */

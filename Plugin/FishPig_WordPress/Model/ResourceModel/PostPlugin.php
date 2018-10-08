@@ -1,14 +1,20 @@
 <?php
-/**
- *
-**/
-namespace FishPig\WordPress_Yoast\Plugin\ResourcePlugin;
+/*
+ * @package FishPig_WordPress_Yoast
+ * @author  Ben Tideswell (ben@fishpig.co.uk)
+ */
+namespace FishPig\WordPress_Yoast\Plugin\FishPig_WordPress\Model\ResourceModel;
 
-use \FishPig\WordPress_Yoast\Plugin\AbstractPlugin;
+/* Parent Class */
+use \FishPig\WordPress_Yoast\Plugin\FishPig_WordPress\Model\AbstractPlugin;
+
+/* Subject */
 use \FishPig\WordPress\Model\ResourceModel\Post as PostResource;
+
+/* Misc */
 use \Magento\Framework\DB\Select;
 
-class Post extends AbstractPlugin
+class PostPlugin extends AbstractPlugin
 {
 	/**
 	 * Add the primary category to a select object

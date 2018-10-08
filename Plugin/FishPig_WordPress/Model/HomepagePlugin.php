@@ -1,12 +1,14 @@
 <?php
-/**
- *
-**/
-namespace FishPig\WordPress_Yoast\Plugin;
+/*
+ * @package FishPig_WordPress_Yoast
+ * @author  Ben Tideswell (ben@fishpig.co.uk)
+ */
+namespace FishPig\WordPress_Yoast\Plugin\FishPig_WordPress\Model;
 
-use \FishPig\WordPress\Api\Data\Entity\ViewableInterface;
+/* Misc */
+use FishPig\WordPress\Api\Data\Entity\ViewableInterface;
 
-class Homepage extends AbstractPlugin
+class HomepagePlugin extends AbstractPlugin
 {
 	/**
 	 * Get the Yoast Page title
