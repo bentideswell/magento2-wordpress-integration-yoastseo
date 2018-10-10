@@ -13,7 +13,7 @@ use FishPig\WordPress_Yoast\Plugin\AbstractPlugin;
 use FishPig\WordPress\Api\Data\Plugin\SeoInterface;
 use FishPig\WordPress_Yoast\Helper\Data as YoastHelper;
 use FishPig\WordPress\Api\Data\Entity\ViewableInterface;
-use FishPig\WordPress\Model\Post\Factory as PostFactory;
+use FishPig\WordPress\Model\PostFactory as PostFactory;
 use FishPig\WordPress\Model\ResourceModel\Post as PostResource;
 
 class Post extends AbstractPlugin
