@@ -280,10 +280,9 @@ abstract class AbstractPlugin extends DataObject implements SeoInterface
 
 					if ($pagerBlock->getCollection()) {
 						$data = $this->getRewriteData();
-						
-						$lastPageNumber = $pagerBlock->getLastPageNum();
-						$data['pagetotal'] = $lastPageNumber;
-						$data['page'] = sprintf('Page %d of %d', $data['pagenumber'], $data['pagetotal']);
+
+						$data['pagetotal'] = $lastPageNumber = (int)$pagerBlock->getLastPageNum();
+						$data['page']      = $lastPageNumber > 1 ? sprintf('Page %d of %d', $data['pagenumber'], $data['pagetotal']) : '';
 						
 						$this->setRewriteData($data);
 					}
@@ -324,7 +323,7 @@ abstract class AbstractPlugin extends DataObject implements SeoInterface
 		}
 
 		if (($value = trim(implode('', $value))) !== '') {
-			return $value;
+			return str_replace(['  ', '  ', '  '], ' ', $value);
 		}
 		
 		return false;

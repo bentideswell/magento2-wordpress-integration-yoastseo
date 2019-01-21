@@ -1,3 +1,6 @@
+21/01/2019 - 2.0.0.3
+Removed 'Page 1 of 1' from page titles.
+
 03/10/2018 - 2.0.0.1
 - Fixed issue with fatal error when calling getFactory() method.
 
