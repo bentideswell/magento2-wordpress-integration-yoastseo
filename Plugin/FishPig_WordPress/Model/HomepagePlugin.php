@@ -35,6 +35,10 @@ class HomepagePlugin extends AbstractPlugin
 	**/
 	protected function _aroundGetMetaDescription(ViewableInterface $object)
 	{
+        if ($object->getFrontStaticPage()) {
+            return $object->getFrontStaticPage()->getMetaDescription();
+        }
+        
 		return $this->_rewriteString(
 			$this->_getMetaDescriptionFormat('home_wpseo')
 		);
