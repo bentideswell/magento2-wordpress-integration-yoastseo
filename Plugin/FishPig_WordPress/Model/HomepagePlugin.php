@@ -17,7 +17,11 @@ class HomepagePlugin extends AbstractPlugin
 	 * @return string|null
 	**/
 	protected function _aroundGetPageTitle(ViewableInterface $object)
-	{
+	{	
+		if ($object->getFrontStaticPage()) {
+			return $object->getFrontStaticPage()->getPageTitle();
+		}
+
 		return $this->_rewriteString(
 			$this->_getPageTitleFormat('home_wpseo')
 		);

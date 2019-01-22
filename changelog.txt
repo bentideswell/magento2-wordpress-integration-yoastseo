@@ -1,3 +1,6 @@
+22/01/2019 - 2.0.0.5
+- Fixed issue with posts page title and custom post type archive meta data.
+
 21/01/2019 - 2.0.0.4
 - Fixed issue where breadcrumb settings in Yoast were used even when the Yoast config had breadcrumbs disabled.
 

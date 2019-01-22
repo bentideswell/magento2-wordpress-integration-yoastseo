@@ -15,7 +15,7 @@ class PostTypePlugin extends AbstractPlugin
 	 *
 	 * @const string
 	**/
-	const FIELD_PAGE_TITLE       = 'title_ptarchive_';
+	const FIELD_PAGE_TITLE       = 'ptarchive_';
 	const FIELD_META_DESCRIPTION = 'metadesc_ptarchive_';
 	const FIELD_META_KEYWORDS    = 'metakey_ptarchive_';
 	const FIELD_NOINDEX          = 'noindex_ptarchive_';
@@ -29,7 +29,7 @@ class PostTypePlugin extends AbstractPlugin
 	protected function _aroundGetPageTitle(ViewableInterface $object)
 	{
 		return $this->_rewriteString(
-			$this->getData(self::FIELD_PAGE_TITLE . $object->getPostType())
+			$this->_getPageTitleFormat(self::FIELD_PAGE_TITLE . $object->getPostType())
 		);
 	}
 	
@@ -42,7 +42,7 @@ class PostTypePlugin extends AbstractPlugin
 	protected function _aroundGetMetaDescription(ViewableInterface $object)
 	{
 		return $this->_rewriteString(
-			$this->getData(self::FIELD_META_DESCRIPTION . $object->getPostType())
+			$this->_getMetaDescriptionFormat(self::FIELD_META_DESCRIPTION . $object->getPostType())
 		);
 	}
 	
@@ -59,7 +59,7 @@ class PostTypePlugin extends AbstractPlugin
 		}
 
 		return $this->_rewriteString(
-			$this->getData(self::FIELD_META_KEYWORDS . $object->getPostType())
+			$this->_getMetaKeywordsFormat(self::FIELD_META_KEYWORDS . $object->getPostType())
 		);
 	}
 	

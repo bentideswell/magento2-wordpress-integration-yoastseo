@@ -304,7 +304,7 @@ abstract class AbstractPlugin extends DataObject implements SeoInterface
 				}
 			}
 		}
-		
+
 		$rwt = '%%';
 		$value = array();
 		$parts = preg_split("/(" . $rwt . "[a-z_-]{1,}" . $rwt . ")/iU", $format, -1, PREG_SPLIT_DELIM_CAPTURE|PREG_SPLIT_NO_EMPTY);
@@ -390,7 +390,7 @@ abstract class AbstractPlugin extends DataObject implements SeoInterface
 				$data['name'] = $object->getDisplayName();
 			}	
 
-			if ($object instanceof \FishPig\WordPress\Model\Post\Type) {
+			if ($object instanceof \FishPig\WordPress\Model\PostType) {
 				$data['pt_plural'] = $object->getPluralName();
 			}
 
@@ -428,6 +428,10 @@ abstract class AbstractPlugin extends DataObject implements SeoInterface
 	 */
 	protected function _getPageTitleFormat($key)
 	{
+		if (strpos($key, 'title_') === 0) {
+			$key = substr($key, strlen('title_'));
+		}
+
 		return trim($this->getConfigOption('title_' . $key));
 	}
 	
@@ -439,6 +443,10 @@ abstract class AbstractPlugin extends DataObject implements SeoInterface
 	 */
 	protected function _getMetaDescriptionFormat($key)
 	{
+		if (strpos($key, 'metadesc_') === 0) {
+			$key = substr($key, strlen('metadesc_'));
+		}
+		
 		return trim($this->getConfigOption('metadesc_' . $key));
 	}
 	
@@ -450,6 +458,10 @@ abstract class AbstractPlugin extends DataObject implements SeoInterface
 	 */
 	protected function _getMetaKeywordsFormat($key)
 	{
+		if (strpos($key, 'metakey_') === 0) {
+			$key = substr($key, strlen('metakey_'));
+		}
+		
 		return trim($this->getConfigOption('metakey_' . $key));
 	}
 	
@@ -461,6 +473,10 @@ abstract class AbstractPlugin extends DataObject implements SeoInterface
 	 */
 	protected function _isNoindex($key)
 	{
+		if (strpos($key, 'noindex_') === 0) {
+			$key = substr($key, strlen('noindex_'));
+		}
+		
 		return (int)$this->getConfigOption('noindex_' . $key) === 1;
 	}
 	
