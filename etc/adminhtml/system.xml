@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+	<system>
+		<section id="wordpress">
+			<group id="addon">
+				<field id="FishPig_WordPress_Yoast" type="text" sortOrder="260" showInDefault="1">
+					<label>Yoast SEO</label>
+					<frontend_model>FishPig\WordPress\Block\Adminhtml\System\Config\Form\Field\Addon</frontend_model>
+				</field>
+			</group>
+		</section>
+	</system>
+</config>
