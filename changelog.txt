@@ -1,3 +1,6 @@
+06/03/2019 - 2.0.0.8
+Fixed warning regarding invalid argument for foreach.
+
 22/01/2019 - 2.0.0.5
 - Fixed issue with posts page title and custom post type archive meta data.
 

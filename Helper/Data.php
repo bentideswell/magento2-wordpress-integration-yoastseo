@@ -65,8 +65,10 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
 		
 		foreach($types as $type) {
 			if ($options = $this->plugin->getOption($type)) {
-				foreach($options as $key => $value) {
-					$data[str_replace('-', '_', $key)] = $value;
+				if (is_array($options)) {
+					foreach($options as $key => $value) {
+						$data[str_replace('-', '_', $key)] = $value;
+					}
 				}
 			}
 		}
