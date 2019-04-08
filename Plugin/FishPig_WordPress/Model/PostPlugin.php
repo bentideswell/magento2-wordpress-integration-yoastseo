@@ -7,6 +7,9 @@ namespace FishPig\WordPress_Yoast\Plugin\FishPig_WordPress\Model;
 
 /* Misc */
 use FishPig\WordPress\Api\Data\Entity\ViewableInterface;
+use FishPig\WordPress\Model\Post;
+use FishPig\WordPress\Model\Term;
+use Closure;
 
 class PostPlugin extends AbstractPlugin
 {
@@ -123,5 +126,29 @@ class PostPlugin extends AbstractPlugin
 		}
 
 		return null;
+	}
+	
+	/*
+	 * Use the Primary category specified via Yoast
+	 *
+	 * @param  Post $post
+	 * @param  Closure $callback
+	 * @param  string $taxonomy
+	 * @return Term
+	 */
+	public function aroundGetParentTerm(Post $post, Closure $callback, $taxonomy)
+	{
+		if ($taxonomy === 'category') {
+			if ($categoryId = $post->getMetaValue('_yoast_wpseo_primary_category')) {
+			
+				$term = $this->factory->create(Term::class)->setTaxonomy($taxonomy)->load($categoryId);
+				
+				if ($term->getId()) {
+					return $term;
+				}
+			}
+		}
+		
+		return $callback($taxonomy);
 	}
 }
