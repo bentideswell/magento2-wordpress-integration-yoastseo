@@ -127,4 +127,13 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
 	{
 		return (int)$this->optionManager->getOption('blog_public') === 0;
 	}
+	
+	/*
+	 *
+	 *
+	 */
+	public function canShowBreacrumbs()
+	{
+		return (int)$this->getConfigOption('breadcrumbs_enable') === 1;
+	}
 }

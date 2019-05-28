@@ -1,3 +1,6 @@
+28/05/2019 - 2.0.0.12
+- Added support for the Yoast breadcrumbs enable/disable flag
+
 08/04/2019 - 2.0.0.10
 - Added support for the Yoast Primary category feature. Calling $post->getParentTerm('category') returns the primary category set via Yoast.
 

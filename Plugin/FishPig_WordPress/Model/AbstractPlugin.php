@@ -498,4 +498,20 @@ abstract class AbstractPlugin extends DataObject implements SeoInterface
 	{
 		return $this->yoastHelper->getConfigOption($key);
 	}
+	
+	/*
+   * Respect the Yoast Breadcrumbs disable flag
+   *
+   * @param  ViewableInterface $subject
+   * @param  mixed $result
+   * @return mixed
+   */
+	public function afterApplyPageConfigData(ViewableInterface $subject, $result)
+	{
+    if (!$this->yoastHelper->canShowBreacrumbs()) {
+      $this->layout->unsetElement('breadcrumbs');
+    }
+    
+    return $result;
+	}
 }
