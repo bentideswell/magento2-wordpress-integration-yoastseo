@@ -34,17 +34,19 @@ class PostPlugin extends AbstractPlugin
 	**/
 	protected function _aroundGetPageTitle(ViewableInterface $object)
 	{
-		$rewriteData = [];
-
+		$rewriteData     = [];
+    $pageTitleFormat = $this->_getPageTitleFormat($object->getPostType());
+    
 		if (($value = trim($object->getMetaValue(self::FIELD_PAGE_TITLE))) !== '') {
-			return $value;
-			$rewriteData = $this->getRewriteData(array('title' => $value));
+  		if (strpos($value, '%%') !== false) {
+    		$pageTitleFormat = $value;
+  		}
+  		else {
+  			$rewriteData = $this->getRewriteData(array('title' => $value));
+  		}
 		}
 
-		return $this->_rewriteString(
-			$this->_getPageTitleFormat($object->getPostType()),
-			$rewriteData
-		);
+		return $this->_rewriteString($pageTitleFormat, $rewriteData);
 	}
 	
 	/**

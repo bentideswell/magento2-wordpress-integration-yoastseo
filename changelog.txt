@@ -1,3 +1,6 @@
+31/05/2019 - 2.0.0.14
+- Added fix for Yoast variables displaying instead of rendered page title.
+
 28/05/2019 - 2.0.0.12
 - Added support for the Yoast breadcrumbs enable/disable flag
 
