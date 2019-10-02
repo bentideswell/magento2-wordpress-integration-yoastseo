@@ -12,14 +12,15 @@ use Magento\Framework\DataObject;
 use FishPig\WordPress\Api\Data\Plugin\SeoInterface;
 
 /* Constructor Args */
+use FishPig\WordPress_Yoast\Model\Context;
+
+/* Misc */
 use FishPig\WordPress\Model\OptionManager;
 use FishPig\WordPress_Yoast\Helper\Data as YoastHelper;
 use FishPig\WordPress\Helper\Date as DateHelper;
 use FishPig\WordPress\Model\Factory;
 use Magento\Framework\Registry;
 use Magento\Framework\View\Layout;
-
-/* Misc */
 use FishPig\WordPress\Api\Data\Entity\ViewableInterface;
 
 abstract class AbstractPlugin extends DataObject implements SeoInterface
@@ -45,25 +46,39 @@ abstract class AbstractPlugin extends DataObject implements SeoInterface
 		'sc-gt'     => '&gt;',
 	);
 	
-	/*
-	 *
+	/**
 	 * @var
-	 *
 	 */
-	protected $optionManager = null;
-
-
-	/*
-	 *
+	protected $context;
+	
+	/**
 	 * @var
-	 *
+	 */
+	protected $optionManager;
+
+	/**
+	 * @var
+	 */
+	protected $yoastHelper;
+	
+	/**
+	 * @var
 	 */
 	protected $dateHelper;
 	
-	/*
-	 *
+	/**
 	 * @var
-	 *
+	 */
+	protected $registry;
+	
+	/**
+	 * @var
+	 */
+	protected $layout;
+
+	
+	/**
+	 * @var
 	 */
 	protected $currentObject;
 	
@@ -71,23 +86,14 @@ abstract class AbstractPlugin extends DataObject implements SeoInterface
 	 *
 	 *
 	 */
-	public function __construct(
-		OptionManager $optionManager,
-  		YoastHelper $yoastHelper,
-		   DateHelper $dateHelper,
-		     Registry $registry,
-		       Layout $layout,
-		      Factory $factory,
-		              $data = []
-  )
+	public function __construct(Context $context, $data = [])
 	{
-		$this->optionManager = $optionManager;
-		$this->yoastHelper   = $yoastHelper;
-		$this->dateHelper    = $dateHelper;
-		$this->_registry     = $registry;     // Remove
-		$this->registry      = $registry;
-		$this->layout        = $layout;
-		$this->factory       = $factory;
+  	$this->context       = $context;
+		$this->optionManager = $context->getOptionManager();
+		$this->yoastHelper   = $context->getYoastHelper();
+		$this->dateHelper    = $context->getDateHelper();
+		$this->registry      = $context->getRegistry();
+		$this->layout        = $context->getLayout();
 		
 		parent::__construct($data);
 	}
@@ -357,7 +363,7 @@ abstract class AbstractPlugin extends DataObject implements SeoInterface
 				}
 			}
 
-			if (($value = trim($this->factory->create('Search')->getSearchTerm(true))) !== '') {
+			if (($value = trim($this->context->getSearchFactory()->create()->getSearchTerm(true))) !== '') {
 				$data['searchphrase'] = $value;
 			}
 
