@@ -1,3 +1,6 @@
+14/10/2019 - 2.0.0.17
+- Changed og:image to full size image rather than smallest image
+
 02/10/2019 - 2.0.0.16
 - Fixed issue with Factory
 
