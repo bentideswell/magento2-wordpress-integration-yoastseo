@@ -10,6 +10,8 @@ use FishPig\WordPress_Yoast\Helper\Data as YoastHelper;
 use FishPig\WordPress\Helper\Date as DateHelper;
 use Magento\Framework\Registry;
 use Magento\Framework\View\Layout;
+use FishPig\WordPress\Model\PostFactory;
+use FishPig\WordPress\Model\TermFactory;
 use FishPig\WordPress\Model\SearchFactory;
 
 class Context
@@ -39,6 +41,21 @@ class Context
 	 */
 	protected $layout;
 	
+	/**
+   * @var PostFactory
+   */
+  protected $postFactory;
+	
+	/**
+   * @var TermFactory
+   */
+  protected $termFactory;
+  
+	/**
+   * @var SearchFactory
+   */
+  protected $searchFactory;
+	
 	/*
 	 *
 	 *
@@ -49,6 +66,8 @@ class Context
     DateHelper $dateHelper,
     Registry $registry,
     Layout $layout,
+    PostFactory $postFactory,
+    TermFactory $termFactory,
     SearchFactory $searchFactory
   )
 	{
@@ -57,6 +76,7 @@ class Context
 		$this->dateHelper    = $dateHelper;
 		$this->registry      = $registry;
 		$this->layout        = $layout;
+		$this->termFactory   = $termFactory;
 		$this->searchFactory = $searchFactory;
 	}
 
@@ -106,5 +126,13 @@ class Context
   public function getSearchFactory()
   {
     return $this->searchFactory;
+  }
+  
+  /**
+   * @return
+   */
+  public function getPostFactory()
+  {
+    return $this->postFactory;
   }
 }

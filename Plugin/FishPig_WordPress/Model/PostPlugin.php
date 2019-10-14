@@ -143,7 +143,7 @@ class PostPlugin extends AbstractPlugin
 		if ($taxonomy === 'category') {
 			if ($categoryId = $post->getMetaValue('_yoast_wpseo_primary_category')) {
 			
-				$term = $this->factory->create(Term::class)->setTaxonomy($taxonomy)->load($categoryId);
+				$term = $this->context->getTermFactory()->create()->setTaxonomy($taxonomy)->load($categoryId);
 				
 				if ($term->getId()) {
 					return $term;
