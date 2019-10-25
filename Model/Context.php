@@ -136,4 +136,12 @@ class Context
   {
     return $this->postFactory;
   }
+  
+  /**
+   * @return
+   */
+  public function getTermFactory()
+  {
+    return $this->termFactory;
+  }
 }
