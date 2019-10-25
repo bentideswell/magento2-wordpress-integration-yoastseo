@@ -1,3 +1,6 @@
+25/10/2019 - 2.0.0.19
+- Fixed issue when using %category% in permalink structure
+
 14/10/2019 - 2.0.0.17
 - Changed og:image to full size image rather than smallest image
 

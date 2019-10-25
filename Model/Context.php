@@ -78,6 +78,7 @@ class Context
 		$this->layout        = $layout;
 		$this->termFactory   = $termFactory;
 		$this->searchFactory = $searchFactory;
+		$this->postFactory   = $postFactory;
 	}
 
   /**
