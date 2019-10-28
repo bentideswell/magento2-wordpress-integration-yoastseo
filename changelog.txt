@@ -1,3 +1,6 @@
+28/10/2019 - 2.0.0.21
+- Fixed og:image tag so original image is used rather than the 150x150 thumbnail
+
 25/10/2019 - 2.0.0.19
 - Fixed issue when using %category% in permalink structure
 
