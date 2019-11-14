@@ -1,7 +1,7 @@
 {
   "name": "bentideswell/magento2-wordpress-integration-yoastseo",
   "description": "Magento 2 WordPress Inegration Addon module to support the WordPress SEO plugin by Yoast.",
-  "version": "2.0.0.21",
+  "version": "2.0.0.22",
   "type": "magento2-module",
 	"autoload": {
 		"files": ["registration.php"],

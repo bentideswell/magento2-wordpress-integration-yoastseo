@@ -18,6 +18,10 @@ class UserPlugin extends AbstractPlugin
 	**/
 	protected function _aroundGetPageTitle(ViewableInterface $object)
 	{
+    if (($customValue = trim($object->getMetaValue('wpseo_title'))) !== '') {
+      return $customValue;  
+    }
+    
 		return $this->_rewriteString(
 			$this->_getPageTitleFormat('author_wpseo')
 		);
@@ -31,6 +35,10 @@ class UserPlugin extends AbstractPlugin
 	**/
 	protected function _aroundGetMetaDescription(ViewableInterface $object)
 	{
+    if (($customValue = trim($object->getMetaValue('wpseo_metadesc'))) !== '') {
+      return $customValue;  
+    }
+    
 		return $this->_rewriteString(
 			$this->_getMetaDescriptionFormat('author_wpseo')
 		);
@@ -62,6 +70,10 @@ class UserPlugin extends AbstractPlugin
 		if ($this->_isNoindex('author_wpseo')) {
 			$robots['index'] = 'noindex';
 		}
+		
+    if (($customValue = trim($object->getMetaValue('wpseo_noindex_author'))) === 'on') {
+			$robots['index'] = 'noindex';
+    }
 	
 		return $robots;
 	}

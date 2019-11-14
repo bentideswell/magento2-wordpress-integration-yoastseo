@@ -1,3 +1,6 @@
+14/11/2019 - 2.0.0.22
+- Fixed several issues with author meta data
+
 28/10/2019 - 2.0.0.21
 - Fixed og:image tag so original image is used rather than the 150x150 thumbnail
 
