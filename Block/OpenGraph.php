@@ -65,6 +65,7 @@ class OpenGraph extends AbstractBlock
 			$tags = array(
 				'description' => $this->yoastHelper->getConfigOption('og_frontpage_desc'),
 				'image' => $this->yoastHelper->getConfigOption('og_frontpage_image'),
+				'url' => $object->getUrl(),
 			);
 		}
 		else if ($object instanceof \FishPig\WordPress\Model\Post) {
