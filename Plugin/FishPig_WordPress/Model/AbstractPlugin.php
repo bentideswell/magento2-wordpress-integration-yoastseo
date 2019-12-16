@@ -281,18 +281,14 @@ abstract class AbstractPlugin extends DataObject implements SeoInterface
 	{
 		if (strpos($format, '%%page%%') !== false || strpos($format, '%%pagetotal%%') !== false) {
 			if ($pagerBlock = $this->layout->getBlock('wp.post_list.pager')) {
-				if ($listBlock = $pagerBlock->getParentBlock()->getParentBlock()) {
-					$listBlock->getPostListHtml();
-
-					if ($pagerBlock->getCollection()) {
-						$data = $this->getRewriteData();
-
-						$data['pagetotal'] = $lastPageNumber = (int)$pagerBlock->getLastPageNum();
-						$data['page']      = $lastPageNumber > 1 ? sprintf('Page %d of %d', $data['pagenumber'], $data['pagetotal']) : '';
+    			$data = $this->getRewriteData();
 						
-						$this->setRewriteData($data);
-					}
-				}
+				$data['pagenumber'] = $pagerBlock->getCurrentPage();
+
+				$data['pagetotal'] = '%%pagetotal%%';
+				$data['page']      = sprintf('Page %d of %s', $data['pagenumber'], $data['pagetotal']);
+
+                $this->setRewriteData($data);
 			}
 		}
 		
@@ -506,18 +502,18 @@ abstract class AbstractPlugin extends DataObject implements SeoInterface
 	}
 	
 	/*
-   * Respect the Yoast Breadcrumbs disable flag
-   *
-   * @param  ViewableInterface $subject
-   * @param  mixed $result
-   * @return mixed
-   */
+     * Respect the Yoast Breadcrumbs disable flag
+     *
+     * @param  ViewableInterface $subject
+     * @param  mixed $result
+     * @return mixed
+     */
 	public function afterApplyPageConfigData(ViewableInterface $subject, $result)
 	{
-    if (!$this->yoastHelper->canShowBreacrumbs()) {
-      $this->layout->unsetElement('breadcrumbs');
-    }
+        if (!$this->yoastHelper->canShowBreacrumbs()) {
+            $this->layout->unsetElement('breadcrumbs');
+        }
     
-    return $result;
+        return $result;
 	}
 }

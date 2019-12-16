@@ -1,34 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
 	<type name="FishPig\WordPress\Model\Post">
-		<plugin name="FishPig_WordPress_Yoast_Post" type="FishPig\WordPress_Yoast\Plugin\FishPig_WordPress\Model\PostPlugin"/>
+		<plugin name="FishPig_WordPress_Yoast" type="FishPig\WordPress_Yoast\Plugin\FishPig_WordPress\Model\PostPlugin"/>
 	</type>
 	<type name="FishPig\WordPress\Model\ResourceModel\Post">
-		<plugin name="FishPig_WordPress_Yoast_PostResource" type="FishPig\WordPress_Yoast\Plugin\FishPig_WordPress\Model\ResourceModel\PostPlugin"/>
+		<plugin name="FishPig_WordPress_Yoast" type="FishPig\WordPress_Yoast\Plugin\FishPig_WordPress\Model\ResourceModel\PostPlugin"/>
 	</type>
 	<type name="FishPig\WordPress\Model\Term">    
-		<plugin name="FishPig_WordPress_Yoast_Term" type="FishPig\WordPress_Yoast\Plugin\FishPig_WordPress\Model\TermPlugin"/>
+		<plugin name="FishPig_WordPress_Yoast" type="FishPig\WordPress_Yoast\Plugin\FishPig_WordPress\Model\TermPlugin"/>
 	</type>
 	<type name="FishPig\WordPress\Model\Taxonomy">    
-		<plugin name="FishPig_WordPress_Yoast_Taxonomy" type="FishPig\WordPress_Yoast\Plugin\FishPig_WordPress\Model\TaxonomyPlugin"/>
+		<plugin name="FishPig_WordPress_Yoast" type="FishPig\WordPress_Yoast\Plugin\FishPig_WordPress\Model\TaxonomyPlugin"/>
 	</type>
 	<type name="FishPig\WordPress\Model\User">    
-		<plugin name="FishPig_WordPress_Yoast_User" type="FishPig\WordPress_Yoast\Plugin\FishPig_WordPress\Model\UserPlugin"/>
+		<plugin name="FishPig_WordPress_Yoast" type="FishPig\WordPress_Yoast\Plugin\FishPig_WordPress\Model\UserPlugin"/>
 	</type>
 	<type name="FishPig\WordPress\Model\Archive">    
-		<plugin name="FishPig_WordPress_Yoast_Archive" type="FishPig\WordPress_Yoast\Plugin\FishPig_WordPress\Model\ArchivePlugin"/>
+		<plugin name="FishPig_WordPress_Yoast" type="FishPig\WordPress_Yoast\Plugin\FishPig_WordPress\Model\ArchivePlugin"/>
 	</type>
 	<type name="FishPig\WordPress\Model\Homepage">    
-		<plugin name="FishPig_WordPress_Yoast_Homepage" type="FishPig\WordPress_Yoast\Plugin\FishPig_WordPress\Model\HomepagePlugin"/>
+		<plugin name="FishPig_WordPress_Yoast" type="FishPig\WordPress_Yoast\Plugin\FishPig_WordPress\Model\HomepagePlugin"/>
 	</type>
 	<type name="FishPig\WordPress\Model\Search">    
-		<plugin name="FishPig_WordPress_Yoast_Search" type="FishPig\WordPress_Yoast\Plugin\FishPig_WordPress\Model\SearchPlugin"/>
+		<plugin name="FishPig_WordPress_Yoast" type="FishPig\WordPress_Yoast\Plugin\FishPig_WordPress\Model\SearchPlugin"/>
 	</type>
 	<!-- Required FishPig_WodPress_PostTypeTaxonomy -->
 	<type name="FishPig\WordPress\Model\PostType">
-		<plugin name="FishPig_WordPress_Yoast_PostType" type="FishPig\WordPress_Yoast\Plugin\FishPig_WordPress\Model\PostTypePlugin"/>
+		<plugin name="FishPig_WordPress_Yoast" type="FishPig\WordPress_Yoast\Plugin\FishPig_WordPress\Model\PostTypePlugin"/>
 	</type>
 	<type name="Magento\Theme\Block\Html\Breadcrumbs">
-		<plugin name="FishPig_WordPress_Yoast_Breadcrumbs" type="FishPig\WordPress_Yoast\Plugin\Magento_Theme\Block\Html\BreadcrumbsPlugin"/>
+		<plugin name="FishPig_WordPress_Yoast" type="FishPig\WordPress_Yoast\Plugin\Magento_Theme\Block\Html\BreadcrumbsPlugin"/>
+	</type>	
+	<type name="FishPig\WordPress\Plugin\Magento\Framework\Controller\ResultPlugin">
+		<plugin name="FishPig_WordPress_Yoast" type="FishPig\WordPress_Yoast\Plugin\FishPig_WordPress\Plugin\Magento\Framework\Controller\ResultPluginPlugin"/>
 	</type>	
 </config>

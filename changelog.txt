@@ -1,6 +1,8 @@
+16/12/2019 - 2.0.0.24
+- Optimised meta data retrieval when using Shortcodes & Widgets
+
 23/11/2019 - 2.0.0.23
 - Fixed issue with og:url when using static page as posts page
-
 
 14/11/2019 - 2.0.0.22
 - Fixed several issues with author meta data
