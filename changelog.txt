@@ -1,3 +1,6 @@
+10/01/2020 - 2.0.0.25
+- Code formatting cleanup
+
 16/12/2019 - 2.0.0.24
 - Optimised meta data retrieval when using Shortcodes & Widgets
 

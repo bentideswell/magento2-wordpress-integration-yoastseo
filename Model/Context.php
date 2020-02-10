@@ -1,5 +1,5 @@
 <?php
-/*
+/**
  * @package FishPig_WordPress_Yoast
  * @author  Ben Tideswell (ben@fishpig.co.uk)
  */
@@ -15,52 +15,52 @@ use FishPig\WordPress\Model\TermFactory;
 use FishPig\WordPress\Model\SearchFactory;
 
 class Context
-{	
-	/**
-	 * @var
-	 */
-	protected $optionManager;
+{    
+    /**
+     * @var
+     */
+    protected $optionManager;
 
-	/**
-	 * @var
-	 */
-	protected $yoastHelper;
-	
-	/**
-	 * @var
-	 */
-	protected $dateHelper;
-	
-	/**
-	 * @var
-	 */
-	protected $registry;
-	
-	/**
-	 * @var
-	 */
-	protected $layout;
-	
-	/**
-   * @var PostFactory
-   */
-  protected $postFactory;
-	
-	/**
-   * @var TermFactory
-   */
-  protected $termFactory;
-  
-	/**
-   * @var SearchFactory
-   */
-  protected $searchFactory;
-	
-	/*
-	 *
-	 *
-	 */
-	public function __construct(
+    /**
+     * @var
+     */
+    protected $yoastHelper;
+
+    /**
+     * @var
+     */
+    protected $dateHelper;
+
+    /**
+     * @var
+     */
+    protected $registry;
+
+    /**
+     * @var
+     */
+    protected $layout;
+
+    /**
+     * @var PostFactory
+     */
+    protected $postFactory;
+
+    /**
+     * @var TermFactory
+     */
+    protected $termFactory;
+
+    /**
+     * @var SearchFactory
+     */
+    protected $searchFactory;
+
+    /**
+     *
+     *
+     */
+    public function __construct(
     OptionManager $optionManager,
     YoastHelper $yoastHelper,
     DateHelper $dateHelper,
@@ -69,79 +69,79 @@ class Context
     PostFactory $postFactory,
     TermFactory $termFactory,
     SearchFactory $searchFactory
-  )
-	{
-		$this->optionManager = $optionManager;
-		$this->yoastHelper   = $yoastHelper;
-		$this->dateHelper    = $dateHelper;
-		$this->registry      = $registry;
-		$this->layout        = $layout;
-		$this->termFactory   = $termFactory;
-		$this->searchFactory = $searchFactory;
-		$this->postFactory   = $postFactory;
-	}
+    )
+    {
+        $this->optionManager = $optionManager;
+        $this->yoastHelper   = $yoastHelper;
+        $this->dateHelper    = $dateHelper;
+        $this->registry      = $registry;
+        $this->layout        = $layout;
+        $this->termFactory   = $termFactory;
+        $this->searchFactory = $searchFactory;
+        $this->postFactory   = $postFactory;
+    }
 
-  /**
-   * @return
-   */
-  public function getOptionManager()
-  {
+    /**
+     * @return
+     */
+    public function getOptionManager()
+    {
     return $this->optionManager;
-  }
-  
-  /**
-   * @return
-   */
-  public function getYoastHelper()
-  {
+    }
+
+    /**
+     * @return
+     */
+    public function getYoastHelper()
+    {
     return $this->yoastHelper;
-  }
-  
-  /**
-   * @return
-   */
-  public function getDateHelper()
-  {
+    }
+
+    /**
+     * @return
+     */
+    public function getDateHelper()
+    {
     return $this->dateHelper;
-  }
-  
-  /**
-   * @return
-   */
-  public function getRegistry()
-  {
+    }
+
+    /**
+     * @return
+     */
+    public function getRegistry()
+    {
     return $this->registry;
-  }
-  
-  /**
-   * @return
-   */
-  public function getLayout()
-  {
+    }
+
+    /**
+     * @return
+     */
+    public function getLayout()
+    {
     return $this->layout;
-  }
-  
-  /**
-   * @return
-   */
-  public function getSearchFactory()
-  {
+    }
+
+    /**
+     * @return
+     */
+    public function getSearchFactory()
+    {
     return $this->searchFactory;
-  }
-  
-  /**
-   * @return
-   */
-  public function getPostFactory()
-  {
+    }
+
+    /**
+     * @return
+     */
+    public function getPostFactory()
+    {
     return $this->postFactory;
-  }
-  
-  /**
-   * @return
-   */
-  public function getTermFactory()
-  {
+    }
+
+    /**
+     * @return
+     */
+    public function getTermFactory()
+    {
     return $this->termFactory;
-  }
+    }
 }
