@@ -33,5 +33,6 @@
 	</type>	
 	<type name="FishPig\WordPress\Plugin\Magento\Framework\Controller\ResultPlugin">
 		<plugin name="FishPig_WordPress_Yoast" type="FishPig\WordPress_Yoast\Plugin\FishPig_WordPress\Plugin\Magento\Framework\Controller\ResultPluginPlugin"/>
-	</type>	
+	</type>
+    <virtualType name="FishPig\WordPress_Yoast\Block\Adminhtml\System\Config\Form\Field\Addon" type="FishPig\WordPress_Yoast\Block\Adminhtml\System\Config\Form\Field\Version" />
 </config>
