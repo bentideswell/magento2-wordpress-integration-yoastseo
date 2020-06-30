@@ -7,7 +7,7 @@ namespace FishPig\WordPress_Yoast\Plugin\Magento_Theme\Block\Html;
 
 use Magento\Theme\Block\Html\Breadcrumbs;
 
-use \FishPig\WordPress_Yoast\Helper\Data as YoastHelper;
+use \FishPig\WordPress_Yoast\Helper\Data\Proxy as YoastHelper;
 
 class BreadcrumbsPlugin
 {

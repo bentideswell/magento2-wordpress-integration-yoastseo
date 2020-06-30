@@ -1,3 +1,6 @@
+30/06/2020 - 2.0.11.4
+- Changed Data helper to Proxy in Breadcrumbs plugin.
+
 10/01/2020 - 2.0.0.25
 - Code formatting cleanup
 

@@ -1,10 +1,13 @@
 {
-  "name": "fishpig/magento2-wordpress-integration-yoastseo",
-  "description": "Magento 2 WordPress Inegration Addon module to support the WordPress SEO plugin by Yoast.",
-  "version": "2.0.11.3",
-  "type": "magento2-module",
+    "name": "fishpig/magento2-wordpress-integration-yoastseo",
+    "description": "Magento 2 WordPress Inegration Addon module to support the WordPress SEO plugin by Yoast.",
+    "version": "2.0.11.4",
+    "type": "magento2-module",
 	"autoload": {
 		"files": ["registration.php"],
 		"psr-4": {"FishPig\\WordPress_Yoast\\": ""}
-	}
+	},
+    "require": {
+        "fishpig/magento2-wordpress-integration": "*"
+    }
 }
