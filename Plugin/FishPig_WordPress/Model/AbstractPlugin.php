@@ -293,7 +293,11 @@ abstract class AbstractPlugin extends DataObject implements SeoInterface
             if (method_exists($this->currentObject, 'getMetaValue')) {
                 if (preg_match_all('/\%\%cf_([^\%]{1,})\%\%/', $format, $matches)) {
                     foreach($matches[1] as $customField) {
-                        $data['cf_' . $customField] = $this->currentObject->getMetaValue($customField);
+                        if ($cfValue = $this->currentObject->getMetaValue($customField)) {
+                            if (!is_array($cfValue)) {
+                                $data['cf_' . $customField] = $cfValue;
+                            }
+                        }
                     }
                 }
             }
