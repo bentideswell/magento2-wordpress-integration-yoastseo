@@ -1,3 +1,6 @@
+21/05/2021 - 2.0.11.6
+- Fixed issue when using custom post titles.
+
 18/12/2020 - 2.0.11.5
 - Fixed issue when rewriteString encounters an array from ACF.
 

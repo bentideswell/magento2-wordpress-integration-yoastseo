@@ -33,16 +33,15 @@ class PostPlugin extends AbstractPlugin
      */
     protected function _aroundGetPageTitle(ViewableInterface $object)
     {
-        $rewriteData     = [];
-    $pageTitleFormat = $this->_getPageTitleFormat($object->getPostType());
+        $rewriteData = [];
+        $pageTitleFormat = $this->_getPageTitleFormat($object->getPostType());
 
         if (($value = trim($object->getMetaValue(self::FIELD_PAGE_TITLE))) !== '') {
-          if (strpos($value, '%%') !== false) {
+            if (strpos($value, '%%') === false) {
+                return $value;
+            }
+            
             $pageTitleFormat = $value;
-          }
-          else {
-              $rewriteData = $this->getRewriteData(array('title' => $value));
-          }
         }
 
         return $this->_rewriteString($pageTitleFormat, $rewriteData);
@@ -97,8 +96,8 @@ class PostPlugin extends AbstractPlugin
         }
 
         switch((int)$object->getMetaValue(self::FIELD_NOINDEX)) {
-            case 1:  $robots['index'] = 'noindex';   break;
-            case 2:  $robots['index'] = 'index';       break;
+            case 1:  $robots['index'] = 'noindex';  break;
+            case 2:  $robots['index'] = 'index';    break;
         }
 
         if ((int)$object->getMetaValue(self::FIELD_NOFOLLOW) === 1) {
