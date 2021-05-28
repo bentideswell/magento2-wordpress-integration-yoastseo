@@ -10,6 +10,23 @@ use Magento\Framework\Data\Form\Element\AbstractElement;
 class Version extends \Magento\Config\Block\System\Config\Form\Field
 {
     /**
+     * @var string
+     */
+    private $moduleVersion;
+
+    /**
+     *
+     */
+    public function __construct(
+        \Magento\Backend\Block\Template\Context $context,
+        \Magento\Framework\Module\Dir\Reader $moduleDirReader,
+        array $data = []
+    ) {
+        $this->moduleDirReader = $moduleDirReader;
+        parent::__construct($context, $data);
+    }
+    
+    /**
      * @param  AbstractElement $element
      * @return string
      */
@@ -30,7 +47,33 @@ class Version extends \Magento\Config\Block\System\Config\Form\Field
             $this->getModuleVersion()
         );
     }
+    
+    /**
+     * @return string
+     */
+    private function getModuleVersion()
+    {
+        if ($this->moduleVersion === null) {
+            $this->moduleVersion = 'Error';
 
+            $moduleComposerJsonFile = $this->moduleDirReader->getModuleDir(
+                '', 
+                'FishPig_WordPress_Yoast'
+            ) . '/composer.json';
+            
+            if (is_file($moduleComposerJsonFile)) {
+                $moduleComposerData = json_decode(
+                    file_get_contents($moduleComposerJsonFile),
+                    true
+                );
+                
+                $this->moduleVersion = (string)$moduleComposerData['version'];
+            }
+        }
+        
+        return $this->moduleVersion;
+    }
+    
     /**
      * @param  AbstractElement $element
      * @return string
@@ -47,21 +90,5 @@ class Version extends \Magento\Config\Block\System\Config\Form\Field
     public function render(AbstractElement $element)
     {
         return str_replace('class="label"', 'style="vertical-align: middle;" class="label"', parent::render($element));
-    }
-
-    /**
-     * @return string
-     */
-    public function getModuleVersion()
-    {
-        $moduleList = \Magento\Framework\App\ObjectManager::getInstance()->get('Magento\Framework\Module\ModuleList');
-        
-        if ($moduleInfo = $moduleList->getOne('FishPig_WordPress_Yoast')) {
-            if (isset($moduleInfo['setup_version'])) {
-                return $moduleInfo['setup_version'];
-            }
-        }
-
-        return '';
     }
 }
