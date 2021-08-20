@@ -3,7 +3,7 @@
 	<system>
 		<section id="wordpress">
 			<group id="addon">
-				<field id="FishPig_WordPress_Yoast" type="text" sortOrder="260" showInDefault="1">
+				<field id="FishPig_WordPress_Yoast" sortOrder="9999" showInDefault="1">
 					<label>Yoast SEO</label>
 					<frontend_model>FishPig\WordPress\Block\Adminhtml\System\Config\Form\Field\Addon</frontend_model>
 				</field>
