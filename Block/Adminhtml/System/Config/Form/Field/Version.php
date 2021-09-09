@@ -42,7 +42,7 @@ class Version extends \Magento\Config\Block\System\Config\Form\Field
     protected function _getElementHtml(AbstractElement $element)
     {
         return sprintf(
-            '<span style="%s">Version %s</span>',
+            '<span style="%s"><strong style="color:green;">ENABLED</strong> - Version %s</span>',
             'display:inline-block;border:1px solid #ccc;background:#f6f6f6;line-height:1em;padding:10px;font-size:13px;color:#04260d;width:80%;margin-bottom:2px;',
             $this->getModuleVersion()
         );
