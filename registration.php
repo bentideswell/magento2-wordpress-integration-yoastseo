@@ -1,9 +1,8 @@
 <?php
 /**
- *
- * FishPig_WordPress_Yoast
- * https://fishpig.co.uk/
- *
+ * @package FishPig_WordPress_Yoast
+ * @author  Ben Tideswell (ben@fishpig.com)
+ * @url     https://fishpig.co.uk/magento/wordpress-integration/yoast/
  */
 use \Magento\Framework\Component\ComponentRegistrar;
 
