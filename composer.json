@@ -12,6 +12,6 @@
         }
 	},
     "require": {
-        "fishpig/magento2-wordpress-integration": ">=2.1.0"
+        "fishpig/magento2-wordpress-integration": "^2.1"
     }
 }

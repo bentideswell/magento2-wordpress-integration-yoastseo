@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="FishPig\WordPress\App\View\AssetProvider">
+        <arguments>
+            <argument name="assetProviders" xsi:type="array">
+                <item name="yoast" xsi:type="object" sortOrder="50">FishPig\WordPress_Yoast\App\View\AssetProvider</item>
+            </argument>
+        </arguments>
+    </type>
+    
     <type name="FishPig\WordPress\Controller\Post\View">
         <arguments>
             <argument name="seoMetaDataProvider" xsi:type="object">FishPig\WordPress_Yoast\Controller\Post\View\SeoMetaDataProvider</argument>
@@ -10,45 +18,38 @@
             <argument name="seoMetaDataProvider" xsi:type="object">FishPig\WordPress_Yoast\Controller\Term\View\SeoMetaDataProvider</argument>
         </arguments>
     </type>
-    
+    <type name="FishPig\WordPress\Controller\User\View">
+        <arguments>
+            <argument name="seoMetaDataProvider" xsi:type="object">FishPig\WordPress_Yoast\Controller\User\View\SeoMetaDataProvider</argument>
+        </arguments>
+    </type>
+    <type name="FishPig\WordPress\Controller\Archive\View">
+        <arguments>
+            <argument name="seoMetaDataProvider" xsi:type="object">FishPig\WordPress_Yoast\Controller\Archive\View\SeoMetaDataProvider</argument>
+        </arguments>
+    </type>
+    <type name="FishPig\WordPress\Controller\Search\View">
+        <arguments>
+            <argument name="seoMetaDataProvider" xsi:type="object">FishPig\WordPress_Yoast\Controller\Search\View\SeoMetaDataProvider</argument>
+        </arguments>
+    </type>
+    <type name="FishPig\WordPress\Controller\PostType\View">
+        <arguments>
+            <argument name="seoMetaDataProvider" xsi:type="object">FishPig\WordPress_Yoast\Controller\PostType\View\SeoMetaDataProvider</argument>
+        </arguments>
+    </type>
+    <!--
+    /**
+     * Plugins
+     */
+    -->
     <type name="FishPig\WordPress\App\Taxonomy\DataRetriever">
         <plugin name="fishpig-wordpress-yoast" type="FishPig\WordPress_Yoast\Plugin\FishPig_WordPress\App\Taxonomy\DataRetrieverPlugin"/>
     </type>
-    
-    <!--
-	<type name="FishPig\WordPress\Model\Post">
-		<plugin name="FishPig_WordPress_Yoast" type="FishPig\WordPress_Yoast\Plugin\FishPig_WordPress\Model\PostPlugin"/>
-	</type>
-	<type name="FishPig\WordPress\Model\ResourceModel\Post">
-		<plugin name="FishPig_WordPress_Yoast" type="FishPig\WordPress_Yoast\Plugin\FishPig_WordPress\Model\ResourceModel\PostPlugin"/>
-	</type>
-	<type name="FishPig\WordPress\Model\Term">    
-		<plugin name="FishPig_WordPress_Yoast" type="FishPig\WordPress_Yoast\Plugin\FishPig_WordPress\Model\TermPlugin"/>
-	</type>
-	<type name="FishPig\WordPress\Model\Taxonomy">    
-		<plugin name="FishPig_WordPress_Yoast" type="FishPig\WordPress_Yoast\Plugin\FishPig_WordPress\Model\TaxonomyPlugin"/>
-	</type>
-	<type name="FishPig\WordPress\Model\User">    
-		<plugin name="FishPig_WordPress_Yoast" type="FishPig\WordPress_Yoast\Plugin\FishPig_WordPress\Model\UserPlugin"/>
-	</type>
-	<type name="FishPig\WordPress\Model\Archive">    
-		<plugin name="FishPig_WordPress_Yoast" type="FishPig\WordPress_Yoast\Plugin\FishPig_WordPress\Model\ArchivePlugin"/>
-	</type>
-	<type name="FishPig\WordPress\Model\Homepage">    
-		<plugin name="FishPig_WordPress_Yoast" type="FishPig\WordPress_Yoast\Plugin\FishPig_WordPress\Model\HomepagePlugin"/>
-	</type>
-	<type name="FishPig\WordPress\Model\Search">    
-		<plugin name="FishPig_WordPress_Yoast" type="FishPig\WordPress_Yoast\Plugin\FishPig_WordPress\Model\SearchPlugin"/>
-	</type>
-
-	<type name="FishPig\WordPress\Model\PostType">
-		<plugin name="FishPig_WordPress_Yoast" type="FishPig\WordPress_Yoast\Plugin\FishPig_WordPress\Model\PostTypePlugin"/>
-	</type>
-	<type name="Magento\Theme\Block\Html\Breadcrumbs">
-		<plugin name="FishPig_WordPress_Yoast" type="FishPig\WordPress_Yoast\Plugin\Magento_Theme\Block\Html\BreadcrumbsPlugin"/>
-	</type>	
-	<type name="FishPig\WordPress\Plugin\Magento\Framework\Controller\ResultPlugin">
-		<plugin name="FishPig_WordPress_Yoast" type="FishPig\WordPress_Yoast\Plugin\FishPig_WordPress\Plugin\Magento\Framework\Controller\ResultPluginPlugin"/>
-	</type>
--->
+    <type name="FishPig\WordPress\Controller\Action">
+        <plugin name="fishpig-wordpress-yoast" type="FishPig\WordPress_Yoast\Plugin\FishPig_WordPress\Controller\ActionPlugin"/>
+    </type>
+    <type name="FishPig\WordPress\Model\ResourceModel\Post\Permalink">
+        <plugin name="fishpig-wordpress-yoast" type="FishPig\WordPress_Yoast\Plugin\FishPig_WordPress\Model\ResourceModel\Post\PermalinkPlugin"/>
+    </type>
 </config>

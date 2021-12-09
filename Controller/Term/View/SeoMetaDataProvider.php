@@ -8,7 +8,7 @@ declare(strict_types=1);
 
 namespace FishPig\WordPress_Yoast\Controller\Term\View;
 
-class SeoMetaDataProvider extends \FishPig\WordPress\Controller\Post\View\SeoMetaDataProvider
+class SeoMetaDataProvider extends \FishPig\WordPress\Controller\Term\View\SeoMetaDataProvider
 {
     /**
      * @var array

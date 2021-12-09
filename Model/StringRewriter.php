@@ -82,7 +82,7 @@ class StringRewriter
                 && substr($stringToken, -2) === self::RWTS;
 
             if ($isStringToken) {
-                $stringToken = $this->renderVariable(trim($stringToken, self::RWTS), $object);
+                $stringToken = $this->renderVariable(trim($stringToken, self::RWTS), $object) ?: $stringToken;
             }
 
             $rewrittenString[] = $stringToken;
@@ -131,8 +131,6 @@ class StringRewriter
            $value =  max(1, (int)$this->yoastHelper->getRequest()->getParam('page'));
         } elseif ($key === 'searchphrase') {
             return $this->search->getSearchTerm();
-        } elseif (in_array($key, ['pagenumber', 'pagetotal', 'page'])) {
-            return $this->renderCollectionSizeVariable($key);
         }
 
         if ($object === null) {
@@ -199,22 +197,5 @@ class StringRewriter
         }*/
         
         return '';
-    }
-
-    /**
-     * @param  string $key
-     * @return string
-     */
-    private function renderCollectionSizeVariable(string $key): string
-    {
-        if (!isset($this->cache[$key])) {
-            if ($pagerBlock = $this->layout->getBlock('wp.post_list.pager')) {
-                $this->cache['pagenumber'] = $pagerBlock->getCurrentPage();
-                $this->cache['pagetotal'] = $pagerBlock->getLastPage();
-                $this->cache['page'] = sprintf('Page %d of %s', $this->cache['pagenumber'], $this->cache['pagetotal']);
-            }
-        }
-        
-        return isset($this->cache[$key]) ? (string)$this->cache[$key] : '';
     }
 }

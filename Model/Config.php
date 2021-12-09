@@ -31,10 +31,12 @@ class Config
      */
     public function __construct(
         \FishPig\WordPress\Model\OptionRepository $optionRepository,
-        \FishPig\WordPress\Model\PluginManager $pluginManager
+        \FishPig\WordPress\Model\PluginManager $pluginManager,
+        \Magento\Framework\Locale\Resolver $localeResolver
     ) {
         $this->optionRepository = $optionRepository;
         $this->pluginManager = $pluginManager;
+        $this->localeResolver = $localeResolver;
     }
     
     /**
@@ -87,6 +89,14 @@ class Config
     public function canStripCategoryUrlBase(): bool
     {
         return (int)$this->getPluginOption('stripcategorybase') === 1;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLocaleCode(): string
+    {
+        return $this->localeResolver->getLocale();
     }
     
     /**
