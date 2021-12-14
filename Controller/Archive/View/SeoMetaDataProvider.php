@@ -33,7 +33,7 @@ class SeoMetaDataProvider extends \FishPig\WordPress\Controller\Archive\View\Seo
         \FishPig\WordPress\Api\Data\ViewableModelInterface $archive
     ): void 
     {
-        parent::addMetaData($resultPage, $user);
+        parent::addMetaData($resultPage, $archive);
         
         if (!$this->config->isEnabled()) {
             return;
@@ -45,7 +45,7 @@ class SeoMetaDataProvider extends \FishPig\WordPress\Controller\Archive\View\Seo
         );
 
         // Meta Description
-        if ($metaDesc = $this->stringRewriter->rewrite($this->config->getMetaDescriptionFormat('archive_wpseo'), $user)) {
+        if ($metaDesc = $this->stringRewriter->rewrite($this->config->getMetaDescriptionFormat('archive_wpseo'), $archive)) {
             $this->setMetaDescription($metaDesc);
         }
 
