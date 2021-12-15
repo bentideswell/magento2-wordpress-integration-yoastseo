@@ -1,3 +1,11 @@
+# Changelog
+Change log for FishPig_WordPress_Yoast.
+
+## [3.0.0] - 2021-12-15
+A new major version to support the changes in fishpig/magento2-wordpress-integration (FishPig_WordPress)
+
+----- Legacy Change Log Below -------
+
 21/05/2021 - 2.0.11.6
 - Fixed issue when using custom post titles.
 
