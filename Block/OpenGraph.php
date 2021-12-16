@@ -26,11 +26,13 @@ class OpenGraph extends \FishPig\WordPress\Block\AbstractBlock
         \FishPig\WordPress_Yoast\Model\Config $config,
         \FishPig\WordPress\Helper\BlogInfo $blogInfo,
         \Magento\Store\Model\StoreManagerInterface $storeManager,
+        \FishPig\WordPress_Yoast\Model\StringRewriter $stringRewriter,
         array $data = []
     ) {
         $this->config = $config;
         $this->blogInfo = $blogInfo;
         $this->storeManager = $storeManager;
+        $this->stringRewriter = $stringRewriter;
         parent::__construct($context, $wpContext, $data);   
     }
 
@@ -44,15 +46,17 @@ class OpenGraph extends \FishPig\WordPress\Block\AbstractBlock
         }
         
         $html = '';
-        
+
         foreach ($this->getTags() as $tagName => $tagValue) {
-            $html .= sprintf(
-                '<meta property="og:%s" content="%s"/>',
-                $this->escapeHtmlAttr($tagName),
-                $this->escapeHtml($tagValue),
-            ) . "\n";
+            if ($tagValue) {
+                $html .= sprintf(
+                    '<meta property="og:%s" content="%s"/>',
+                    $this->escapeHtmlAttr($tagName),
+                    $this->escapeHtml($this->stringRewriter->rewrite($tagValue)),
+                ) . "\n";
+            }
         }
-        
+
         return $html;
     }
 
@@ -64,12 +68,13 @@ class OpenGraph extends \FishPig\WordPress\Block\AbstractBlock
         $object = $this->getCurrentObject();
         $tags = [];
 
-        if ($object instanceof \FishPig\WordPress\Model\Homepage) {
-            $tags = array(
-                'description' => $this->config->getPluginOption('og_frontpage_desc'),
-                'image' => $this->config->getPluginOption('og_frontpage_image'),
+        if (($object instanceof \FishPig\WordPress\Model\PostType) && $object->isFrontPage()) {
+            $tags = [
+                'title' => $this->config->getPluginOption('open_graph_frontpage_title'),
+                'description' => $this->config->getPluginOption('open_graph_frontpage_desc'),
+                'image' => $this->config->getPluginOption('open_graph_frontpage_image'),
                 'url' => $object->getUrl(),
-            );
+            ];
         } elseif ($object instanceof \FishPig\WordPress\Model\Post) {
             $tags = array(
                 'type' => 'article',
