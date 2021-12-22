@@ -39,6 +39,6 @@ class ActionPlugin
             $this->layout->unsetElement('breadcrumbs');
         }
 
-        return $result;        
+        return $result;
     }
 }

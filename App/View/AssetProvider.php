@@ -38,8 +38,7 @@ class AssetProvider implements \FishPig\WordPress\Api\App\View\AssetProviderInte
     public function provideAssets(
         \Magento\Framework\App\RequestInterface $request,
         \Magento\Framework\App\ResponseInterface $response
-    ): void
-    {
+    ): void {
         if (!$this->config->isEnabled()) {
             return;
         }
@@ -69,7 +68,7 @@ class AssetProvider implements \FishPig\WordPress\Api\App\View\AssetProviderInte
      * @return array
      */
     private function getPageData(): array
-    {   
+    {
         $data = [
             self::PAGE_NUMBER_PLACEHOLDER => '',
             self::PAGE_TOTAL_PLACEHOLDER => '',
@@ -84,7 +83,11 @@ class AssetProvider implements \FishPig\WordPress\Api\App\View\AssetProviderInte
             if ($pagerBlock->getCollection()) {
                 $data[self::PAGE_TOTAL_PLACEHOLDER] = (int)$pagerBlock->getLastPageNum();
                 $data[self::PAGE_NUMBER_PLACEHOLDER] = (int)$pagerBlock->getCurrentPage();
-                $data[self::PAGE_PLACEHOLDER] = sprintf('Page %d of %s', $data[self::PAGE_NUMBER_PLACEHOLDER], $data[self::PAGE_TOTAL_PLACEHOLDER]);
+                $data[self::PAGE_PLACEHOLDER] = sprintf(
+                    'Page %d of %s',
+                    $data[self::PAGE_NUMBER_PLACEHOLDER],
+                    $data[self::PAGE_TOTAL_PLACEHOLDER]
+                );
             }
         }
 

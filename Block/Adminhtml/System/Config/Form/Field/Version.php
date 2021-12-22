@@ -20,9 +20,11 @@ class Version extends \Magento\Config\Block\System\Config\Form\Field
     public function __construct(
         \Magento\Backend\Block\Template\Context $context,
         \Magento\Framework\Module\Dir\Reader $moduleDirReader,
+        \Magento\Framework\Filesystem\DriverInterface $filesystemDriver,
         array $data = []
     ) {
         $this->moduleDirReader = $moduleDirReader;
+        $this->filesystemDriver = $filesystemDriver;
         parent::__construct($context, $data);
     }
     
@@ -32,7 +34,7 @@ class Version extends \Magento\Config\Block\System\Config\Form\Field
      */
     public function getElementHtml(AbstractElement $element)
     {
-       return $this->_getElementHtml($element);
+        return $this->_getElementHtml($element);
     }
 
     /**
@@ -43,7 +45,8 @@ class Version extends \Magento\Config\Block\System\Config\Form\Field
     {
         return sprintf(
             '<span style="%s"><strong style="color:green;">ENABLED</strong> - Version %s</span>',
-            'display:inline-block;border:1px solid #ccc;background:#f6f6f6;line-height:1em;padding:10px;font-size:13px;color:#04260d;width:80%;margin-bottom:2px;',
+            'display:inline-block;border:1px solid #ccc;background:#f6f6f6;line-height:1em;padding:10px;'
+            . 'font-size:13px;color:#04260d;width:80%;margin-bottom:2px;',
             $this->getModuleVersion()
         );
     }
@@ -57,13 +60,13 @@ class Version extends \Magento\Config\Block\System\Config\Form\Field
             $this->moduleVersion = 'Error';
 
             $moduleComposerJsonFile = $this->moduleDirReader->getModuleDir(
-                '', 
+                '',
                 'FishPig_WordPress_Yoast'
             ) . '/composer.json';
             
-            if (is_file($moduleComposerJsonFile)) {
+            if ($this->filesystemDriver->isFile($moduleComposerJsonFile)) {
                 $moduleComposerData = json_decode(
-                    file_get_contents($moduleComposerJsonFile),
+                    $this->filesystemDriver->fileGetContents($moduleComposerJsonFile),
                     true
                 );
                 

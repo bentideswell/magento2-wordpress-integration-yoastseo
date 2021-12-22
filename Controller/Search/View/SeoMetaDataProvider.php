@@ -31,8 +31,7 @@ class SeoMetaDataProvider extends \FishPig\WordPress\Controller\Search\View\SeoM
     public function addMetaData(
         \Magento\Framework\View\Result\Page $resultPage,
         \FishPig\WordPress\Api\Data\ViewableModelInterface $search
-    ): void 
-    {
+    ): void {
         parent::addMetaData($resultPage, $search);
         
         if (!$this->config->isEnabled()) {

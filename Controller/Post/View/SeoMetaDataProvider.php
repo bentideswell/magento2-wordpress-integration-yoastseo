@@ -31,8 +31,7 @@ class SeoMetaDataProvider extends \FishPig\WordPress\Controller\Post\View\SeoMet
     public function addMetaData(
         \Magento\Framework\View\Result\Page $resultPage,
         \FishPig\WordPress\Api\Data\ViewableModelInterface $post
-    ): void 
-    {
+    ): void {
         parent::addMetaData($resultPage, $post);
         
         if (!$this->config->isEnabled()) {
@@ -49,6 +48,7 @@ class SeoMetaDataProvider extends \FishPig\WordPress\Controller\Post\View\SeoMet
 
         // Meta Description
         if ($metaDesc = $this->stringRewriter->rewrite(
+            // phpcs:ignore -- long line
             $post->getMetaValue($this->config::FIELD_META_DESCRIPTION) ?: $this->config->getMetaDescriptionFormat($post->getPostType()),
             $post
         )) {
@@ -68,9 +68,13 @@ class SeoMetaDataProvider extends \FishPig\WordPress\Controller\Post\View\SeoMet
                 $robots['index'] = 'noindex';
             }
             
-            switch((int)$post->getMetaValue($this->config::FIELD_NOINDEX)) {
-                case 1:  $robots['index'] = 'noindex';  break;
-                case 2:  $robots['index'] = 'index';    break;
+            switch ((int)$post->getMetaValue($this->config::FIELD_NOINDEX)) {
+                case 1:
+                    $robots['index'] = 'noindex';
+                    break;
+                case 2:
+                    $robots['index'] = 'index';
+                    break;
             }
     
             if ((int)$post->getMetaValue($this->config::FIELD_NOFOLLOW) === 1) {

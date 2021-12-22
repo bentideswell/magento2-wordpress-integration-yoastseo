@@ -1,6 +1,10 @@
 # Changelog
 Change log for FishPig_WordPress_Yoast.
 
+## [3.0.2] - 2021-12-22
+### [Changed]
+- Code formatting clean up
+
 ## [3.0.1] - 2021-12-16
 ### Fixed
 - Updated some references to legacy classes to the new versions.

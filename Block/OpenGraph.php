@@ -33,7 +33,7 @@ class OpenGraph extends \FishPig\WordPress\Block\AbstractBlock
         $this->blogInfo = $blogInfo;
         $this->storeManager = $storeManager;
         $this->stringRewriter = $stringRewriter;
-        parent::__construct($context, $wpContext, $data);   
+        parent::__construct($context, $wpContext, $data);
     }
 
     /**
@@ -76,7 +76,7 @@ class OpenGraph extends \FishPig\WordPress\Block\AbstractBlock
                 'url' => $object->getUrl(),
             ];
         } elseif ($object instanceof \FishPig\WordPress\Model\Post) {
-            $tags = array(
+            $tags = [
                 'type' => 'article',
                 'title' => $object->getName(),
                 'description' => $object->getMetaDescription(),
@@ -86,7 +86,7 @@ class OpenGraph extends \FishPig\WordPress\Block\AbstractBlock
                 'article:author' => $object->getUser()->getMetaValue('facebook'),
                 'article:published_time' => $object->getPostDate('c'),
                 'article:modified_time' => $object->getPostModifiedDate('c'),
-            );
+            ];
 
             foreach (['title', 'description', 'image'] as $key) {
                 if ($value = $object->getMetaValue('_yoast_wpseo_opengraph-' . $key)) {
@@ -94,12 +94,12 @@ class OpenGraph extends \FishPig\WordPress\Block\AbstractBlock
                 }
             }
         } elseif ($object instanceof \FishPig\WordPress\Model\Term) {
-            $tags = array(
+            $tags = [
                 'type' => 'object',
                 'title' => $object->getName(),
                 'url' => $object->getUrl(),
                 'description' => $object->getDescription()
-            );
+            ];
         }
 
         $tags = array_merge(
@@ -136,5 +136,5 @@ class OpenGraph extends \FishPig\WordPress\Block\AbstractBlock
         }
         
         return $this->entity;
-    }        
+    }
 }

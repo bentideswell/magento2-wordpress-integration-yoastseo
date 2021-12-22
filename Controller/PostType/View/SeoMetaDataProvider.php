@@ -35,8 +35,7 @@ class SeoMetaDataProvider extends \FishPig\WordPress\Controller\PostType\View\Se
     public function addMetaData(
         \Magento\Framework\View\Result\Page $resultPage,
         \FishPig\WordPress\Api\Data\ViewableModelInterface $postType
-    ): void 
-    {
+    ): void {
         parent::addMetaData($resultPage, $postType);
         
         if (!$this->config->isEnabled()) {
@@ -89,9 +88,13 @@ class SeoMetaDataProvider extends \FishPig\WordPress\Controller\PostType\View\Se
         if ($this->getBlogInfo()->isBlogPublic()) {
             $robots = ['index' => 'index', 'follow' => 'follow'];
             
-            switch((int)$this->config->getPluginOption('noindex_ptarchive_' . $object->getPostType())) {
-                case 1:  $robots['index'] = 'noindex';   break;
-                case 2:  $robots['index'] = 'index';     break;
+            switch ((int)$this->config->getPluginOption('noindex_ptarchive_' . $object->getPostType())) {
+                case 1:
+                    $robots['index'] = 'noindex';
+                    break;
+                case 2:
+                    $robots['index'] = 'index';
+                    break;
             }
 
             $this->setRobots($robots);

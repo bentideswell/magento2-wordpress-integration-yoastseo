@@ -38,8 +38,7 @@ class SeoMetaDataProvider extends \FishPig\WordPress\Controller\Term\View\SeoMet
     public function addMetaData(
         \Magento\Framework\View\Result\Page $resultPage,
         \FishPig\WordPress\Api\Data\ViewableModelInterface $term
-    ): void 
-    {
+    ): void {
         parent::addMetaData($resultPage, $term);
         
         if (!$this->config->isEnabled()) {
@@ -47,18 +46,18 @@ class SeoMetaDataProvider extends \FishPig\WordPress\Controller\Term\View\SeoMet
         }
 
         // Meta Title
-        $this->setMetaTitle(
-            $this->stringRewriter->rewrite(
-                $this->getMetaValue($term, 'wpseo_title') ?: $this->config->getTitleFormat('tax_' . $term->getTaxonomy()),
-                $term
-            )
-        );
-
-        // Meta Description
-        if ($metaDesc = $this->stringRewriter->rewrite(
-            $this->getMetaValue($term, 'wpseo_desc') ?? $this->config->getMetaDescriptionFormat('tax_' . $term->getTaxonomy()),
+        if ($metaTitle = $this->stringRewriter->rewrite(
+            $this->getMetaValue($term, 'wpseo_title') ?: $this->config->getTitleFormat('tax_' . $term->getTaxonomy()),
             $term
         )) {
+            $this->setMetaTitle($metaTitle);
+        }
+
+        // Meta Description
+        $metaDescFormat = $this->getMetaValue($term, 'wpseo_desc')
+            ?? $this->config->getMetaDescriptionFormat('tax_' . $term->getTaxonomy());
+
+        if ($metaDesc = $this->stringRewriter->rewrite($metaDescFormat, $term)) {
             $this->setMetaDescription($metaDesc);
         }
 

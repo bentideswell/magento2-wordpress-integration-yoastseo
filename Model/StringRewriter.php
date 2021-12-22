@@ -25,7 +25,7 @@ class StringRewriter
     /**
      * @var array
      */
-    private $separators = array(
+    private $separators = [
         'sc-dash'   => '-',
         'sc-ndash'  => '&ndash;',
         'sc-mdash'  => '&mdash;',
@@ -39,7 +39,7 @@ class StringRewriter
         'sc-raquo'  => '&raquo;',
         'sc-lt'     => '&lt;',
         'sc-gt'     => '&gt;',
-    );
+    ];
 
     /**
      * @return void
@@ -56,7 +56,6 @@ class StringRewriter
         $this->layout = $layout;
     }
 
-    
     /**
      * @param  string $str
      * @return string
@@ -70,15 +69,15 @@ class StringRewriter
         $rwt = '%%';
         $rewrittenString = [];
         $stringTokens = preg_split(
-            '/(' . self::RWTS . '[a-z_-]{1,}' . self::RWTS . ')/iU', 
-            $str, 
-            -1, 
+            '/(' . self::RWTS . '[a-z_-]{1,}' . self::RWTS . ')/iU',
+            $str,
+            -1,
             PREG_SPLIT_DELIM_CAPTURE|PREG_SPLIT_NO_EMPTY
         );
 
         foreach ($stringTokens as $stringToken) {
-            $isStringToken = strlen($stringToken) >= 5 
-                && substr($stringToken, 0, 2) === self::RWTS 
+            $isStringToken = strlen($stringToken) >= 5
+                && substr($stringToken, 0, 2) === self::RWTS
                 && substr($stringToken, -2) === self::RWTS;
 
             if ($isStringToken) {
@@ -94,7 +93,7 @@ class StringRewriter
         
         $rewrittenString = trim(implode('', $rewrittenString));
         
-        return preg_replace('/\s+/', ' ', $rewrittenString);exit;
+        return preg_replace('/\s+/', ' ', $rewrittenString);
     }
 
     /**
@@ -128,7 +127,7 @@ class StringRewriter
             
             return $value;
         } elseif ($key === 'pagenumber') {
-           $value =  max(1, (int)$this->yoastHelper->getRequest()->getParam('page'));
+            $value =  max(1, (int)$this->yoastHelper->getRequest()->getParam('page'));
         } elseif ($key === 'searchphrase') {
             return $this->search->getSearchTerm();
         }

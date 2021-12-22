@@ -31,8 +31,7 @@ class SeoMetaDataProvider extends \FishPig\WordPress\Controller\Archive\View\Seo
     public function addMetaData(
         \Magento\Framework\View\Result\Page $resultPage,
         \FishPig\WordPress\Api\Data\ViewableModelInterface $archive
-    ): void 
-    {
+    ): void {
         parent::addMetaData($resultPage, $archive);
         
         if (!$this->config->isEnabled()) {
@@ -45,7 +44,10 @@ class SeoMetaDataProvider extends \FishPig\WordPress\Controller\Archive\View\Seo
         );
 
         // Meta Description
-        if ($metaDesc = $this->stringRewriter->rewrite($this->config->getMetaDescriptionFormat('archive_wpseo'), $archive)) {
+        if ($metaDesc = $this->stringRewriter->rewrite(
+            $this->config->getMetaDescriptionFormat('archive_wpseo'),
+            $archive
+        )) {
             $this->setMetaDescription($metaDesc);
         }
 

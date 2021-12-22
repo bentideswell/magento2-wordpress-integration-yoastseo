@@ -109,9 +109,9 @@ class Config
         if ($this->pluginOptions === null) {
             $this->pluginOptions = [];
 
-            foreach($this->getPluginOptionKeys() as $pluginOptionKey) {
+            foreach ($this->getPluginOptionKeys() as $pluginOptionKey) {
                 if ($options = $this->optionRepository->getUnserialized($pluginOptionKey)) {
-                    foreach($options as $optionKey => $optionValue) {
+                    foreach ($options as $optionKey => $optionValue) {
                         $this->pluginOptions[str_replace('-', '_', $optionKey)] = $optionValue;
                     }
                 }

@@ -4,6 +4,7 @@
  * @author  Ben Tideswell (ben@fishpig.com)
  * @url     https://fishpig.co.uk/magento/wordpress-integration/yoast/
  */
+// phpcs:ignoreFile -- long lines
 use \Magento\Framework\Component\ComponentRegistrar;
 
 ComponentRegistrar::register(

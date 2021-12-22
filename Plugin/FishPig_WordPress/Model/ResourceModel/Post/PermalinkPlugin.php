@@ -44,29 +44,10 @@ class PermalinkPlugin
                     return $termId;
                 }
             }
-        } catch (\Magento\Framework\Exception\NoSuchEntityException $e) {
-            // We can ignore this exception and just return the callback    
+        } catch (\Magento\Framework\Exception\NoSuchEntityException $e) { // phpcs:ignore -- empty catch
+            // We can ignore this exception and just return the callback
         }
 
         return $callback($postId, $taxonomy);
-        
-        if (!$this->isEnabled()) {
-            return $this;
-        }
-
-        if (is_object($postId)) {
-            $post = $postId->getId();
-        }
-        else if (is_array($postId)) {
-            $postId = array_shift($postId);
-        }
-
-        $tempPostModel = $this->context->getPostFactory()->create()->setId($postId);
-
-        if ($categoryId = $tempPostModel->getMetaValue('_yoast_wpseo_primary_category')) {
-            $select->reset(\Zend_Db_Select::ORDER)->where('_term.term_id=?', $categoryId);
-        }
-
-        return $this;
     }
 }
