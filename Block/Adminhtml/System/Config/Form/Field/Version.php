@@ -20,11 +20,11 @@ class Version extends \Magento\Config\Block\System\Config\Form\Field
     public function __construct(
         \Magento\Backend\Block\Template\Context $context,
         \Magento\Framework\Module\Dir\Reader $moduleDirReader,
-        \Magento\Framework\Filesystem\DriverInterface $filesystemDriver,
+        \Magento\Framework\Filesystem $filesystem,
         array $data = []
     ) {
         $this->moduleDirReader = $moduleDirReader;
-        $this->filesystemDriver = $filesystemDriver;
+        $this->filesystem = $filesystem;
         parent::__construct($context, $data);
     }
     
@@ -59,17 +59,16 @@ class Version extends \Magento\Config\Block\System\Config\Form\Field
         if ($this->moduleVersion === null) {
             $this->moduleVersion = 'Error';
 
-            $moduleComposerJsonFile = $this->moduleDirReader->getModuleDir(
-                '',
-                'FishPig_WordPress_Yoast'
-            ) . '/composer.json';
-            
-            if ($this->filesystemDriver->isFile($moduleComposerJsonFile)) {
+            $moduleDirectory = $this->filesystem->getDirectoryReadByPath(
+                $this->moduleDirReader->getModuleDir('', 'FishPig_WordPress_Yoast')
+            );
+
+            if ($moduleDirectory->isFile('composer.json')) {
                 $moduleComposerData = json_decode(
-                    $this->filesystemDriver->fileGetContents($moduleComposerJsonFile),
+                    $moduleDirectory->readFile($moduleDirectory->getAbsolutePath('composer.json')),
                     true
                 );
-                
+
                 $this->moduleVersion = (string)$moduleComposerData['version'];
             }
         }
