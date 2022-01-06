@@ -1,6 +1,11 @@
 # Changelog
 Change log for FishPig_WordPress_Yoast.
 
+## [3.0.4] - 2022-01-06
+### Fixed
+- Various strict type errors
+- Incorrect variable name ($object, should have been $postType)
+
 ## [3.0.2] - 2021-12-22
 ### [Changed]
 - Code formatting clean up

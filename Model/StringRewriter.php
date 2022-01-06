@@ -60,7 +60,7 @@ class StringRewriter
      * @param  string $str
      * @return string
      */
-    public function rewrite(string $str, ?ViewableModelInterface $object = null): string
+    public function rewrite(?string $str, ?ViewableModelInterface $object = null): string
     {
         if (strpos($str, self::RWTS) === false) {
             return $str;

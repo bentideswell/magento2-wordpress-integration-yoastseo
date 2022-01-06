@@ -62,7 +62,7 @@ class SeoMetaDataProvider extends \FishPig\WordPress\Controller\User\View\SeoMet
                 $robots['index'] = 'noindex';
             }
 
-            if (($customValue = trim($user->getMetaValue('wpseo_noindex_author'))) === 'on') {
+            if (($customValue = trim((string)$user->getMetaValue('wpseo_noindex_author'))) === 'on') {
                 $robots['index'] = 'noindex';
             }
             

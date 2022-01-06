@@ -87,8 +87,8 @@ class SeoMetaDataProvider extends \FishPig\WordPress\Controller\PostType\View\Se
         // Robots
         if ($this->getBlogInfo()->isBlogPublic()) {
             $robots = ['index' => 'index', 'follow' => 'follow'];
-            
-            switch ((int)$this->config->getPluginOption('noindex_ptarchive_' . $object->getPostType())) {
+
+            switch ((int)$this->config->getPluginOption('noindex_ptarchive_' . $postType->getPostType())) {
                 case 1:
                     $robots['index'] = 'noindex';
                     break;
