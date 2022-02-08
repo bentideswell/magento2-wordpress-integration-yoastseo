@@ -52,7 +52,7 @@ class OpenGraph extends \FishPig\WordPress\Block\AbstractBlock
                 $html .= sprintf(
                     '<meta property="og:%s" content="%s"/>',
                     $this->escapeHtmlAttr($tagName),
-                    $this->escapeHtml($this->stringRewriter->rewrite($tagValue)),
+                    $this->escapeHtml($this->stringRewriter->rewrite($tagValue))
                 ) . "\n";
             }
         }
@@ -73,7 +73,7 @@ class OpenGraph extends \FishPig\WordPress\Block\AbstractBlock
                 'title' => $this->config->getPluginOption('open_graph_frontpage_title'),
                 'description' => $this->config->getPluginOption('open_graph_frontpage_desc'),
                 'image' => $this->config->getPluginOption('open_graph_frontpage_image'),
-                'url' => $object->getUrl(),
+                'url' => $object->getUrl()
             ];
         } elseif ($object instanceof \FishPig\WordPress\Model\Post) {
             $tags = [
@@ -85,7 +85,7 @@ class OpenGraph extends \FishPig\WordPress\Block\AbstractBlock
                 'updated_time' => $object->getPostModifiedDate('c'),
                 'article:author' => $object->getUser()->getMetaValue('facebook'),
                 'article:published_time' => $object->getPostDate('c'),
-                'article:modified_time' => $object->getPostModifiedDate('c'),
+                'article:modified_time' => $object->getPostModifiedDate('c')
             ];
 
             foreach (['title', 'description', 'image'] as $key) {
@@ -111,7 +111,7 @@ class OpenGraph extends \FishPig\WordPress\Block\AbstractBlock
                 'url' => $this->url->getUrl(),
                 'site_name' => $this->blogInfo->getBlogName(),
                 'article:publisher' => $this->config->getPluginOption('facebook_site'),
-                'image' => $this->config->getPluginOption('og_default_image'),
+                'image' => $this->config->getPluginOption('og_default_image')
             ],
             array_filter($tags)
         );
