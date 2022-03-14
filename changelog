@@ -1,7 +1,7 @@
 # Changelog
 Change log for FishPig_WordPress_Yoast.
 
-## [3.0.6] - 2022-03-14
+## [3.0.7] - 2022-03-14
 ### [Fixed]
 - Fixed missing YoastHelper class in StringRewriter.
 
