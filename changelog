@@ -1,6 +1,10 @@
 # Changelog
 Change log for FishPig_WordPress_Yoast.
 
+## [3.0.6] - 2022-03-14
+### [Fixed]
+- Fixed missing YoastHelper class in StringRewriter.
+
 ## [3.0.5] - 2022-02-08
 ### [Changed]
 - Removed trailing commas to fix some PHP 7.2 compat issues. This is fine in PHP 7.3 and above.

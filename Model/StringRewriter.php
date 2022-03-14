@@ -40,6 +40,11 @@ class StringRewriter
         'sc-lt'     => '&lt;',
         'sc-gt'     => '&gt;',
     ];
+    
+    /**
+     * @var \Magento\Framework\App\RequestInterface
+     */
+    private $request = null;
 
     /**
      * @return void
@@ -48,12 +53,14 @@ class StringRewriter
         \FishPig\WordPress_Yoast\Model\Config $config,
         \FishPig\WordPress\Model\OptionRepository $optionRepository,
         \FishPig\WordPress\Model\Search $search,
-        \Magento\Framework\View\Layout $layout
+        \Magento\Framework\View\Layout $layout,
+        \Magento\Framework\App\RequestInterface $request
     ) {
         $this->config = $config;
         $this->optionRepository = $optionRepository;
         $this->search = $search;
         $this->layout = $layout;
+        $this->reqest = $request;
     }
 
     /**
@@ -127,7 +134,7 @@ class StringRewriter
             
             return $value;
         } elseif ($key === 'pagenumber') {
-            $value =  max(1, (int)$this->yoastHelper->getRequest()->getParam('page'));
+            $value =  max(1, (int)$this->reqest->getParam('page'));
         } elseif ($key === 'searchphrase') {
             return $this->search->getSearchTerm();
         }
