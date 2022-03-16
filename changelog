@@ -1,6 +1,10 @@
 # Changelog
 Change log for FishPig_WordPress_Yoast.
 
+## [3.0.8] - 2022-03-16
+### [Fixed]
+- Open Graph now uses meta description if specific description not set.
+
 ## [3.0.7] - 2022-03-14
 ### [Fixed]
 - Fixed missing YoastHelper class in StringRewriter.

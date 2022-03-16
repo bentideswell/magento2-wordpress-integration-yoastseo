@@ -27,12 +27,14 @@ class OpenGraph extends \FishPig\WordPress\Block\AbstractBlock
         \FishPig\WordPress\Helper\BlogInfo $blogInfo,
         \Magento\Store\Model\StoreManagerInterface $storeManager,
         \FishPig\WordPress_Yoast\Model\StringRewriter $stringRewriter,
+        \Magento\Framework\View\Page\Config $pageConfig,
         array $data = []
     ) {
         $this->config = $config;
         $this->blogInfo = $blogInfo;
         $this->storeManager = $storeManager;
         $this->stringRewriter = $stringRewriter;
+        $this->pageConfig = $pageConfig;
         parent::__construct($context, $wpContext, $data);
     }
 
@@ -106,8 +108,8 @@ class OpenGraph extends \FishPig\WordPress\Block\AbstractBlock
             [
                 'locale' => $this->config->getLocaleCode(),
                 'type' => 'blog',
-                'title' => $this->blogInfo->getBlogName(),
-                'description' => $this->blogInfo->getBlogDescription(),
+                'title' => $this->pageConfig->getTitle()->get(),
+                'description' => $this->pageConfig->getDescription(),
                 'url' => $this->url->getUrl(),
                 'site_name' => $this->blogInfo->getBlogName(),
                 'article:publisher' => $this->config->getPluginOption('facebook_site'),
