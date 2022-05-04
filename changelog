@@ -1,6 +1,9 @@
 # Changelog
 Change log for FishPig_WordPress_Yoast.
 
+## [3.0.9] - 2022-05-04
+- Fixed strict type error for str_replace
+
 ## [3.0.8] - 2022-03-16
 ### [Fixed]
 - Open Graph now uses meta description if specific description not set.

@@ -53,7 +53,7 @@ class AssetProvider implements \FishPig\WordPress\Api\App\View\AssetProviderInte
                 foreach ($this->getPageData() as $var => $value) {
                     $bodyHtml = str_replace(
                         StringRewriter::RWTS . $var . StringRewriter::RWTS,
-                        $value,
+                        (string)$value,
                         $bodyHtml
                     );
                 }
