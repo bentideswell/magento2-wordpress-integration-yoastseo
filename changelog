@@ -1,6 +1,11 @@
 # Changelog
 Change log for FishPig_WordPress_Yoast.
 
+## [3.1.1] - 2022-08-05
+### [Fixed]
+- \FishPig\WordPress\Model\Post::isPublic now returns false if post is set to
+  noindex.
+
 ## [3.1.0] - 2022-07-19
 ### [Added]
 - Added a Factory class to prevent PSR-0 errors when optimizing the composer autoloader.

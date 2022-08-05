@@ -22,7 +22,7 @@ class SeoMetaDataProvider extends \FishPig\WordPress\Controller\Post\View\SeoMet
         $this->stringRewriter = $stringRewriter;
         parent::__construct($blogInfo);
     }
-    
+
     /**
      * @param  \Magento\Framework\View\Result\Page $resultPage,
      * @param  \FishPig\WordPress\Api\Data\ViewableModelInterface $object
@@ -33,7 +33,7 @@ class SeoMetaDataProvider extends \FishPig\WordPress\Controller\Post\View\SeoMet
         \FishPig\WordPress\Api\Data\ViewableModelInterface $post
     ): void {
         parent::addMetaData($resultPage, $post);
-        
+
         if (!$this->config->isEnabled()) {
             return;
         }
@@ -61,13 +61,25 @@ class SeoMetaDataProvider extends \FishPig\WordPress\Controller\Post\View\SeoMet
         );
 
         // Robots
+        if ($robots = $this->getRobots($post)) {
+            $this->setRobots(implode(',', $robots));
+        }
+    }
+
+    /**
+     *
+     */
+    public function getRobots(\FishPig\WordPress\Model\Post $post): array
+    {
+        $robots = [];
+
         if ($this->getBlogInfo()->isBlogPublic()) {
             $robots = ['index' => 'index', 'follow' => 'follow'];
-            
+
             if ($this->config->isTypeNoindex($post->getPostType())) {
                 $robots['index'] = 'noindex';
             }
-            
+
             switch ((int)$post->getMetaValue($this->config::FIELD_NOINDEX)) {
                 case 1:
                     $robots['index'] = 'noindex';
@@ -76,20 +88,22 @@ class SeoMetaDataProvider extends \FishPig\WordPress\Controller\Post\View\SeoMet
                     $robots['index'] = 'index';
                     break;
             }
-    
+
             if ((int)$post->getMetaValue($this->config::FIELD_NOFOLLOW) === 1) {
                 $robots['follow'] = 'nofollow';
             }
-    
+
             if (($advancedRobots = $post->getMetaValue($this->config::FIELD_ROBOTS_ADVANCED)) !== '') {
                 if ($advancedRobots !== 'none') {
                     $robots['advanced'] = $advancedRobots;
                 }
             }
-    
-            if ($robots = array_filter($robots)) {
-                $this->setRobots(implode(',', $robots));
-            }
+
+            $robots = array_filter($robots);
+        } else {
+            $robots = ['index' => 'noindex', 'follow' => 'nofollow'];
         }
+
+        return $robots;
     }
 }
