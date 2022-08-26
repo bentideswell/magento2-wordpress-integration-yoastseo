@@ -1,6 +1,10 @@
 # Changelog
 Change log for FishPig_WordPress_Yoast.
 
+## [3.2.0] - 2022-08-26
+### [Added]
+- Added support for Premium URL redirects.
+
 ## [3.1.1] - 2022-08-05
 ### [Fixed]
 - \FishPig\WordPress\Model\Post::isPublic now returns false if post is set to

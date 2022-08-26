@@ -52,4 +52,11 @@
     <type name="FishPig\WordPress\Model\ResourceModel\Post\Permalink">
         <plugin name="fishpig-wordpress-yoast" type="FishPig\WordPress_Yoast\Plugin\FishPig_WordPress\Model\ResourceModel\Post\PermalinkPlugin"/>
     </type>
+    <type name="FishPig\WordPress\Controller\Router">
+        <arguments>
+            <argument name="routerPool" xsi:type="array">
+                <item name="yoast-redirects" xsi:type="object" sortOrder="3">FishPig\WordPress_Yoast\Controller\Router\RedirectRouter</item>
+            </argument>
+        </arguments>
+    </type>
 </config>
