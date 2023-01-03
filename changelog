@@ -1,6 +1,10 @@
 # Changelog
 Change log for FishPig_WordPress_Yoast.
 
+## [3.2.1] - 2023-01-03
+### [Changed]
+- Changed string rewriting to include support for %%primary_category%%
+
 ## [3.2.0] - 2022-08-26
 ### [Added]
 - Added support for Premium URL redirects.

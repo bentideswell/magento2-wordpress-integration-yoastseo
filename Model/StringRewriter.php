@@ -40,7 +40,7 @@ class StringRewriter
         'sc-lt'     => '&lt;',
         'sc-gt'     => '&gt;',
     ];
-    
+
     /**
      * @var \Magento\Framework\App\RequestInterface
      */
@@ -93,13 +93,13 @@ class StringRewriter
 
             $rewrittenString[] = $stringToken;
         }
-        
+
         if (!$rewrittenString) {
             return '';
         }
-        
+
         $rewrittenString = trim(implode('', $rewrittenString));
-        
+
         return preg_replace('/\s+/', ' ', $rewrittenString);
     }
 
@@ -125,13 +125,13 @@ class StringRewriter
             return date('Y');
         } elseif ($key === 'sep') {
             $value = '|';
-            
+
             if ($sep = $this->config->getPluginOption('separator')) {
                 if (isset($this->separators[$sep])) {
                     $value = $this->separators[$sep];
                 }
             }
-            
+
             return $value;
         } elseif ($key === 'pagenumber') {
             $value =  max(1, (int)$this->reqest->getParam('page'));
@@ -150,6 +150,12 @@ class StringRewriter
                 return $object->getPostTitle();
             } elseif ($key === 'excerpt') {
                 return trim($object->getExcerpt(30));
+            } elseif ($key === 'primary_category') {
+                if ($term = $object->getParentTerm('category')) {
+                    return $term->getName();
+                }
+
+                return '';
             } elseif ($key === 'category') {
                 $categories = [];
 
@@ -201,7 +207,7 @@ class StringRewriter
                 }
             }
         }*/
-        
+
         return '';
     }
 }
