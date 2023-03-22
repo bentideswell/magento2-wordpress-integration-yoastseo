@@ -11,6 +11,21 @@ namespace FishPig\WordPress_Yoast\Controller\Term\View;
 class SeoMetaDataProvider extends \FishPig\WordPress\Controller\Term\View\SeoMetaDataProvider
 {
     /**
+     * @auto
+     */
+    protected $config = null;
+
+    /**
+     * @auto
+     */
+    protected $stringRewriter = null;
+
+    /**
+     * @auto
+     */
+    protected $optionRepository = null;
+
+    /**
      * @var array
      */
     private $taxonomyMeta = null;

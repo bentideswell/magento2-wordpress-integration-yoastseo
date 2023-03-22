@@ -11,6 +11,16 @@ namespace FishPig\WordPress_Yoast\Controller\Archive\View;
 class SeoMetaDataProvider extends \FishPig\WordPress\Controller\Archive\View\SeoMetaDataProvider
 {
     /**
+     * @auto
+     */
+    protected $config = null;
+
+    /**
+     * @auto
+     */
+    protected $stringRewriter = null;
+
+    /**
      * @param \FishPig\WordPress\Helper\BlogInfo $blogInfo
      */
     public function __construct(

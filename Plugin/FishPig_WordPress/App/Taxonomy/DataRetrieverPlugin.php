@@ -13,6 +13,11 @@ use FishPig\WordPress\App\Taxonomy\DataRetriever;
 class DataRetrieverPlugin
 {
     /**
+     * @auto
+     */
+    protected $config = null;
+
+    /**
      * @param \FishPig\WordPress_Yoast\Model\Config $config
      */
     public function __construct(

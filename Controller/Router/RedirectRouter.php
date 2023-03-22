@@ -11,6 +11,26 @@ namespace FishPig\WordPress_Yoast\Controller\Router;
 class RedirectRouter implements \Magento\Framework\App\RouterInterface
 {
     /**
+     * @auto
+     */
+    protected $requestDispatcher = null;
+
+    /**
+     * @auto
+     */
+    protected $routerUrlHelper = null;
+
+    /**
+     * @auto
+     */
+    protected $optionRepository = null;
+
+    /**
+     * @auto
+     */
+    protected $url = null;
+
+    /**
      *
      */
     public function __construct(

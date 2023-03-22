@@ -13,6 +13,16 @@ use FishPig\WordPress_Yoast\Model\StringRewriter;
 class AssetProvider implements \FishPig\WordPress\Api\App\View\AssetProviderInterface
 {
     /**
+     * @auto
+     */
+    protected $config = null;
+
+    /**
+     * @auto
+     */
+    protected $layout = null;
+
+    /**
      * @const string
      */
     const PAGE_PLACEHOLDER = 'page';

@@ -13,6 +13,16 @@ use FishPig\WordPress\Model\ResourceModel\Post\Permalink;
 class PermalinkPlugin
 {
     /**
+     * @auto
+     */
+    protected $config = null;
+
+    /**
+     * @auto
+     */
+    protected $postFactory = null;
+
+    /**
      * @const string
      */
     const META_KEY = '_yoast_wpseo_primary_category';

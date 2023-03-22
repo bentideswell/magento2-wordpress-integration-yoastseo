@@ -11,6 +11,31 @@ namespace FishPig\WordPress_Yoast\Block;
 class OpenGraph extends \FishPig\WordPress\Block\AbstractBlock
 {
     /**
+     * @auto
+     */
+    protected $config = null;
+
+    /**
+     * @auto
+     */
+    protected $blogInfo = null;
+
+    /**
+     * @auto
+     */
+    protected $storeManager = null;
+
+    /**
+     * @auto
+     */
+    protected $stringRewriter = null;
+
+    /**
+     * @auto
+     */
+    protected $pageConfig = null;
+
+    /**
      * @var FishPig\WordPress\Model\AbstractModel
      */
     private $entity = null;

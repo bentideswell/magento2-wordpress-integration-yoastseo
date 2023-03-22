@@ -10,6 +10,16 @@ use Magento\Framework\Data\Form\Element\AbstractElement;
 class Version extends \Magento\Config\Block\System\Config\Form\Field
 {
     /**
+     * @auto
+     */
+    protected $moduleDirReader = null;
+
+    /**
+     * @auto
+     */
+    protected $filesystem = null;
+
+    /**
      * @var string
      */
     private $moduleVersion;

@@ -7,6 +7,16 @@ namespace FishPig\WordPress_Yoast\Controller\Post\View;
 class SeoMetaDataProviderFactory
 {
     /**
+     * @auto
+     */
+    protected $objectManager = null;
+
+    /**
+     * @auto
+     */
+    protected $instanceName = null;
+
+    /**
      * Object Manager instance
      *
      * @var \Magento\Framework\ObjectManagerInterface

@@ -11,6 +11,21 @@ namespace FishPig\WordPress_Yoast\Model;
 class Config
 {
     /**
+     * @auto
+     */
+    protected $optionRepository = null;
+
+    /**
+     * @auto
+     */
+    protected $pluginManager = null;
+
+    /**
+     * @auto
+     */
+    protected $localeResolver = null;
+
+    /**
      * @const string
      */
     const FIELD_TITLE = '_yoast_wpseo_title';

@@ -13,6 +13,16 @@ use FishPig\WordPress\Model\Post;
 class PostPlugin
 {
     /**
+     * @auto
+     */
+    protected $config = null;
+
+    /**
+     * @auto
+     */
+    protected $seoMetaDataProvider = null;
+
+    /**
      *
      */
     private $cache = [];

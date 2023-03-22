@@ -13,6 +13,26 @@ use FishPig\WordPress\Api\Data\ViewableModelInterface;
 class StringRewriter
 {
     /**
+     * @auto
+     */
+    protected $config = null;
+
+    /**
+     * @auto
+     */
+    protected $optionRepository = null;
+
+    /**
+     * @auto
+     */
+    protected $search = null;
+
+    /**
+     * @auto
+     */
+    protected $layout = null;
+
+    /**
      * @const string
      */
     const RWTS = '%%';
@@ -60,7 +80,7 @@ class StringRewriter
         $this->optionRepository = $optionRepository;
         $this->search = $search;
         $this->layout = $layout;
-        $this->reqest = $request;
+        $this->request = $request;
     }
 
     /**
@@ -134,7 +154,7 @@ class StringRewriter
 
             return $value;
         } elseif ($key === 'pagenumber') {
-            $value =  max(1, (int)$this->reqest->getParam('page'));
+            $value =  max(1, (int)$this->request->getParam('page'));
         } elseif ($key === 'searchphrase') {
             return $this->search->getSearchTerm();
         }

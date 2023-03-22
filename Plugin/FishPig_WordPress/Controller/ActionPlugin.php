@@ -13,6 +13,16 @@ use FishPig\WordPress\Controller\Action;
 class ActionPlugin
 {
     /**
+     * @auto
+     */
+    protected $config = null;
+
+    /**
+     * @auto
+     */
+    protected $layout = null;
+
+    /**
      * @param \FishPig\WordPress_Yoast\Model\Config $config
      * @param \Magento\Framework\View\Layout        $layout
      */
