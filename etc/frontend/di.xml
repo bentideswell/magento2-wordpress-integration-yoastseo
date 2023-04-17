@@ -59,4 +59,7 @@
             </argument>
         </arguments>
     </type>
+    <type name="FishPig\WordPress_PluginShortcodeWidget\Controller\Router\DynamicRouter">
+        <plugin name="fishpig-wordpress-yoast" type="FishPig\WordPress_Yoast\Plugin\FishPig_WordPress_PluginShortcodeWidget\Controller\Router\DynamicRouterPlugin"/>
+    </type>
 </config>

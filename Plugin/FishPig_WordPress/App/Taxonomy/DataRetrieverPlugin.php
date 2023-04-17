@@ -13,9 +13,9 @@ use FishPig\WordPress\App\Taxonomy\DataRetriever;
 class DataRetrieverPlugin
 {
     /**
-     * @auto
+     *
      */
-    protected $config = null;
+    private $config = null;
 
     /**
      * @param \FishPig\WordPress_Yoast\Model\Config $config
@@ -25,7 +25,7 @@ class DataRetrieverPlugin
     ) {
         $this->config = $config;
     }
-    
+
     /**
      * @param  \Magento\Framework\View\Result\Page $resultPage,
      * @param  \FishPig\WordPress\Api\Data\ViewableModelInterface $object
