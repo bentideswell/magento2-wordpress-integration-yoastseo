@@ -44,7 +44,7 @@ class SeoMetaDataProvider extends \FishPig\WordPress\Controller\Term\View\SeoMet
         $this->optionRepository = $optionRepository;
         parent::__construct($blogInfo);
     }
-    
+
     /**
      * @param  \Magento\Framework\View\Result\Page $resultPage,
      * @param  \FishPig\WordPress\Api\Data\ViewableModelInterface $object
@@ -55,7 +55,7 @@ class SeoMetaDataProvider extends \FishPig\WordPress\Controller\Term\View\SeoMet
         \FishPig\WordPress\Api\Data\ViewableModelInterface $term
     ): void {
         parent::addMetaData($resultPage, $term);
-        
+
         if (!$this->config->isEnabled()) {
             return;
         }
@@ -70,7 +70,7 @@ class SeoMetaDataProvider extends \FishPig\WordPress\Controller\Term\View\SeoMet
 
         // Meta Description
         $metaDescFormat = $this->getMetaValue($term, 'wpseo_desc')
-            ?? $this->config->getMetaDescriptionFormat('tax_' . $term->getTaxonomy());
+            ?: $this->config->getMetaDescriptionFormat('tax_' . $term->getTaxonomy());
 
         if ($metaDesc = $this->stringRewriter->rewrite($metaDescFormat, $term)) {
             $this->setMetaDescription($metaDesc);
@@ -84,21 +84,21 @@ class SeoMetaDataProvider extends \FishPig\WordPress\Controller\Term\View\SeoMet
         // Robots
         if ($this->getBlogInfo()->isBlogPublic()) {
             $robots = ['index' => 'index', 'follow' => 'follow'];
-            
+
             if ($this->config->isTypeNoindex('tax_' . $term->getTaxonomy())) {
                 $robots['index'] = 'noindex';
             }
-    
+
             if (($value = trim($this->getMetaValue($term, $this->config::FIELD_NOINDEX))) !== '') {
                 $robots['index'] = $value;
             }
-    
+
             if ($robots = array_filter($robots)) {
                 $this->setRobots(implode(',', $robots));
             }
         }
     }
-    
+
     /**
      * @param  \FishPig\WordPress\Model\Term $term
      * @param  string $key

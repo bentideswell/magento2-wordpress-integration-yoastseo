@@ -67,7 +67,7 @@ class SeoMetaDataProvider extends \FishPig\WordPress\Controller\Post\View\SeoMet
 
         // Canonical
         $this->setCanonicalUrl(
-            $post->getMetaValue($this->config::FIELD_CANONICAL) ?? $post->getUrl()
+            $post->getMetaValue($this->config::FIELD_CANONICAL) ?: $post->getUrl()
         );
 
         // Robots
