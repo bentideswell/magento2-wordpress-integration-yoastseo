@@ -1,6 +1,10 @@
 # Changelog
 Change log for FishPig_WordPress_Yoast.
 
+## [3.3.3] - 2023-06-08
+### [Fixed]
+- Fixed issue introduced in 3.3.1 with dynamic routes.
+
 ## [3.3.2] - 2023-05-09
 ### [Fixed]
 - Fixed bug where term meta description template was not used.

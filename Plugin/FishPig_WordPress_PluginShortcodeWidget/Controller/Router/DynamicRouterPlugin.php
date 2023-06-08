@@ -51,8 +51,12 @@ class DynamicRouterPlugin
             return $result;
         }
 
-        // Relative path info starts with /category/ but Yoast config forbids this
-        // so do not allow this to be requested via PSW's dynamic routing system
-        return false;
+        if (strpos($relativePathInfo, 'category/') === 0) {
+            // Relative path info starts with /category/ but Yoast config forbids this
+            // so do not allow this to be requested via PSW's dynamic routing system
+            return false;
+        }
+
+        return $result;
     }
 }
