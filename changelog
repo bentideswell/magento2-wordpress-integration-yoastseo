@@ -1,6 +1,10 @@
 # Changelog
 Change log for FishPig_WordPress_Yoast.
 
+## [3.3.4] - 2023-06-08
+### [Changed]
+- Changed AssetProvider to use canProvideAssets method.
+
 ## [3.3.3] - 2023-06-08
 ### [Fixed]
 - Fixed issue introduced in 3.3.1 with dynamic routes.

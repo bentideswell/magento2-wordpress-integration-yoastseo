@@ -28,7 +28,7 @@ class AssetProvider implements \FishPig\WordPress\Api\App\View\AssetProviderInte
     const PAGE_PLACEHOLDER = 'page';
     const PAGE_TOTAL_PLACEHOLDER = 'pagetotal';
     const PAGE_NUMBER_PLACEHOLDER = 'pagenumber';
-  
+
     /**
      *
      */
@@ -49,20 +49,14 @@ class AssetProvider implements \FishPig\WordPress\Api\App\View\AssetProviderInte
         \Magento\Framework\App\RequestInterface $request,
         \Magento\Framework\App\ResponseInterface $response
     ): void {
-        if (!$this->config->isEnabled()) {
-            return;
-        }
-        
         $bodyHtml = $response->getBody();
-        
-        foreach ([
-            self::PAGE_NUMBER_PLACEHOLDER,
-            self::PAGE_TOTAL_PLACEHOLDER,
-            self::PAGE_PLACEHOLDER] as $key) {
-            if (strpos($bodyHtml, StringRewriter::RWTS . $key . StringRewriter::RWTS) !== false) {
+
+        foreach ($this->getPlaceholders() as $key) {
+            $placeholder = $this->buildPlaceholder($key);
+            if (strpos($bodyHtml, $placeholder) !== false) {
                 foreach ($this->getPageData() as $var => $value) {
                     $bodyHtml = str_replace(
-                        StringRewriter::RWTS . $var . StringRewriter::RWTS,
+                        $placeholder,
                         (string)$value,
                         $bodyHtml
                     );
@@ -75,15 +69,38 @@ class AssetProvider implements \FishPig\WordPress\Api\App\View\AssetProviderInte
     }
 
     /**
+     * @param  \Magento\Framework\App\RequestInterface $request,
+     * @param  \Magento\Framework\App\ResponseInterface $response
+     * @return bool
+     */
+    public function canProvideAssets(
+        \Magento\Framework\App\RequestInterface $request,
+        \Magento\Framework\App\ResponseInterface $response
+    ): bool {
+        if (!$this->config->isEnabled()) {
+            return false;
+        }
+
+        $bodyHtml = $response->getBody();
+
+        foreach ($this->getPlaceholders() as $key) {
+            if (strpos($bodyHtml, $this->buildPlaceholder($key)) !== false) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
      * @return array
      */
     private function getPageData(): array
     {
-        $data = [
-            self::PAGE_NUMBER_PLACEHOLDER => '',
-            self::PAGE_TOTAL_PLACEHOLDER => '',
-            self::PAGE_PLACEHOLDER => ''
-        ];
+        $data = array_combine(
+            $this->getPlaceholders(),
+            array_fill(0, count($this->getPlaceholders()), '')
+        );
 
         if (!($pagerBlock = $this->layout->getBlock('wp.post_list.pager'))) {
             return $data;
@@ -102,5 +119,25 @@ class AssetProvider implements \FishPig\WordPress\Api\App\View\AssetProviderInte
         }
 
         return $data;
+    }
+
+    /**
+     *
+     */
+    private function getPlaceholders(): array
+    {
+        return [
+            self::PAGE_NUMBER_PLACEHOLDER,
+            self::PAGE_TOTAL_PLACEHOLDER,
+            self::PAGE_PLACEHOLDER
+        ];
+    }
+
+    /**
+     *
+     */
+    private function buildPlaceholder(string $key): string
+    {
+        return StringRewriter::RWTS . $key . StringRewriter::RWTS;
     }
 }
