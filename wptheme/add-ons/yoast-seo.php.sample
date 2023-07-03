@@ -1,0 +1,36 @@
+<?php
+/**
+ * @package FishPig_WordPress_Yoast
+ * @author  Ben Tideswell (ben@fishpig.com)
+ * @url     https://fishpig.co.uk/magento/wordpress-integration/
+ */
+// phpcs:ignoreFile -- this file is a WordPress theme file and will not run in Magento
+namespace FishPig\WordPress\X;
+
+class YoastSeo
+{
+    /**
+     *
+     */
+    public function __construct()
+    {
+        add_action(
+            'after_setup_theme', function() {
+                $this->disableXmlSitemapStylesheetUrl();
+            }
+        );
+    }
+
+    /**
+     *
+     */
+    private function disableXmlSitemapStylesheetUrl(): void
+    {
+        add_filter(
+            'wpseo_stylesheet_url',
+            function ($url) {
+                return '';
+            }
+        );
+    }
+}

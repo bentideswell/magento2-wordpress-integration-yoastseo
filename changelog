@@ -1,6 +1,12 @@
 # Changelog
 Change log for FishPig_WordPress_Yoast.
 
+## [3.3.5] - 2023-07-03
+### [Added]
+- Added WP theme file to stop CSS file being included in the XML sitemap index.
+  This fixes CORS issues when using external integration and a separate WP
+  domain.
+
 ## [3.3.4] - 2023-06-08
 ### [Changed]
 - Changed AssetProvider to use canProvideAssets method.

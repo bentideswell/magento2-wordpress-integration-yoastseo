@@ -3,4 +3,11 @@
     <type name="FishPig\WordPress\Model\Post">
         <plugin name="fishpig-wordpress-yoast" type="FishPig\WordPress_Yoast\Plugin\FishPig_WordPress\Model\PostPlugin"/>
     </type>
+    <type name="FishPig\WordPress\App\Theme\FileCollector">
+        <arguments>
+            <argument name="modules" xsi:type="array">
+                <item name="FishPig_WordPress_Yoast" xsi:type="string">FishPig_WordPress_Yoast</item>
+            </argument>
+        </arguments>
+    </type>
 </config>
