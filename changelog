@@ -1,6 +1,11 @@
 # Changelog
 Change log for FishPig_WordPress_Yoast.
 
+## [3.3.6] - 2023-12-19
+### [Fixed]
+- Fixed config retrieval for post types that contain a hyphen. Yoast changes this
+  to an underscore.
+
 ## [3.3.5] - 2023-07-03
 ### [Added]
 - Added WP theme file to stop CSS file being included in the XML sitemap index.

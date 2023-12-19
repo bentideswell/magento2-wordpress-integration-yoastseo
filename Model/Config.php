@@ -35,7 +35,7 @@ class Config
     const FIELD_NOFOLLOW = '_yoast_wpseo_meta-robots-nofollow';
     const FIELD_ROBOTS_ADVANCED = '_yoast_wpseo_meta-robots-adv';
     const FIELD_CANONICAL = '_yoast_wpseo_canonical';
-    
+
     /**
      * @var array
      */
@@ -53,7 +53,7 @@ class Config
         $this->pluginManager = $pluginManager;
         $this->localeResolver = $localeResolver;
     }
-    
+
     /**
      * @return bool
      */
@@ -77,7 +77,9 @@ class Config
      */
     public function getTitleFormat(string $key): string
     {
-        return trim($this->getPluginOption('title_' . $key, ''));
+        return trim(
+            $this->getTypeOption('title_%s', $key) ?? ''
+        );
     }
 
     /**
@@ -86,18 +88,33 @@ class Config
      */
     public function getMetaDescriptionFormat(string $key): string
     {
-        return trim($this->getPluginOption('metadesc_' . $key, ''));
+        return trim(
+            $this->getTypeOption('metadesc_%s', $key) ?? ''
+        );
     }
-    
+
     /**
      * @param  string $key
      * @return bool
      */
     public function isTypeNoindex(string $key): bool
     {
-        return (int)$this->getPluginOption('noindex_' . $key) === 1;
+        return (int)$this->getTypeOption('noindex_%s', $key) === 1;
     }
-    
+
+    /**
+     *
+     */
+    private function getTypeOption(string $key, string $type, )
+    {
+        return $this->getPluginOption(
+            sprintf(
+                $key,
+                str_replace('-', '_', $type)
+            )
+        );
+    }
+
     /**
      * @return bool
      */
@@ -113,7 +130,7 @@ class Config
     {
         return $this->localeResolver->getLocale();
     }
-    
+
     /**
      * @param  string $key = null
      * @param  mixed  $default = null
