@@ -105,7 +105,7 @@ class Config
     /**
      *
      */
-    private function getTypeOption(string $key, string $type, )
+    private function getTypeOption(string $key, string $type)
     {
         return $this->getPluginOption(
             sprintf(

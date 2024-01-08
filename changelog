@@ -1,6 +1,10 @@
 # Changelog
 Change log for FishPig_WordPress_Yoast.
 
+## [3.3.7] - 2024-01-08
+### [Fixed]
+- Removed trailing comma in getTypeOption method declaration.
+
 ## [3.3.6] - 2023-12-19
 ### [Fixed]
 - Fixed config retrieval for post types that contain a hyphen. Yoast changes this

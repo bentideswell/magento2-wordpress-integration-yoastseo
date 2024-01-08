@@ -10,4 +10,19 @@
             </argument>
         </arguments>
     </type>
+    <type name="FishPig\WordPress\Model\OptionRepository">
+        <arguments>
+            <argument name="autoloadKeys" xsi:type="array">
+                <item name="wpseo-premium-redirects-base" xsi:type="string">wpseo-premium-redirects-base</item>
+                <item name="wpseo" xsi:type="string">wpseo</item>
+                <item name="wpseo_titles" xsi:type="string">wpseo_titles</item>
+                <item name="wpseo_xml" xsi:type="string">wpseo_xml</item>
+                <item name="wpseo_social" xsi:type="string">wpseo_social</item>
+                <item name="wpseo_rss" xsi:type="string">wpseo_rss</item>
+                <item name="wpseo_internallinks" xsi:type="string">wpseo_internallinks</item>
+                <item name="wpseo_permalinks" xsi:type="string">wpseo_permalinks</item>
+                <item name="wpseo_taxonomy_meta" xsi:type="string">wpseo_taxonomy_meta</item>
+            </argument>
+        </arguments>
+    </type>
 </config>
