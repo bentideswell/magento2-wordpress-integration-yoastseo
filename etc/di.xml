@@ -25,4 +25,7 @@
             </argument>
         </arguments>
     </type>
+    <type name="FishPig\WordPress\Model\ResourceModel\Post\Permalink">
+        <plugin name="fishpig-wordpress-yoast" type="FishPig\WordPress_Yoast\Plugin\FishPig_WordPress\Model\ResourceModel\Post\PermalinkPlugin"/>
+    </type>
 </config>

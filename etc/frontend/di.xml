@@ -7,7 +7,6 @@
             </argument>
         </arguments>
     </type>
-
     <type name="FishPig\WordPress\Controller\Post\View">
         <arguments>
             <argument name="seoMetaDataProvider" xsi:type="object">FishPig\WordPress_Yoast\Controller\Post\View\SeoMetaDataProvider</argument>
@@ -48,9 +47,6 @@
     </type>
     <type name="FishPig\WordPress\Controller\Action">
         <plugin name="fishpig-wordpress-yoast" type="FishPig\WordPress_Yoast\Plugin\FishPig_WordPress\Controller\ActionPlugin"/>
-    </type>
-    <type name="FishPig\WordPress\Model\ResourceModel\Post\Permalink">
-        <plugin name="fishpig-wordpress-yoast" type="FishPig\WordPress_Yoast\Plugin\FishPig_WordPress\Model\ResourceModel\Post\PermalinkPlugin"/>
     </type>
     <type name="FishPig\WordPress\Controller\Router">
         <arguments>

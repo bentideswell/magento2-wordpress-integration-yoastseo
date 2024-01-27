@@ -1,6 +1,10 @@
 # Changelog
 Change log for FishPig_WordPress_Yoast.
 
+## [3.3.8] - 2024-01-27
+### [Changed]
+- Moved permalink plugin to global scope to ensure it runs during XML sitemap generation.
+
 ## [3.3.7] - 2024-01-08
 ### [Fixed]
 - Removed trailing comma in getTypeOption method declaration.
