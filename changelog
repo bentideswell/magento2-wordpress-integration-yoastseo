@@ -1,6 +1,10 @@
 # Changelog
 Change log for FishPig_WordPress_Yoast.
 
+## [3.3.9] - 2024-03-20
+### [Added]
+- Added pt_plural and pt_single variables to post view templates.
+
 ## [3.3.8] - 2024-01-27
 ### [Changed]
 - Moved permalink plugin to global scope to ensure it runs during XML sitemap generation.

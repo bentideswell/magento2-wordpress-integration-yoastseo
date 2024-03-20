@@ -192,6 +192,16 @@ class StringRewriter
                 return $object->getUser()->getUserNicename();
             } elseif ($key === 'userid') {
                 return $object->getUser()->getId();
+            } elseif (strpos($key, 'pt_') === 0) {
+                if ($object->getPostType()) {
+                    if ($postType = $object->getTypeInstance()) {
+                        if ($key === 'pt_plural') {
+                            return $postType->getPluralName();
+                        } elseif ($key === 'pt_single') {
+                            return $postType->getName();
+                        }
+                    }
+                }
             }
         } elseif ($object instanceof \FishPig\WordPress\Model\Term) {
             if ($key === 'term_description') {
