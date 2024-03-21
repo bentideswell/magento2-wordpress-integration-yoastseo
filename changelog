@@ -1,6 +1,10 @@
 # Changelog
 Change log for FishPig_WordPress_Yoast.
 
+## [3.3.10] - 2024-03-21
+### [Changed]
+- Changed links in README.md to use fishpig.com.
+
 ## [3.3.9] - 2024-03-20
 ### [Added]
 - Added pt_plural and pt_single variables to post view templates.

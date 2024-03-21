@@ -4,7 +4,7 @@ A free Magento 2 module that integrates the Yoast SEO WordPress plugin with Word
 
 # Installation
 
-This module required <a href="https://fishpig.co.uk/magento/wordpress-integration/" target="_blank">FishPig_WordPress</a> be installed.
+This module required <a href="https://fishpig.com/magento-2-wordpress-integration" target="_blank">FishPig_WordPress</a> be installed.
 
 ## Composer
 ```
@@ -24,14 +24,13 @@ cd - && bin/magento module:enable FishPig_WordPress_Yoast && bin/magento setup:u
 
 The following add-ons are currently available and more are on the way.
 
-- <a href="https://fishpig.co.uk/magento/wordpress-integration/multisite/" target="_blank">FishPig_WordPress_Multisite</a>
-- <a href="https://fishpig.co.uk/magento/wordpress-integration/root/" target="_blank">FishPig_WordPress_Root</a>
-- <a href="https://fishpig.co.uk/magento/wordpress-integration/post-types-taxonomies/" target="_blank">FishPig_WordPress_PostTypeTaxonomy</a>
-- <a href="https://fishpig.co.uk/magento/wordpress-integration/shortcodes-widgets/" target="_blank">FishPig_WordPress_ShortcodesWidgets</a>
-- <a href="https://fishpig.co.uk/magento/wordpress-integration/advanced-custom-fields/" target="_blank">FishPig_WordPress_ACF</a>
-- <a href="https://fishpig.co.uk/magento/wordpress-integration/related-products/" target="_blank">FishPig_WordPress_RelatedProducts</a>
-- <a href="https://fishpig.co.uk/magento/wordpress-integration/customer-synchronisation/" target="_blank">FishPig_WordPress_CustomerSynchronisation</a>
-- <a href="https://fishpig.co.uk/magento/wordpress-integration/integrated-search/" target="_blank">FishPig_WordPress_IntegratedSearch</a>
-- <a href="https://fishpig.co.uk/magento/wordpress-integration/amp/" target="_blank">FishPig_WordPress_AMP</a>
+- <a href="https://fishpig.com/magento-2-wordpress-integration/multisite" target="_blank">Multisite</a>
+- <a href="https://fishpig.com/magento-2-wordpress-integration/root" target="_blank">Root</a>
+- <a href="https://fishpig.com/magento-2-wordpress-integration/post-types-taxonomies" target="_blank">Post Types and Taxonomies</a>
+- <a href="https://fishpig.com/magento-2-wordpress-integration/shortcodes" target="_blank">Shortcodes</a>
+- <a href="https://fishpig.com/magento-2-wordpress-integration/advanced-custom-fields" target="_blank">Advanced Custom Fields (ACF)</a>
+- <a href="https://fishpig.com/magento-2-wordpress-integration/related-products" target="_blank">Related Products</a>
+- <a href="https://fishpig.com/magento-2-wordpress-integration/integrated-search" target="_blank">Integrated Search</a>
+- <a href="https://fishpig.com/magento-2-wordpress-integration/wpml" target="_blank">WPML</a>
 
-For an up to date list, check the <a href="https://fishpig.co.uk/magento/wordpress-integration/add-ons/" target="_blank">Magento 2 WordPress Integration Add-ons page</a>.
+For an up to date list, check the <a href="https://fishpig.com/magento-2-wordpress-integration/add-ons" target="_blank">Magento 2 WordPress Integration Add-ons</a> page.
