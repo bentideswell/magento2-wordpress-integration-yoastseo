@@ -143,6 +143,10 @@ class Config
 
             foreach ($this->getPluginOptionKeys() as $pluginOptionKey) {
                 if ($options = $this->optionRepository->getUnserialized($pluginOptionKey)) {
+                    // This fixes a bug with stripcategorybase. This is set in
+                    // multiple options and this can disable this value even
+                    // when it is set in the admin.
+                    $options = array_filter($options);
                     foreach ($options as $optionKey => $optionValue) {
                         $this->pluginOptions[str_replace('-', '_', $optionKey)] = $optionValue;
                     }

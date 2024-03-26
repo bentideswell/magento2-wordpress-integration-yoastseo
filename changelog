@@ -1,6 +1,11 @@
 # Changelog
 Change log for FishPig_WordPress_Yoast.
 
+## [3.3.11] - 2024-02-26
+### [Fixed]
+- Fixed issue with stripcategorybase plugin option. Even if this is set in Admin,
+  it can be overwritten in config as key is set in multiple options.
+
 ## [3.3.10] - 2024-03-21
 ### [Changed]
 - Changed links in README.md to use fishpig.com.
