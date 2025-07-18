@@ -132,11 +132,9 @@ class Config
     }
 
     /**
-     * @param  string $key = null
-     * @param  mixed  $default = null
-     * @return mixed
+     *
      */
-    public function getPluginOption(string $key = null, $default = null)
+    public function getPluginOption(?string $key = null, $default = null)
     {
         if ($this->pluginOptions === null) {
             $this->pluginOptions = [];
