@@ -108,7 +108,7 @@ class StringRewriter
                 && substr($stringToken, -2) === self::RWTS;
 
             if ($isStringToken) {
-                $stringToken = $this->renderVariable(trim($stringToken, self::RWTS), $object) ?: $stringToken;
+                $stringToken = $this->renderVariable(trim($stringToken, self::RWTS), $object) ?: '';
             }
 
             $rewrittenString[] = $stringToken;
@@ -119,6 +119,7 @@ class StringRewriter
         }
 
         $rewrittenString = trim(implode('', $rewrittenString));
+
 
         return preg_replace('/\s+/', ' ', $rewrittenString);
     }
@@ -154,7 +155,7 @@ class StringRewriter
 
             return $value;
         } elseif ($key === 'pagenumber') {
-            $value =  max(1, (int)$this->request->getParam('page'));
+            return max(1, (int)$this->request->getParam('page'));
         } elseif ($key === 'searchphrase') {
             return $this->search->getSearchTerm();
         }

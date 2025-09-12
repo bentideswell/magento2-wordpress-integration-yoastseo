@@ -1,6 +1,10 @@
 # Changelog
 Change log for FishPig_WordPress_Yoast.
 
+## [3.3.14] - 2025-09-12
+### [Changed]
+- Remove unreplaced template variables
+
 ## [3.3.12] - 2025-07-18
 ### [Fixed]
 - Added PHP 8.4 compatibility
