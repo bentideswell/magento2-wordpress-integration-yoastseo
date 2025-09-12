@@ -78,7 +78,7 @@ class OpenGraph extends \FishPig\WordPress\Block\AbstractBlock
             if ($tagValue) {
                 $html .= sprintf(
                     '<meta property="og:%s" content="%s"/>',
-                    $this->escapeHtmlAttr($tagName),
+                    str_replace('&#x3A;', ':', $this->escapeHtmlAttr($tagName)),
                     $this->escapeHtml($this->stringRewriter->rewrite($tagValue))
                 ) . "\n";
             }
