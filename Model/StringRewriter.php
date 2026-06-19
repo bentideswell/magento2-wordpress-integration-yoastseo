@@ -67,6 +67,11 @@ class StringRewriter
     private $request = null;
 
     /**
+     * @var \FishPig\WordPress\Helper\Date
+     */
+    private $dateHelper;
+
+    /**
      * @return void
      */
     public function __construct(
@@ -74,13 +79,15 @@ class StringRewriter
         \FishPig\WordPress\Model\OptionRepository $optionRepository,
         \FishPig\WordPress\Model\Search $search,
         \Magento\Framework\View\Layout $layout,
-        \Magento\Framework\App\RequestInterface $request
+        \Magento\Framework\App\RequestInterface $request,
+        \FishPig\WordPress\Helper\Date $dateHelper
     ) {
         $this->config = $config;
         $this->optionRepository = $optionRepository;
         $this->search = $search;
         $this->layout = $layout;
         $this->request = $request;
+        $this->dateHelper;
     }
 
     /**

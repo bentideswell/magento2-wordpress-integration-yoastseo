@@ -1,6 +1,10 @@
 # Changelog
 Change log for FishPig_WordPress_Yoast.
 
+## [3.3.16] - 2026-06-19
+### [Fixed]
+- Fixed missing date helper when rewriting SEO strings.
+
 ## [3.3.15] - 2025-09-12
 ### [Changed]
 - Remove unreplaced template variables
